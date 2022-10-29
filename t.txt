@@ -1,0 +1,104 @@
+package main
+
+import (
+	"log"
+	"os"
+	"text/template"
+	"time"
+)
+
+func main() {
+/* 	const url = "https://github.com/golang/go/raw/master/CONTRIBUTORS"
+
+	rsp, err := http.Get(url)
+	die(err)
+	defer rsp.Body.Close()
+
+	sc := bufio.NewScanner(rsp.Body)
+	carls := []string{}
+
+	for sc.Scan() {
+		if strings.Contains(sc.Text(), "Carl") {
+			carls = append(carls, sc.Text())
+		}
+	}
+
+	die(sc.Err()) */
+
+	url := make(map[string][]string)
+    url["url"] = append(url["url"], "Post")
+    url["url"] = append(url["url"], "Get")
+
+    url["url2"] = append(url["url2"], "Post")
+    url["url2"] = append(url["url2"], "Get")
+
+	
+	f, err := os.Create("./route/route.go")
+ 	die(err)
+	defer f.Close()
+
+	urlKeys := make([]string, 0, len(url))
+
+	packageTemplate.Execute(f, struct {
+		Timestamp time.Time
+		URL       map[string][]string
+		URLKeys   []string
+	}{
+		Timestamp: time.Now(),
+		URL:       url,
+		URLKeys:   urlKeys,
+	})
+
+	for k := range url  {
+		urlKeys = append(urlKeys , k)
+	}
+	
+    for j, k := range url {
+        //fmt.Println(k)
+        for _, method := range k {
+            bodyTemplate.Execute(f, struct {
+				Timestamp time.Time
+				URL      string
+				Method   string
+			}{
+				Timestamp: time.Now(),
+				URL:       j,
+				Method:    method,
+			})
+        }
+    }
+
+
+	endTemplate.Execute(f, struct {
+		Timestamp time.Time
+		
+	}{
+		Timestamp: time.Now(),
+	})
+}
+
+func die(err error) {
+	if err != nil {
+		log.Fatal(err)
+	}
+}
+
+var bodyTemplate = template.Must(template.New("").Parse(
+`
+	app.{{ .Method }}("/{{.URL}}", func(c *fiber.Ctx)  {
+	
+		
+	})
+`))
+
+var packageTemplate = template.Must(template.New("").Parse(
+`package route
+
+func RegisterRoute(app *fiber.App){
+	
+`))
+
+var endTemplate = template.Must(template.New("").Parse(
+`
+}
+`)) 

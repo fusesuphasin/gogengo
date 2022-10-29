@@ -1,0 +1,1387 @@
+{
+	"info": {
+		"_postman_id": "4aad4532-0077-46cc-8bfd-be40d357a240",
+		"name": "Go Gen Go Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18395872"
+	},
+	"item": [
+		{
+			"name": "Purpose",
+			"item": [
+				{
+					"name": "Translation",
+					"item": [
+						{
+							"name": "List translation",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose",
+										":id",
+										"translation"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "200",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept-Language",
+												"value": "{{language}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"{{api}}",
+												"admin",
+												"coupons",
+												"initial_data",
+												"purpose",
+												":id",
+												"translation"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": null
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Accept-Language",
+											"value": "{{language}}",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": {"data":[{"id":"string","language":"en","name":"Credit Card Only"}],"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
+								},
+								{
+									"name": "500",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept-Language",
+												"value": "{{language}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"{{api}}",
+												"admin",
+												"coupons",
+												"initial_data",
+												"purpose",
+												":id",
+												"translation"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": null
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Accept-Language",
+											"value": "{{language}}",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": {"data":{},"meta":{"code":"500","errors":[],"message":"List translation failed","type":"Internal Error"}}
+								}
+							]
+						},
+						{
+							"name": "Create a translation",
+							"request": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only"}},
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose",
+										":id",
+										"translation",
+										"language",
+										":language"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										},
+										{
+											"key": "language",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "201",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept-Language",
+												"value": "{{language}}",
+												"type": "text"
+											}
+										],
+										"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only"}},
+										"url": {
+											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"{{api}}",
+												"admin",
+												"coupons",
+												"initial_data",
+												"purpose",
+												":id",
+												"translation",
+												"language",
+												":language"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": null
+												},
+												{
+													"key": "language",
+													"value": null
+												}
+											]
+										}
+									},
+									"status": "Created",
+									"code": 201,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Accept-Language",
+											"value": "{{language}}",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": {"data":{"id":"string","name":"Credit Card Only"},"meta":{"code":"201","message":"The request was successfully processed.","type":"Created"}}
+								},
+								{
+									"name": "500",
+									"originalRequest": {
+										"method": "POST",
+										"header": [
+											{
+												"key": "Accept-Language",
+												"value": "{{language}}",
+												"type": "text"
+											}
+										],
+										"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"@#"}},
+										"url": {
+											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"{{api}}",
+												"admin",
+												"coupons",
+												"initial_data",
+												"purpose",
+												":id",
+												"translation",
+												"language",
+												":language"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": null
+												},
+												{
+													"key": "language",
+													"value": null
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Accept-Language",
+											"value": "{{language}}",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": {"data":{},"meta":{"code":"422","errors":[{"info":"the format of the data is not valid as required.","path":"name"}],"message":"The data given in the request failed validation. Inspect the response for details.","type":"Request Validation Failed"}}
+								}
+							]
+						},
+						{
+							"name": "Retrieve a translation",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose",
+										":id",
+										"translation",
+										"language",
+										":language"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										},
+										{
+											"key": "language",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "200",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept-Language",
+												"value": "{{language}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"{{api}}",
+												"admin",
+												"coupons",
+												"initial_data",
+												"purpose",
+												":id",
+												"translation",
+												"language",
+												":language"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": null
+												},
+												{
+													"key": "language",
+													"value": null
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Accept-Language",
+											"value": "{{language}}",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": {"data":{"id":"string","name":"Credit Card Only"},"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
+								},
+								{
+									"name": "500",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept-Language",
+												"value": "{{language}}",
+												"type": "text"
+											}
+										],
+										"url": {
+											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"{{api}}",
+												"admin",
+												"coupons",
+												"initial_data",
+												"purpose",
+												":id",
+												"translation",
+												"language",
+												":language"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": null
+												},
+												{
+													"key": "language",
+													"value": null
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Accept-Language",
+											"value": "{{language}}",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": {"data":{},"meta":{"code":"500","errors":[],"message":"Retrieve a translation failed","type":"Internal Error"}}
+								}
+							]
+						},
+						{
+							"name": "Update a translation",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only"}},
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose",
+										":id",
+										"translation",
+										"language",
+										":language"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										},
+										{
+											"key": "language",
+											"value": null
+										}
+									]
+								}
+							},
+							"response": [
+								{
+									"name": "200",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept-Language",
+												"value": "{{language}}",
+												"type": "text"
+											}
+										],
+										"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only"}},
+										"url": {
+											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"{{api}}",
+												"admin",
+												"coupons",
+												"initial_data",
+												"purpose",
+												":id",
+												"translation",
+												"language",
+												":language"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": null
+												},
+												{
+													"key": "language",
+													"value": null
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Accept-Language",
+											"value": "{{language}}",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": {"data":{"id":"string","name":"Credit Card Only"},"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
+								},
+								{
+									"name": "500",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept-Language",
+												"value": "{{language}}",
+												"type": "text"
+											}
+										],
+										"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"@#"}},
+										"url": {
+											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+											"host": [
+												"{{base_url}}"
+											],
+											"path": [
+												"{{api}}",
+												"admin",
+												"coupons",
+												"initial_data",
+												"purpose",
+												":id",
+												"translation",
+												"language",
+												":language"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": null
+												},
+												{
+													"key": "language",
+													"value": null
+												}
+											]
+										}
+									},
+									"status": "Internal Server Error",
+									"code": 500,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Accept-Language",
+											"value": "{{language}}",
+											"type": "text"
+										}
+									],
+									"cookie": [],
+									"body": {"data":{},"meta":{"code":"422","errors":[{"info":"the format of the data is not valid as required.","path":"name"}],"message":"The data given in the request failed validation. Inspect the response for details.","type":"Request Validation Failed"}}
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "List purpose",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{language}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose?limit={{limit}}&offset={{offset}}&search={\"key\": \"name\",\"value\": \"Credit Card Only\"}&filter=[{\"key\": \"name\",\"value\": \"Credit Card Only\",\"operator\": \"equal_to\"}]&sort=[{\"key\": \"name\",\"order\": \"descending\"}]&type=plan",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{api}}",
+								"admin",
+								"coupons",
+								"initial_data",
+								"purpose"
+							],
+							"query": [
+								{
+									"key": "limit",
+									"value": "{{limit}}"
+								},
+								{
+									"key": "offset",
+									"value": "{{offset}}"
+								},
+								{
+									"key": "search",
+									"value": "{\"key\": \"name\",\"value\": \"Credit Card Only\"}"
+								},
+								{
+									"key": "filter",
+									"value": "[{\"key\": \"name\",\"value\": \"Credit Card Only\",\"operator\": \"equal_to\"}]"
+								},
+								{
+									"key": "sort",
+									"value": "[{\"key\": \"name\",\"order\": \"descending\"}]"
+								},
+								{
+									"key": "type",
+									"value": "plan"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose?limit={{limit}}&offset={{offset}}&search={\"key\": \"name\",\"value\": \"Credit Card Only\"}&filter=[{\"key\": \"name\",\"value\": \"Credit Card Only\",\"operator\": \"equal_to\"}]&sort=[{\"key\": \"name\",\"order\": \"descending\"}]&type=plan",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "{{limit}}"
+										},
+										{
+											"key": "offset",
+											"value": "{{offset}}"
+										},
+										{
+											"key": "search",
+											"value": "{\"key\": \"name\",\"value\": \"Credit Card Only\"}"
+										},
+										{
+											"key": "filter",
+											"value": "[{\"key\": \"name\",\"value\": \"Credit Card Only\",\"operator\": \"equal_to\"}]"
+										},
+										{
+											"key": "sort",
+											"value": "[{\"key\": \"name\",\"order\": \"descending\"}]"
+										},
+										{
+											"key": "type",
+											"value": "plan"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Accept-Language",
+									"value": "{{language}}",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": {"data":[{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_deleted":false,"is_enabled":true,"name":"Credit Card Only","slug":"plan_credit_card_only","type":"plan","updated_at":"2022-02-12T04:30:30.359Z"}],"meta":{"code":"200","message":"The request was successfully processed.","pagination":{"limit":20,"offset":0,"total":1,"total_page":1},"type":"OK"}}
+						},
+						{
+							"name": "500",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose?limit={{limit}}&offset={{offset}}&search={\"key\": \"name\",\"value\": \"Credit Card Only\"}&filter=[{\"key\": \"name\",\"value\": \"Credit Card Only\",\"operator\": \"equal_to\"}]&sort=[{\"key\": \"name\",\"order\": \"descending\"}]&type=plan",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose"
+									],
+									"query": [
+										{
+											"key": "limit",
+											"value": "{{limit}}"
+										},
+										{
+											"key": "offset",
+											"value": "{{offset}}"
+										},
+										{
+											"key": "search",
+											"value": "{\"key\": \"name\",\"value\": \"Credit Card Only\"}"
+										},
+										{
+											"key": "filter",
+											"value": "[{\"key\": \"name\",\"value\": \"Credit Card Only\",\"operator\": \"equal_to\"}]"
+										},
+										{
+											"key": "sort",
+											"value": "[{\"key\": \"name\",\"order\": \"descending\"}]"
+										},
+										{
+											"key": "type",
+											"value": "plan"
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Accept-Language",
+									"value": "{{language}}",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": {"data":{},"meta":{"code":"500","errors":[],"message":"List purpose failed","type":"Internal Error"}}
+						}
+					]
+				},
+				{
+					"name": "Create a purpose",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{language}}",
+								"type": "text"
+							}
+						],
+						"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only","type":"plan"}},
+						"url": {
+							"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{api}}",
+								"admin",
+								"coupons",
+								"initial_data",
+								"purpose"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "201",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only","type":"plan"}},
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Accept-Language",
+									"value": "{{language}}",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_deleted":false,"is_enabled":true,"name":"Credit Card Only","slug":"plan_credit_card_only","type":"plan","updated_at":"2022-02-12T04:30:30.359Z"},"meta":{"code":"201","message":"The request was successfully processed.","type":"Created"}}
+						},
+						{
+							"name": "500",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"@#","type":"plan"}},
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose"
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Accept-Language",
+									"value": "{{language}}",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": {"data":{},"meta":{"code":"422","errors":[{"info":"the format of the data is not valid as required.","path":"name"}],"message":"The data given in the request failed validation. Inspect the response for details.","type":"Request Validation Failed"}}
+						}
+					]
+				},
+				{
+					"name": "Retrieve a purpose",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{language}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{api}}",
+								"admin",
+								"coupons",
+								"initial_data",
+								"purpose",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Accept-Language",
+									"value": "{{language}}",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_deleted":false,"is_enabled":true,"name":"Credit Card Only","slug":"plan_credit_card_only","type":"plan","updated_at":"2022-02-12T04:30:30.359Z"},"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
+						},
+						{
+							"name": "500",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Accept-Language",
+									"value": "{{language}}",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": {"data":{},"meta":{"code":"500","errors":[],"message":"Retrieve a purpose failed","type":"Internal Error"}}
+						}
+					]
+				},
+				{
+					"name": "Update a purpose",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{language}}",
+								"type": "text"
+							}
+						],
+						"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only","type":"plan"}},
+						"url": {
+							"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{api}}",
+								"admin",
+								"coupons",
+								"initial_data",
+								"purpose",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only","type":"plan"}},
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Accept-Language",
+									"value": "{{language}}",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_deleted":false,"is_enabled":true,"name":"Credit Card Only","slug":"plan_credit_card_only","type":"plan","updated_at":"2022-02-12T04:30:30.359Z"},"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
+						},
+						{
+							"name": "500",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"@#","type":"plan"}},
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Accept-Language",
+									"value": "{{language}}",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": {"data":{},"meta":{"code":"422","errors":[{"info":"the format of the data is not valid as required.","path":"name"}],"message":"The data given in the request failed validation. Inspect the response for details.","type":"Request Validation Failed"}}
+						}
+					]
+				},
+				{
+					"name": "Update is enabled a purpose",
+					"request": {
+						"method": "PATCH",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{language}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/is_enabled",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{api}}",
+								"admin",
+								"coupons",
+								"initial_data",
+								"purpose",
+								":id",
+								"is_enabled"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/is_enabled",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose",
+										":id",
+										"is_enabled"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Accept-Language",
+									"value": "{{language}}",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": {"data":{},"meta":{"code":"200","message":"The request was successfully processed","type":"OK"}}
+						},
+						{
+							"name": "500",
+							"originalRequest": {
+								"method": "PATCH",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/is_enabled",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose",
+										":id",
+										"is_enabled"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Accept-Language",
+									"value": "{{language}}",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": {"data":{},"meta":{"code":"500","errors":[],"message":"Update is enabled a purpose failed","type":"Internal Error"}}
+						}
+					]
+				},
+				{
+					"name": "Delete a purpose",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept-Language",
+								"value": "{{language}}",
+								"type": "text"
+							}
+						],
+						"url": {
+							"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"{{api}}",
+								"admin",
+								"coupons",
+								"initial_data",
+								"purpose",
+								":id"
+							],
+							"variable": [
+								{
+									"key": "id",
+									"value": null
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "200",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Accept-Language",
+									"value": "{{language}}",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": {"data":{},"meta":{"code":"200","message":"The request was successfully processed","type":"OK"}}
+						},
+						{
+							"name": "500",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept-Language",
+										"value": "{{language}}",
+										"type": "text"
+									}
+								],
+								"url": {
+									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+									"host": [
+										"{{base_url}}"
+									],
+									"path": [
+										"{{api}}",
+										"admin",
+										"coupons",
+										"initial_data",
+										"purpose",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": null
+										}
+									]
+								}
+							},
+							"status": "Internal Server Error",
+							"code": 500,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Accept-Language",
+									"value": "{{language}}",
+									"type": "text"
+								}
+							],
+							"cookie": [],
+							"body": {"data":{},"meta":{"code":"500","errors":[],"message":"Delete a purpose failed","type":"Internal Error"}}
+						}
+					]
+				}
+			]
+		}
+	]
+}

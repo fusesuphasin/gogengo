@@ -1,0 +1,23 @@
+package generatestruct
+
+import (
+	"fmt"
+	"gogenerate/extractfield.go"
+
+	"github.com/itchyny/gojq"
+)
+
+type GenStruct struct {
+	BodyBytes                   []byte
+	ValuePartExtract         	[]interface{}
+	PartExtract                 []interface{} //+ //[POST_label: address]
+}
+
+func GenerateStruct(BodyBytes *[]byte, JqQueryBodyDecoder *gojq.Iter) {
+	fmt.Println("Why", string(*BodyBytes))
+	genstruct := GenStruct{BodyBytes: *BodyBytes}
+	genstruct.PartExtract, genstruct.ValuePartExtract = extractfield.ExtractFieldJSON(BodyBytes, JqQueryBodyDecoder)
+	fmt.Println(genstruct.PartExtract)
+	fmt.Println("_________________________")
+	fmt.Println(genstruct.ValuePartExtract)
+}
