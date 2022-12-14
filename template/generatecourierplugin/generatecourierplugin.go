@@ -2,10 +2,11 @@ package generatecourierplugin
 
 import (
 	"fmt"
-	"gogenerate/generatecourierplugin/controller"
-	"gogenerate/generatecourierplugin/newtemplate"
-	"gogenerate/generatecourierplugin/repository"
-	"gogenerate/generatecourierplugin/service"
+	"gogenerate/template/generatecourierplugin/controller"
+	"gogenerate/template/generatecourierplugin/newtemplate"
+	"gogenerate/template/generatecourierplugin/repository"
+	"gogenerate/template/generatecourierplugin/service"
+
 	"os"
 
 	cp "github.com/otiai10/copy"
@@ -39,7 +40,7 @@ func (gcp *GenerateCourierPluginTemplate) GenerateCourierPluginTemplate() {
 
 func (gcp *GenerateCourierPluginTemplate) RealGenerateCourierPluginTemplate() {
 	
-	path := "D:/generate/api/thirdparty/courier"
+	path := "./api/thirdparty/courier"
 	err := os.Mkdir(path, os.ModePerm)
 	if(err!=nil){
 		fmt.Println(err)
@@ -98,7 +99,7 @@ func (gcp *GenerateCourierPluginTemplate) ParseValueCourierPluginTemplate() {
 		fmt.Println(err)
 	}
 
-	err = cp.Copy("D:/generate/generatecourierplugin/parsevalue", path)
+	err = cp.Copy("./generatecourierplugin/parsevalue", path)
 	if(err!=nil){
 		fmt.Println(err)
 	}
@@ -111,7 +112,7 @@ func (gcp *GenerateCourierPluginTemplate) FileCourierPluginTemplate() {
 		fmt.Println(err)
 	}
 
-	err = cp.Copy("D:/generate/generatecourierplugin/file", path)
+	err = cp.Copy("./generatecourierplugin/file", path)
 	if(err!=nil){
 		fmt.Println(err)
 	}

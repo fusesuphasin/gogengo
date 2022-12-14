@@ -2,11 +2,12 @@ package main
 
 import (
 	"fmt"
-	"gogenerate/etl"
-	"gogenerate/generatecourierplugin"
-	"gogenerate/generatestruct"
-	"gogenerate/generatestructer"
-	"gogenerate/structure"
+	"gogenerate/generate/etl"
+	"gogenerate/generate/generatestruct"
+	"gogenerate/generate/generatestructer"
+	"gogenerate/template/generatecourierplugin"
+	"gogenerate/template/structure"
+
 	"sort"
 )
 

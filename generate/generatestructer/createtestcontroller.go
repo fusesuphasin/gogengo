@@ -1,12 +1,16 @@
 package generatestructer
 
 import (
-	"gogenerate/generatestructer/gotemplate"
+	"gogenerate/generate/generatestructer/gotemplate"
 	"os"
 	"time"
 )
 
-func CreateTestController(newMethod string, CtlMethodService string, CtlStructName string, generate *Genenrate) {
+type TestController struct{
+	
+}
+
+func (tc *TestController) CreateTestController(newMethod string, CtlMethodService string, CtlStructName string, generate *Genenrate) {
 	gotemplate.TestMethodctlTemplate.Execute(generate.TestCtl, struct {
 		Timestamp      time.Time
 		URL            string
@@ -39,7 +43,7 @@ func CreateTestController(newMethod string, CtlMethodService string, CtlStructNa
 	})
 }
 
-func CreateTestControllerCreate(newMethod string, CtlMethodService string, CtlStructName string, generate *Genenrate) {
+func  (tc *TestController) CreateTestControllerCreate(newMethod string, CtlMethodService string, CtlStructName string, generate *Genenrate) {
 	gotemplate.TestMethodctlTemplateCreate.Execute(generate.TestCtl, struct {
 		Timestamp      time.Time
 		URL            string
@@ -73,7 +77,7 @@ func CreateTestControllerCreate(newMethod string, CtlMethodService string, CtlSt
 	})
 }
 
-func CreateTestControllerUpdate(newMethod string, CtlMethodService string, CtlStructName string, generate *Genenrate) {
+func (tc *TestController) CreateTestControllerUpdate(newMethod string, CtlMethodService string, CtlStructName string, generate *Genenrate) {
 	gotemplate.TestMethodctlTemplateUpdate.Execute(generate.TestCtl, struct {
 		Timestamp      time.Time
 		URL            string
@@ -107,7 +111,7 @@ func CreateTestControllerUpdate(newMethod string, CtlMethodService string, CtlSt
 	})
 }
 
-func CreateTestControllerPatch(newMethod string, CtlMethodService string, CtlStructName string, generate *Genenrate) {
+func (tc *TestController) CreateTestControllerPatch(newMethod string, CtlMethodService string, CtlStructName string, generate *Genenrate) {
 	gotemplate.TestMethodctlTemplatePatch.Execute(generate.TestCtl, struct {
 		Timestamp      time.Time
 		URL            string
@@ -141,7 +145,7 @@ func CreateTestControllerPatch(newMethod string, CtlMethodService string, CtlStr
 	})
 }
 
-func CreateTestControllerDelete(newMethod string, CtlMethodService string, CtlStructName string, generate *Genenrate) {
+func (tc *TestController) CreateTestControllerDelete(newMethod string, CtlMethodService string, CtlStructName string, generate *Genenrate) {
 	gotemplate.TestMethodctlTemplateDelete.Execute(generate.TestCtl, struct {
 		Timestamp      time.Time
 		URL            string
@@ -174,7 +178,7 @@ func CreateTestControllerDelete(newMethod string, CtlMethodService string, CtlSt
 		
 	})
 }
-func CreateTestControllerGetAll(newMethod string, CtlMethodService string, CtlStructName string, generate *Genenrate) {
+func (tc *TestController) CreateTestControllerGetAll(newMethod string, CtlMethodService string, CtlStructName string, generate *Genenrate) {
 	gotemplate.TestMethodctlTemplateGetAll.Execute(generate.TestCtl, struct {
 		Timestamp      time.Time
 		URL            string
@@ -209,7 +213,7 @@ func CreateTestControllerGetAll(newMethod string, CtlMethodService string, CtlSt
 }
 
 
-func CreateTestControllerGetBy(newMethod string, CtlMethodService string, CtlStructName string, generate *Genenrate) {
+func (tc *TestController) CreateTestControllerGetBy(newMethod string, CtlMethodService string, CtlStructName string, generate *Genenrate) {
 	gotemplate.TestMethodctlTemplateGetBy.Execute(generate.TestCtl, struct {
 		Timestamp      time.Time
 		URL            string
@@ -244,7 +248,7 @@ func CreateTestControllerGetBy(newMethod string, CtlMethodService string, CtlStr
 }
 
 
-func CallTestControllerTemplate(ControllerName string, f *os.File){
+func (tc *TestController) CallTestControllerTemplate(ControllerName string, f *os.File){
 	gotemplate.TestCallControllerTemplate.Execute(f, struct {
 		Timestamp      time.Time
 		ControllerName string

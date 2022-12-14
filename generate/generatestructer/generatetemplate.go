@@ -2,7 +2,7 @@ package generatestructer
 
 import (
 	"fmt"
-	"gogenerate/generatestructer/gotemplate"
+	"gogenerate/generate/generatestructer/gotemplate"
 	"log"
 	"os"
 	"strings"
@@ -66,6 +66,16 @@ type Genenrate struct {
 	//Generate Route API URL
 	RouteURL *RouteURL
 
+	//Generate Structer
+	Controller	Controller
+	Repository	Repository
+	Service	Service
+	Response	Response
+	TestController	TestController
+	TestRepository	TestRepository
+	TestService	TestService
+	Template	Template
+
 	//
 	CtlSvRepo *CtlSvRepo
 
@@ -104,7 +114,7 @@ func (g *Genenrate) Createroute(url *map[string][]string, keys *[]string, urlStr
 	g.RouteURL.RequestURL = *url
 
 	urlKeys := make([]string, 0, len(*url))
-	PackageTamplate(g.RouteURL.RouteFile, g.RouteURL.RouteFileTest, url, urlKeys)
+	g.Template.PackageTamplate(g.RouteURL.RouteFile, g.RouteURL.RouteFileTest, url, urlKeys)
 
 	for k := range *url {
 		urlKeys = append(urlKeys, k)
@@ -112,9 +122,9 @@ func (g *Genenrate) Createroute(url *map[string][]string, keys *[]string, urlStr
 
 	g.GenenrateCtlTemplate(keys, urlStruct)
 
-	EndTemplate(g.RouteURL.RouteFile)
-	EndTemplate(g.RouteURL.RouteFileTest)
-	CreateResponseTemplate(g.Path)
+	g.Template.EndTemplate(g.RouteURL.RouteFile)
+	g.Template.EndTemplate(g.RouteURL.RouteFileTest)
+	g.Response.CreateResponseTemplate(g.Path)
 }
 
 func (g *Genenrate) GenenrateCtlTemplate(keys *[]string, urlStruct *map[string][]string) {
@@ -148,8 +158,8 @@ func (g *Genenrate) GenenrateCtlTemplate(keys *[]string, urlStruct *map[string][
 								g.GenerateControllerRouteTemplate(g.Ctl, cURL, checkDupicateURL, &groupCount, checkURLcurr)
 							}
 						}
-						EndTemplate(g.Ctl)
-						EndTemplate(g.TestCtl)
+						g.Template.EndTemplate(g.Ctl)
+						g.Template.EndTemplate(g.TestCtl)
 
 						//write method for route
 						for _, cURL := range *keys {
@@ -170,8 +180,8 @@ func (g *Genenrate) GenenrateCtlTemplate(keys *[]string, urlStruct *map[string][
 			case 1:
 				{
 					if checkDupicate[g.RouteURL.ControllerName] == 1 {
-						CallControllerTemplate(g.RouteURL.ControllerName, g.RouteURL.RouteFile)
-						CallControllerTemplate(g.RouteURL.ControllerName, g.RouteURL.RouteFileTest)
+						g.Controller.CallControllerTemplate(g.RouteURL.ControllerName, g.RouteURL.RouteFile)
+						g.Controller.CallControllerTemplate(g.RouteURL.ControllerName, g.RouteURL.RouteFileTest)
 					}
 				}
 			}
@@ -318,14 +328,14 @@ func (g *Genenrate) GenerateControllerRouteTemplate(ctl *os.File, cURL string, c
 		checkDupicateURL[createNewDupicate]++
 
 		if *groupCount == 0 {
-			GroupTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.Ctl)
-			GroupTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.TestCtl)
+			g.Template.GroupTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.Ctl)
+			g.Template.GroupTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.TestCtl)
 		}
 
 		if checkDupicateURL[createNewDupicate] == 1 {
 			//	fmt.Println(ctl, cURL, NewmethodURL)
-			BodyTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.Ctl)
-			BodyTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.TestCtl)
+			g.Template.BodyTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.Ctl)
+			g.Template.BodyTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.TestCtl)
 		}
 		*groupCount++
 	}
@@ -395,53 +405,53 @@ func (g *Genenrate) GenerateCtlSvRepoTemplate(cURL string, checkURLcurr []string
 			//annotation.CodeSuccess = getURLCode(copyURLCode, cURL, newMethod)
 			switch(CtlMethodService){
 			case "GetAll":
-				CreateControllerGetAll(newMethod, CtlMethodService, CtlStructName, g)
-				CreateServiceGetAll(CtlMethodService, CtlStructName, g)
-				CreateRepositoryGetAll(CtlMethodService, CtlStructName, g)
+				g.Controller.CreateControllerGetAll(newMethod, CtlMethodService, CtlStructName, g)
+				g.Service.CreateServiceGetAll(CtlMethodService, CtlStructName, g)
+				g.Repository.CreateRepositoryGetAll(CtlMethodService, CtlStructName, g)
 
-				CreateTestControllerGetAll(newMethod, CtlMethodService, CtlStructName, g)
-				CreateTestServiceGetAll(CtlMethodService, CtlStructName, g)
-				CreateTestRepositoryGetAll(CtlMethodService, CtlStructName, g)
+				g.TestController.CreateTestControllerGetAll(newMethod, CtlMethodService, CtlStructName, g)
+				g.TestService.CreateTestServiceGetAll(CtlMethodService, CtlStructName, g)
+				g.TestRepository.CreateTestRepositoryGetAll(CtlMethodService, CtlStructName, g)
 			case "Create":
-				CreateControllerCreate(newMethod, CtlMethodService, CtlStructName, g)
-				CreateServiceCreate(CtlMethodService, CtlStructName, g)
-				CreateRepositoryCreate(CtlMethodService, CtlStructName, g)
+				g.Controller.CreateControllerCreate(newMethod, CtlMethodService, CtlStructName, g)
+				g.Service.CreateServiceCreate(CtlMethodService, CtlStructName, g)
+				g.Repository.CreateRepositoryCreate(CtlMethodService, CtlStructName, g)
 				
-				CreateTestControllerCreate(newMethod, CtlMethodService, CtlStructName, g)
-				CreateTestServiceCreate(CtlMethodService, CtlStructName, g)
-				CreateTestRepositoryCreate(CtlMethodService, CtlStructName, g)
+				g.TestController.CreateTestControllerCreate(newMethod, CtlMethodService, CtlStructName, g)
+				g.TestService.CreateTestService(CtlMethodService, CtlStructName, g)
+				g.TestRepository.CreateTestRepositoryCreate(CtlMethodService, CtlStructName, g)
 			case "UpdateAll":
-				CreateControllerUpdate(newMethod, CtlMethodService, CtlStructName, g)
-				CreateServiceUpdate(CtlMethodService, CtlStructName, g)
-				CreateRepositoryUpdate(CtlMethodService, CtlStructName, g)
+				g.Controller.CreateControllerUpdate(newMethod, CtlMethodService, CtlStructName, g)
+				g.Service.CreateServiceUpdate(CtlMethodService, CtlStructName, g)
+				g.Repository.CreateRepositoryUpdate(CtlMethodService, CtlStructName, g)
 
-				CreateTestControllerUpdate(newMethod, CtlMethodService, CtlStructName, g)
-				CreateTestServiceUpdate(CtlMethodService, CtlStructName, g)
-				CreateTestRepositoryUpdate(CtlMethodService, CtlStructName, g)
+				g.TestController.CreateTestControllerUpdate(newMethod, CtlMethodService, CtlStructName, g)
+				g.TestService.CreateTestServiceUpdate(CtlMethodService, CtlStructName, g)
+				g.TestRepository.CreateTestRepositoryUpdate(CtlMethodService, CtlStructName, g)
 			case "Update":
-				CreateControllerPatch(newMethod, CtlMethodService, CtlStructName, g)
-				CreateServicePatch(CtlMethodService, CtlStructName, g)
-				CreateRepositoryPatch(CtlMethodService, CtlStructName, g)
+				g.Controller.CreateControllerPatch(newMethod, CtlMethodService, CtlStructName, g)
+				g.Service.CreateServicePatch(CtlMethodService, CtlStructName, g)
+				g.Repository.CreateRepositoryPatch(CtlMethodService, CtlStructName, g)
 
-				CreateTestControllerPatch(newMethod, CtlMethodService, CtlStructName, g)
-				CreateTestServicePatch(CtlMethodService, CtlStructName, g)
-				CreateTestRepositoryPatch(CtlMethodService, CtlStructName, g)
+				g.TestController.CreateTestControllerPatch(newMethod, CtlMethodService, CtlStructName, g)
+				g.TestService.CreateTestServicePatch(CtlMethodService, CtlStructName, g)
+				g.TestRepository.CreateTestRepositoryPatch(CtlMethodService, CtlStructName, g)
 			case "Delete":
-				CreateControllerDelete(newMethod, CtlMethodService, CtlStructName, g)
-				CreateServiceDelete(CtlMethodService, CtlStructName, g)
-				CreateRepositoryDelete(CtlMethodService, CtlStructName, g)
+				g.Controller.CreateControllerDelete(newMethod, CtlMethodService, CtlStructName, g)
+				g.Service.CreateServiceDelete(CtlMethodService, CtlStructName, g)
+				g.Repository.CreateRepositoryDelete(CtlMethodService, CtlStructName, g)
 			
-				CreateTestControllerDelete(newMethod, CtlMethodService, CtlStructName, g)
-				CreateTestServiceDelete(CtlMethodService, CtlStructName, g)
-				CreateTestRepositoryDelete(CtlMethodService, CtlStructName, g)
+				g.TestController.CreateTestControllerDelete(newMethod, CtlMethodService, CtlStructName, g)
+				g.TestService.CreateTestServiceDelete(CtlMethodService, CtlStructName, g)
+				g.TestRepository.CreateTestRepositoryDelete(CtlMethodService, CtlStructName, g)
 			default: //Get By
-				CreateControllerGetBy(newMethod, CtlMethodService, CtlStructName, g)
-				CreateServiceGetBy(CtlMethodService, CtlStructName, g)
-				CreateRepositoryGetBy(CtlMethodService, CtlStructName, g)
+				g.Controller.CreateControllerGetBy(newMethod, CtlMethodService, CtlStructName, g)
+				g.Service.CreateServiceGetBy(CtlMethodService, CtlStructName, g)
+				g.Repository.CreateRepositoryGetBy(CtlMethodService, CtlStructName, g)
 
-				CreateTestControllerGetBy(newMethod, CtlMethodService, CtlStructName, g)
-				CreateTestServiceGetBy(CtlMethodService, CtlStructName, g)
-				CreateTestRepositoryGetBy(CtlMethodService, CtlStructName, g)
+				g.TestController.CreateTestControllerGetBy(newMethod, CtlMethodService, CtlStructName, g)
+				g.TestService.CreateTestServiceGetBy(CtlMethodService, CtlStructName, g)
+				g.TestRepository.CreateTestRepositoryGetBy(CtlMethodService, CtlStructName, g)
 			}
 		}
 	}
@@ -526,29 +536,29 @@ func (gr *Genenrate) createFile()  {
 	// create controller package
 	controllerName := fmt.Sprintf("%v/app/controller/%vcontroller.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
 	gr.Ctl, _ = os.Create(controllerName)
-	ControllerTemplate(gr.Ctl, gr.RouteURL.RouteFile, gr.RouteURL.ControllerName)
+	gr.Template.ControllerTemplate(gr.Ctl, gr.RouteURL.RouteFile, gr.RouteURL.ControllerName)
 
 	TestControllerName := fmt.Sprintf("%v/app/controller/%vcontroller_test.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
 	gr.TestCtl, _ = os.Create(TestControllerName)
-	TestControllerTemplate(gr.TestCtl, gr.RouteURL.RouteFileTest, gr.RouteURL.ControllerName)
+	gr.Template.TestControllerTemplate(gr.TestCtl, gr.RouteURL.RouteFileTest, gr.RouteURL.ControllerName)
 
 	// create service package
 	serviceName := fmt.Sprintf("%v/app/service/%vservice.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
 	gr.SV, _ = os.Create(serviceName)
-	ServiceTemplate(gr.SV, gr.RouteURL.ControllerName)
+	gr.Template.ServiceTemplate(gr.SV, gr.RouteURL.ControllerName)
 
 	TestServiceName := fmt.Sprintf("%v/app/service/%vservice_test.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
 	gr.TestSV, _ = os.Create(TestServiceName)
-	TestServiceTemplate(gr.TestSV, gr.RouteURL.ControllerName)
+	gr.Template.TestServiceTemplate(gr.TestSV, gr.RouteURL.ControllerName)
 
 	// create repository package
 	repositoryName := fmt.Sprintf("%v/app/repository/%vrepository.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
 	gr.RP, _ = os.Create(repositoryName)
-	RepositoryTemplate(gr.RP, gr.RouteURL.ControllerName)
+	gr.Template.RepositoryTemplate(gr.RP, gr.RouteURL.ControllerName)
 
 	TestRepositoryName := fmt.Sprintf("%v/app/repository/%vrepository_test.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
 	gr.TestRP, _ = os.Create(TestRepositoryName)
-	TestRepositoryTemplate(gr.TestRP, gr.RouteURL.ControllerName)
+	gr.Template.TestRepositoryTemplate(gr.TestRP, gr.RouteURL.ControllerName)
 }
 
 func unique(duplicateSlice []string) []string {
@@ -585,25 +595,20 @@ func (g *Genenrate) findParam(newParams []string) {
 
 	var newparameter []string
 	var newparameterParameters []string
-	/* var lastNewparameter string */
 	for i, v := range parameter {
 		
 		newparameter = append(newparameter, v[1:])
-		/* lastNewparameter = fmt.Sprintf("%v ", v[1:]) */
 		if(i==0){
 			newparameterParameters = append(newparameterParameters, fmt.Sprintf("%v", v[1:]))
 		}else{
 			newparameterParameters = append(newparameterParameters, fmt.Sprintf(", %v ", v[1:]))
 		}
 	}
-	/* if(len(newparameterParameters)>0){
-		newparameterParameters[len(newparameterParameters)-1] = lastNewparameter
-	} */
+
 	
 
 	var newqeury []string
 	var newqeuryParamaters []string
-	/* var lastQeary string */
 	for i, v := range qeury {
 		spirtQeury := strings.Split(v, "=")
 		qeuryParameters := ""
@@ -613,18 +618,8 @@ func (g *Genenrate) findParam(newParams []string) {
 			qeuryParameters = fmt.Sprintf(", %v", spirtQeury[0])
 		}
 		newqeury = append(newqeury, spirtQeury[0])
-		/* lastQeary = fmt.Sprintf("%v", spirtQeury[0]) */
 		newqeuryParamaters =  append(newqeuryParamaters, qeuryParameters)
 	}
-	
-	/* if(len(newqeuryParamaters)>0){
-		isParamNull := newqeuryParamaters[0]
-		newqeuryParamaters[0] = fmt.Sprintf(", %v", newqeuryParamaters[0])
-		newqeuryParamaters[len(newqeuryParamaters)-1] = lastQeary
-		if(newparameterParameters==nil&&len(newqeuryParamaters)>0){
-			newqeuryParamaters[0] = fmt.Sprintf("%v", isParamNull)
-		}
-	}  */
 	
 	g.CtlSvRepo.Qeury = newqeury
 	g.CtlSvRepo.QeuryParameters = newqeuryParamaters

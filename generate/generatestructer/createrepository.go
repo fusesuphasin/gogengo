@@ -2,12 +2,16 @@ package generatestructer
 
 import (
 	"fmt"
-	"gogenerate/generatestructer/gotemplate"
+	"gogenerate/generate/generatestructer/gotemplate"
 	"strings"
 	"time"
 )
 
-func CreateRepository(RPMethodService string, CtlStructName string, generate *Genenrate) {
+type Repository struct{
+	
+}
+
+func (rp *Repository) CreateRepository(RPMethodService string, CtlStructName string, generate *Genenrate) {
 	generate.CtlSvRepo.MethodRequestURL = strings.Title(generate.CtlSvRepo.MethodRequestURL)
 	err := gotemplate.MethodRepoTemplate.Execute(generate.RP, struct {
 		Timestamp      time.Time
@@ -39,7 +43,7 @@ func CreateRepository(RPMethodService string, CtlStructName string, generate *Ge
 	}
 }
 
-func CreateRepositoryCreate(RPMethodService string, CtlStructName string, generate *Genenrate) {
+func (rp *Repository) CreateRepositoryCreate(RPMethodService string, CtlStructName string, generate *Genenrate) {
 	generate.CtlSvRepo.MethodRequestURL = strings.Title(generate.CtlSvRepo.MethodRequestURL)
 	err := gotemplate.MethodRepoTemplateCreate.Execute(generate.RP, struct {
 		Timestamp      time.Time
@@ -71,7 +75,7 @@ func CreateRepositoryCreate(RPMethodService string, CtlStructName string, genera
 	}
 }
 
-func CreateRepositoryGetAll(RPMethodService string, CtlStructName string, generate *Genenrate) {
+func (rp *Repository) CreateRepositoryGetAll(RPMethodService string, CtlStructName string, generate *Genenrate) {
 	generate.CtlSvRepo.MethodRequestURL = strings.Title(generate.CtlSvRepo.MethodRequestURL)
 	err := gotemplate.MethodRepoTemplateGetAll.Execute(generate.RP, struct {
 		Timestamp      time.Time
@@ -103,7 +107,7 @@ func CreateRepositoryGetAll(RPMethodService string, CtlStructName string, genera
 	}
 }
 
-func CreateRepositoryGetBy(RPMethodService string, CtlStructName string, generate *Genenrate) {
+func (rp *Repository) CreateRepositoryGetBy(RPMethodService string, CtlStructName string, generate *Genenrate) {
 	generate.CtlSvRepo.MethodRequestURL = strings.Title(generate.CtlSvRepo.MethodRequestURL)
 	err := gotemplate.MethodRepoTemplateGetBy.Execute(generate.RP, struct {
 		Timestamp      time.Time
@@ -135,7 +139,7 @@ func CreateRepositoryGetBy(RPMethodService string, CtlStructName string, generat
 	}
 }
 
-func CreateRepositoryUpdate(RPMethodService string, CtlStructName string, generate *Genenrate) {
+func (rp *Repository) CreateRepositoryUpdate(RPMethodService string, CtlStructName string, generate *Genenrate) {
 	generate.CtlSvRepo.MethodRequestURL = strings.Title(generate.CtlSvRepo.MethodRequestURL)
 	err := gotemplate.MethodRepoTemplateUpdate.Execute(generate.RP, struct {
 		Timestamp      time.Time
@@ -167,7 +171,7 @@ func CreateRepositoryUpdate(RPMethodService string, CtlStructName string, genera
 	}
 }
 
-func CreateRepositoryPatch(RPMethodService string, CtlStructName string, generate *Genenrate) {
+func (rp *Repository) CreateRepositoryPatch(RPMethodService string, CtlStructName string, generate *Genenrate) {
 	generate.CtlSvRepo.MethodRequestURL = strings.Title(generate.CtlSvRepo.MethodRequestURL)
 	err := gotemplate.MethodRepoTemplatePatch.Execute(generate.RP, struct {
 		Timestamp      time.Time
@@ -199,7 +203,7 @@ func CreateRepositoryPatch(RPMethodService string, CtlStructName string, generat
 	}
 }
 
-func CreateRepositoryDelete(RPMethodService string, CtlStructName string, generate *Genenrate) {
+func (rp *Repository) CreateRepositoryDelete(RPMethodService string, CtlStructName string, generate *Genenrate) {
 	generate.CtlSvRepo.MethodRequestURL = strings.Title(generate.CtlSvRepo.MethodRequestURL)
 	err := gotemplate.MethodRepoTemplateDelete.Execute(generate.RP, struct {
 		Timestamp      time.Time

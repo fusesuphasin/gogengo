@@ -1,7 +1,7 @@
 package generatestruct
 
 import (
-	"gogenerate/extractfield"
+	"gogenerate/generate/extractfield"
 	"io/ioutil"
 	"log"
 	"os"
@@ -22,7 +22,7 @@ type GenStruct struct {
 
 
 func GenerateStruct(path string)  (map[string][]string, map[string][]string, map[string][]string){
-	FileName := "D:/generate/etl/afterconv/interface_parse.json"
+	FileName := "./generate/etl/afterconv/interface_parse.json"
 	QueryParameter := `paths | join(".")`
 
 	//Declear Object

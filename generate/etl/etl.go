@@ -1,7 +1,7 @@
 package etl
 
 import (
-	"gogenerate/etl/convjson"
+	"gogenerate/generate/etl/convjson"
 	"io/ioutil"
 	"log"
 	"os"
@@ -19,8 +19,8 @@ type MainConvertJSON struct {
 
 
 func  ETL() {
-	FileName := "D:/generate/etl/beforeconv/interface.json"
-	OutputFileNameConvJSON := "D:/generate/etl/afterconv/interface_parse.json"
+	FileName := "./generate/etl/beforeconv/interface.json"
+	OutputFileNameConvJSON := "./generate/etl/afterconv/interface_parse.json"
 
 	QueryParameter := `paths | join(".")`
 

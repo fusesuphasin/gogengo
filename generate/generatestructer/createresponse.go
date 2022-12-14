@@ -2,12 +2,16 @@ package generatestructer
 
 import (
 	"fmt"
-	"gogenerate/generatestructer/gotemplate"
+	"gogenerate/generate/generatestructer/gotemplate"
 	"os"
 	"time"
 )
 
-func CreateResponseTemplate(path string) {
+type Response struct{
+	
+}
+
+func (rp *Response) CreateResponseTemplate(path string) {
 	//write respone struct file
 	controllerFileName := fmt.Sprintf("%v/app/utils/response/response.go", path)
 	res, err := os.Create(controllerFileName)

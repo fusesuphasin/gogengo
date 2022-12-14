@@ -2,9 +2,8 @@ package structure
 
 import (
 	"fmt"
+	"gogenerate/generate/generatestructer/gotemplate"
 	"os"
-
-	"gogenerate/generatestructer/gotemplate"
 
 	cp "github.com/otiai10/copy"
 )
@@ -42,30 +41,30 @@ func  CreateStructure(path string) {
 		}
 	}
 
-	err = cp.Copy("D:/generate/structure/Init/app", createFolderApp)
+	err = cp.Copy("./template/structure/Init/app", createFolderApp)
 	if(err!=nil){
 		fmt.Println(err)
 	}
 
-	err = cp.Copy("D:/generate/structure/Init/cmd", createFolderBackend)
+	err = cp.Copy("./template/structure/Init/cmd", createFolderBackend)
 	if(err!=nil){
 		fmt.Println(err)
 	}
 
-	err = cp.Copy("D:/generate/structure/Init/docker", createFolderBackend+"/docker")
+	err = cp.Copy("./template/structure/Init/docker", createFolderBackend+"/docker")
 	if(err!=nil){
 		fmt.Println(err)
 	}
 
-	err = cp.Copy("D:/generate/structure/Init/docker-compose.yml", fmt.Sprintf("%v/docker-compose.yml", createFolderBackend))
+	err = cp.Copy("./template/structure/Init/docker-compose.yml", fmt.Sprintf("%v/docker-compose.yml", createFolderBackend))
 	if(err!=nil){
 		fmt.Println(err)
 	}
-	err = cp.Copy("D:/generate/structure/Init/.env", fmt.Sprintf("%v/docker-compose.yml", createFolderBackend))
+	err = cp.Copy("./template/structure/Init/.env", fmt.Sprintf("%v/docker-compose.yml", createFolderBackend))
 	if(err!=nil){
 		fmt.Println(err)
 	}
-	err = cp.Copy("D:/generate/structure/Init/.gitignore", fmt.Sprintf("%v/docker-compose.yml", createFolderBackend))
+	err = cp.Copy("./template/structure/Init/.gitignore", fmt.Sprintf("%v/docker-compose.yml", createFolderBackend))
 	if(err!=nil){
 		fmt.Println(err)
 	}

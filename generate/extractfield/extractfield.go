@@ -2,7 +2,7 @@ package extractfield
 
 import (
 	"fmt"
-	"gogenerate/generatestruct/createstruct"
+	"gogenerate/generate/generatestruct/createstruct"
 	"log"
 	"strconv"
 	"strings"

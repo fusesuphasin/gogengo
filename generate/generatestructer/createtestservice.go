@@ -2,29 +2,16 @@ package generatestructer
 
 import (
 	"fmt"
-	"gogenerate/generatestructer/gotemplate"
+	"gogenerate/generate/generatestructer/gotemplate"
 	"time"
 )
 
-/*
-func CreateTestServiceTemplate(ControllerName string) *os.File{
-	serviceName := fmt.Sprintf("D:/backend/app/service/%vservice.go", strings.ToLower(ControllerName))
-	sv, err := os.Create(serviceName)
-	if(err!=nil){
-		fmt.Println(err)
-	}
 
-	gotemplate.TestSVpackageTemplate.Execute(generate.SV, struct {
-		Timestamp      time.Time
-		ControllerName string
-	}{
-		Timestamp:      time.Now(),
-		ControllerName: ControllerName,
-	})
-	return sv
-} */
+type TestService struct{
+	
+}
 
-func CreateTestServiceCreate(CtlMethodService string, CtlStructName string, generate *Genenrate) {
+func (ts *TestService) CreateTestService(CtlMethodService string, CtlStructName string, generate *Genenrate) {
 	err := gotemplate.TestMethodSVTemplateCreate.Execute(generate.TestSV, struct {
 		Timestamp      time.Time
 		ServiceName   string
@@ -55,7 +42,7 @@ func CreateTestServiceCreate(CtlMethodService string, CtlStructName string, gene
 	}
 }
 
-func CreateTestServiceGetAll(CtlMethodService string, CtlStructName string, generate *Genenrate) {
+func (ts *TestService) CreateTestServiceGetAll(CtlMethodService string, CtlStructName string, generate *Genenrate) {
 	err := gotemplate.TestMethodSVTemplateGetAll.Execute(generate.TestSV, struct {
 		Timestamp      time.Time
 		ServiceName   string
@@ -86,7 +73,7 @@ func CreateTestServiceGetAll(CtlMethodService string, CtlStructName string, gene
 	}
 }
 
-func CreateTestServiceGetBy(CtlMethodService string, CtlStructName string, generate *Genenrate) {
+func (ts *TestService) CreateTestServiceGetBy(CtlMethodService string, CtlStructName string, generate *Genenrate) {
 	err := gotemplate.TestMethodSVTemplateGetBy.Execute(generate.TestSV, struct {
 		Timestamp      time.Time
 		ServiceName   string
@@ -117,7 +104,7 @@ func CreateTestServiceGetBy(CtlMethodService string, CtlStructName string, gener
 	}
 }
 
-func CreateTestServiceUpdate(CtlMethodService string, CtlStructName string, generate *Genenrate) {
+func (ts *TestService) CreateTestServiceUpdate(CtlMethodService string, CtlStructName string, generate *Genenrate) {
 	err := gotemplate.TestMethodSVTemplateUpdate.Execute(generate.TestSV, struct {
 		Timestamp      time.Time
 		ServiceName   string
@@ -148,7 +135,7 @@ func CreateTestServiceUpdate(CtlMethodService string, CtlStructName string, gene
 	}
 }
 
-func CreateTestServicePatch(CtlMethodService string, CtlStructName string, generate *Genenrate) {
+func (ts *TestService)CreateTestServicePatch(CtlMethodService string, CtlStructName string, generate *Genenrate) {
 	err := gotemplate.TestMethodSVTemplatePatch.Execute(generate.TestSV, struct {
 		Timestamp      time.Time
 		ServiceName   string
@@ -179,7 +166,7 @@ func CreateTestServicePatch(CtlMethodService string, CtlStructName string, gener
 	}
 }
 
-func CreateTestServiceDelete(CtlMethodService string, CtlStructName string, generate *Genenrate) {
+func (ts *TestService) CreateTestServiceDelete(CtlMethodService string, CtlStructName string, generate *Genenrate) {
 	err := gotemplate.TestMethodSVTemplateDelete.Execute(generate.TestSV, struct {
 		Timestamp      time.Time
 		ServiceName   string
