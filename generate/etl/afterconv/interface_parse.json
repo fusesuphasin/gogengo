@@ -1,13 +1,13 @@
 {
 	"info": {
-		"_postman_id": "4aad4532-0077-46cc-8bfd-be40d357a240",
-		"name": "Go Gen Go Test",
+		"_postman_id": "c5d33048-2dd2-48f6-87e3-30a1cc389587",
+		"name": "Courier",
 		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
 		"_exporter_id": "18395872"
 	},
 	"item": [
 		{
-			"name": "Purpose",
+			"name": "Groups",
 			"item": [
 				{
 					"name": "Translation",
@@ -24,16 +24,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/translation",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose",
+										"couriers",
+										"groups",
 										":id",
 										"translation"
 									],
@@ -58,16 +57,15 @@
 											}
 										],
 										"url": {
-											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation",
+											"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/translation",
 											"host": [
 												"{{base_url}}"
 											],
 											"path": [
 												"{{api}}",
 												"admin",
-												"coupons",
-												"initial_data",
-												"purpose",
+												"couriers",
+												"groups",
 												":id",
 												"translation"
 											],
@@ -90,7 +88,7 @@
 										}
 									],
 									"cookie": [],
-									"body": {"data":[{"id":"string","language":"en","name":"Credit Card Only"}],"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
+									"body": {"data":[{"id":"string","language":"en","name":"SCG"}],"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
 								},
 								{
 									"name": "500",
@@ -104,16 +102,15 @@
 											}
 										],
 										"url": {
-											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation",
+											"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/translation",
 											"host": [
 												"{{base_url}}"
 											],
 											"path": [
 												"{{api}}",
 												"admin",
-												"coupons",
-												"initial_data",
-												"purpose",
+												"couriers",
+												"groups",
 												":id",
 												"translation"
 											],
@@ -151,18 +148,17 @@
 										"type": "text"
 									}
 								],
-								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only"}},
+								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"SCG"}},
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/translation/language/:language",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose",
+										"couriers",
+										"groups",
 										":id",
 										"translation",
 										"language",
@@ -192,18 +188,17 @@
 												"type": "text"
 											}
 										],
-										"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only"}},
+										"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"SCG"}},
 										"url": {
-											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+											"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/translation/language/:language",
 											"host": [
 												"{{base_url}}"
 											],
 											"path": [
 												"{{api}}",
 												"admin",
-												"coupons",
-												"initial_data",
-												"purpose",
+												"couriers",
+												"groups",
 												":id",
 												"translation",
 												"language",
@@ -232,7 +227,7 @@
 										}
 									],
 									"cookie": [],
-									"body": {"data":{"id":"string","name":"Credit Card Only"},"meta":{"code":"201","message":"The request was successfully processed.","type":"Created"}}
+									"body": {"data":{"id":"string","name":"SCG"},"meta":{"code":"201","message":"The request was successfully processed.","type":"Created"}}
 								},
 								{
 									"name": "500",
@@ -247,16 +242,15 @@
 										],
 										"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"@#"}},
 										"url": {
-											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+											"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/translation/language/:language",
 											"host": [
 												"{{base_url}}"
 											],
 											"path": [
 												"{{api}}",
 												"admin",
-												"coupons",
-												"initial_data",
-												"purpose",
+												"couriers",
+												"groups",
 												":id",
 												"translation",
 												"language",
@@ -301,16 +295,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/translation/language/:language",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose",
+										"couriers",
+										"groups",
 										":id",
 										"translation",
 										"language",
@@ -341,16 +334,15 @@
 											}
 										],
 										"url": {
-											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+											"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/translation/language/:language",
 											"host": [
 												"{{base_url}}"
 											],
 											"path": [
 												"{{api}}",
 												"admin",
-												"coupons",
-												"initial_data",
-												"purpose",
+												"couriers",
+												"groups",
 												":id",
 												"translation",
 												"language",
@@ -379,7 +371,7 @@
 										}
 									],
 									"cookie": [],
-									"body": {"data":{"id":"string","name":"Credit Card Only"},"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
+									"body": {"data":{"id":"string","name":"SCG"},"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
 								},
 								{
 									"name": "500",
@@ -393,16 +385,15 @@
 											}
 										],
 										"url": {
-											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+											"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/translation/language/:language",
 											"host": [
 												"{{base_url}}"
 											],
 											"path": [
 												"{{api}}",
 												"admin",
-												"coupons",
-												"initial_data",
-												"purpose",
+												"couriers",
+												"groups",
 												":id",
 												"translation",
 												"language",
@@ -446,18 +437,17 @@
 										"type": "text"
 									}
 								],
-								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only"}},
+								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"SCG"}},
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/translation/language/:language",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose",
+										"couriers",
+										"groups",
 										":id",
 										"translation",
 										"language",
@@ -487,18 +477,17 @@
 												"type": "text"
 											}
 										],
-										"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only"}},
+										"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"SCG"}},
 										"url": {
-											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+											"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/translation/language/:language",
 											"host": [
 												"{{base_url}}"
 											],
 											"path": [
 												"{{api}}",
 												"admin",
-												"coupons",
-												"initial_data",
-												"purpose",
+												"couriers",
+												"groups",
 												":id",
 												"translation",
 												"language",
@@ -527,7 +516,7 @@
 										}
 									],
 									"cookie": [],
-									"body": {"data":{"id":"string","name":"Credit Card Only"},"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
+									"body": {"data":{"id":"string","name":"SCG"},"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
 								},
 								{
 									"name": "500",
@@ -542,16 +531,15 @@
 										],
 										"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"@#"}},
 										"url": {
-											"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/translation/language/:language",
+											"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/translation/language/:language",
 											"host": [
 												"{{base_url}}"
 											],
 											"path": [
 												"{{api}}",
 												"admin",
-												"coupons",
-												"initial_data",
-												"purpose",
+												"couriers",
+												"groups",
 												":id",
 												"translation",
 												"language",
@@ -587,7 +575,7 @@
 					]
 				},
 				{
-					"name": "List purpose",
+					"name": "List groups",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -598,16 +586,15 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose?limit={{limit}}&offset={{offset}}&search={\"key\": \"name\",\"value\": \"Credit Card Only\"}&filter=[{\"key\": \"name\",\"value\": \"Credit Card Only\",\"operator\": \"equal_to\"}]&sort=[{\"key\": \"name\",\"order\": \"descending\"}]&type=plan",
+							"raw": "{{base_url}}/{{api}}/admin/couriers/groups?limit={{limit}}&offset={{offset}}&search={\"key\": \"name\",\"value\": \"SCG\"}&filter=[{\"key\": \"name\",\"value\": \"SCG\",\"operator\": \"equal_to\"}]&sort=[{\"key\": \"name\",\"order\": \"descending\"}]",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"{{api}}",
 								"admin",
-								"coupons",
-								"initial_data",
-								"purpose"
+								"couriers",
+								"groups"
 							],
 							"query": [
 								{
@@ -620,19 +607,15 @@
 								},
 								{
 									"key": "search",
-									"value": "{\"key\": \"name\",\"value\": \"Credit Card Only\"}"
+									"value": "{\"key\": \"name\",\"value\": \"SCG\"}"
 								},
 								{
 									"key": "filter",
-									"value": "[{\"key\": \"name\",\"value\": \"Credit Card Only\",\"operator\": \"equal_to\"}]"
+									"value": "[{\"key\": \"name\",\"value\": \"SCG\",\"operator\": \"equal_to\"}]"
 								},
 								{
 									"key": "sort",
 									"value": "[{\"key\": \"name\",\"order\": \"descending\"}]"
-								},
-								{
-									"key": "type",
-									"value": "plan"
 								}
 							]
 						}
@@ -650,16 +633,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose?limit={{limit}}&offset={{offset}}&search={\"key\": \"name\",\"value\": \"Credit Card Only\"}&filter=[{\"key\": \"name\",\"value\": \"Credit Card Only\",\"operator\": \"equal_to\"}]&sort=[{\"key\": \"name\",\"order\": \"descending\"}]&type=plan",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups?limit={{limit}}&offset={{offset}}&search={\"key\": \"name\",\"value\": \"SCG\"}&filter=[{\"key\": \"name\",\"value\": \"SCG\",\"operator\": \"equal_to\"}]&sort=[{\"key\": \"name\",\"order\": \"descending\"}]",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose"
+										"couriers",
+										"groups"
 									],
 									"query": [
 										{
@@ -672,19 +654,15 @@
 										},
 										{
 											"key": "search",
-											"value": "{\"key\": \"name\",\"value\": \"Credit Card Only\"}"
+											"value": "{\"key\": \"name\",\"value\": \"SCG\"}"
 										},
 										{
 											"key": "filter",
-											"value": "[{\"key\": \"name\",\"value\": \"Credit Card Only\",\"operator\": \"equal_to\"}]"
+											"value": "[{\"key\": \"name\",\"value\": \"SCG\",\"operator\": \"equal_to\"}]"
 										},
 										{
 											"key": "sort",
 											"value": "[{\"key\": \"name\",\"order\": \"descending\"}]"
-										},
-										{
-											"key": "type",
-											"value": "plan"
 										}
 									]
 								}
@@ -700,7 +678,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":[{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_deleted":false,"is_enabled":true,"name":"Credit Card Only","slug":"plan_credit_card_only","type":"plan","updated_at":"2022-02-12T04:30:30.359Z"}],"meta":{"code":"200","message":"The request was successfully processed.","pagination":{"limit":20,"offset":0,"total":1,"total_page":1},"type":"OK"}}
+							"body": {"data":[{"created_at":"2022-02-12T04:30:30.359Z","icon_url":"example.com","id":"string","is_deleted":false,"is_enabled":true,"logo_url":"example.com","name":"SCG","slug":"scg","updated_at":"2022-02-12T04:30:30.359Z"}],"meta":{"code":"200","message":"The request was successfully processed.","pagination":{"limit":20,"offset":0,"total":1,"total_page":1},"type":"OK"}}
 						},
 						{
 							"name": "500",
@@ -714,16 +692,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose?limit={{limit}}&offset={{offset}}&search={\"key\": \"name\",\"value\": \"Credit Card Only\"}&filter=[{\"key\": \"name\",\"value\": \"Credit Card Only\",\"operator\": \"equal_to\"}]&sort=[{\"key\": \"name\",\"order\": \"descending\"}]&type=plan",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups?limit={{limit}}&offset={{offset}}&search={\"key\": \"name\",\"value\": \"SCG\"}&filter=[{\"key\": \"name\",\"value\": \"SCG\",\"operator\": \"equal_to\"}]&sort=[{\"key\": \"name\",\"order\": \"descending\"}]",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose"
+										"couriers",
+										"groups"
 									],
 									"query": [
 										{
@@ -736,19 +713,15 @@
 										},
 										{
 											"key": "search",
-											"value": "{\"key\": \"name\",\"value\": \"Credit Card Only\"}"
+											"value": "{\"key\": \"name\",\"value\": \"SCG\"}"
 										},
 										{
 											"key": "filter",
-											"value": "[{\"key\": \"name\",\"value\": \"Credit Card Only\",\"operator\": \"equal_to\"}]"
+											"value": "[{\"key\": \"name\",\"value\": \"SCG\",\"operator\": \"equal_to\"}]"
 										},
 										{
 											"key": "sort",
 											"value": "[{\"key\": \"name\",\"order\": \"descending\"}]"
-										},
-										{
-											"key": "type",
-											"value": "plan"
 										}
 									]
 								}
@@ -764,12 +737,12 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":{},"meta":{"code":"500","errors":[],"message":"List purpose failed","type":"Internal Error"}}
+							"body": {"data":{},"meta":{"code":"500","errors":[],"message":"List groups failed","type":"Internal Error"}}
 						}
 					]
 				},
 				{
-					"name": "Create a purpose",
+					"name": "Create a group",
 					"request": {
 						"method": "POST",
 						"header": [
@@ -779,20 +752,20 @@
 								"type": "text"
 							}
 						],
-						"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only","type":"plan"}},
+						"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"icon_url":"example.com","logo_url":"example.com","name":"SCG"}},
 						"url": {
-							"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose",
+							"raw": "{{base_url}}/{{api}}/admin/couriers/groups",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"{{api}}",
 								"admin",
-								"coupons",
-								"initial_data",
-								"purpose"
+								"couriers",
+								"groups"
 							]
-						}
+						},
+						"description": "| **attribute** | **type** | **value** | **requried** | **validate** | **description** |\n| --- | --- | --- | --- | --- | --- |\n| name | string | SCG | true | min=3,max=20 | name of courier |\n| logo_url | string | example.com | false |  | aaa |\n| icon_url | string | example.com | false |  |  |"
 					},
 					"response": [
 						{
@@ -806,18 +779,17 @@
 										"type": "text"
 									}
 								],
-								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only","type":"plan"}},
+								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"icon_url":"example.com","logo_url":"example.com","name":"SCG"}},
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose"
+										"couriers",
+										"groups"
 									]
 								}
 							},
@@ -832,7 +804,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_deleted":false,"is_enabled":true,"name":"Credit Card Only","slug":"plan_credit_card_only","type":"plan","updated_at":"2022-02-12T04:30:30.359Z"},"meta":{"code":"201","message":"The request was successfully processed.","type":"Created"}}
+							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","icon_url":"example.com","id":"string","is_deleted":false,"is_enabled":true,"logo_url":"example.com","name":"SCG","slug":"scg","updated_at":"2022-02-12T04:30:30.359Z"},"meta":{"code":"201","message":"The request was successfully processed.","type":"Created"}}
 						},
 						{
 							"name": "500",
@@ -845,18 +817,17 @@
 										"type": "text"
 									}
 								],
-								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"@#","type":"plan"}},
+								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"icon_url":"example.com","logo_url":"example.com","name":"@#"}},
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose"
+										"couriers",
+										"groups"
 									]
 								}
 							},
@@ -876,7 +847,7 @@
 					]
 				},
 				{
-					"name": "Retrieve a purpose",
+					"name": "Retrieve a group",
 					"request": {
 						"method": "GET",
 						"header": [
@@ -887,16 +858,15 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+							"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"{{api}}",
 								"admin",
-								"coupons",
-								"initial_data",
-								"purpose",
+								"couriers",
+								"groups",
 								":id"
 							],
 							"variable": [
@@ -920,16 +890,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose",
+										"couriers",
+										"groups",
 										":id"
 									],
 									"variable": [
@@ -951,7 +920,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_deleted":false,"is_enabled":true,"name":"Credit Card Only","slug":"plan_credit_card_only","type":"plan","updated_at":"2022-02-12T04:30:30.359Z"},"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
+							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","icon_url":"example.com","id":"string","is_deleted":false,"is_enabled":true,"logo_url":"example.com","name":"SCG","slug":"scg","updated_at":"2022-02-12T04:30:30.359Z"},"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
 						},
 						{
 							"name": "500",
@@ -965,16 +934,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose",
+										"couriers",
+										"groups",
 										":id"
 									],
 									"variable": [
@@ -996,12 +964,12 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":{},"meta":{"code":"500","errors":[],"message":"Retrieve a purpose failed","type":"Internal Error"}}
+							"body": {"data":{},"meta":{"code":"500","errors":[],"message":"Retrieve a group failed","type":"Internal Error"}}
 						}
 					]
 				},
 				{
-					"name": "Update a purpose",
+					"name": "Update a group",
 					"request": {
 						"method": "PUT",
 						"header": [
@@ -1011,18 +979,17 @@
 								"type": "text"
 							}
 						],
-						"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only","type":"plan"}},
+						"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"icon_url":"example.com","logo_url":"example.com","name":"SCG"}},
 						"url": {
-							"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+							"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"{{api}}",
 								"admin",
-								"coupons",
-								"initial_data",
-								"purpose",
+								"couriers",
+								"groups",
 								":id"
 							],
 							"variable": [
@@ -1045,18 +1012,17 @@
 										"type": "text"
 									}
 								],
-								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Credit Card Only","type":"plan"}},
+								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"icon_url":"example.com","logo_url":"example.com","name":"SCG"}},
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose",
+										"couriers",
+										"groups",
 										":id"
 									],
 									"variable": [
@@ -1078,7 +1044,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_deleted":false,"is_enabled":true,"name":"Credit Card Only","slug":"plan_credit_card_only","type":"plan","updated_at":"2022-02-12T04:30:30.359Z"},"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
+							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","icon_url":"example.com","id":"string","is_deleted":false,"is_enabled":true,"logo_url":"example.com","name":"SCG","slug":"scg","updated_at":"2022-02-12T04:30:30.359Z"},"meta":{"code":"200","message":"The request was successfully processed.","type":"OK"}}
 						},
 						{
 							"name": "500",
@@ -1091,18 +1057,17 @@
 										"type": "text"
 									}
 								],
-								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"@#","type":"plan"}},
+								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"icon_url":"example.com","logo_url":"example.com","name":"@#"}},
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose",
+										"couriers",
+										"groups",
 										":id"
 									],
 									"variable": [
@@ -1129,7 +1094,7 @@
 					]
 				},
 				{
-					"name": "Update is enabled a purpose",
+					"name": "Update is enabled a group",
 					"request": {
 						"method": "PATCH",
 						"header": [
@@ -1140,16 +1105,15 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/is_enabled",
+							"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/is_enabled",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"{{api}}",
 								"admin",
-								"coupons",
-								"initial_data",
-								"purpose",
+								"couriers",
+								"groups",
 								":id",
 								"is_enabled"
 							],
@@ -1174,16 +1138,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/is_enabled",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/is_enabled",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose",
+										"couriers",
+										"groups",
 										":id",
 										"is_enabled"
 									],
@@ -1220,16 +1183,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id/is_enabled",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id/is_enabled",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose",
+										"couriers",
+										"groups",
 										":id",
 										"is_enabled"
 									],
@@ -1252,12 +1214,12 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":{},"meta":{"code":"500","errors":[],"message":"Update is enabled a purpose failed","type":"Internal Error"}}
+							"body": {"data":{},"meta":{"code":"500","errors":[],"message":"Update is enabled a group failed","type":"Internal Error"}}
 						}
 					]
 				},
 				{
-					"name": "Delete a purpose",
+					"name": "Delete a group",
 					"request": {
 						"method": "DELETE",
 						"header": [
@@ -1268,16 +1230,15 @@
 							}
 						],
 						"url": {
-							"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+							"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id",
 							"host": [
 								"{{base_url}}"
 							],
 							"path": [
 								"{{api}}",
 								"admin",
-								"coupons",
-								"initial_data",
-								"purpose",
+								"couriers",
+								"groups",
 								":id"
 							],
 							"variable": [
@@ -1301,16 +1262,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose",
+										"couriers",
+										"groups",
 										":id"
 									],
 									"variable": [
@@ -1346,16 +1306,15 @@
 									}
 								],
 								"url": {
-									"raw": "{{base_url}}/{{api}}/admin/coupons/initial_data/purpose/:id",
+									"raw": "{{base_url}}/{{api}}/admin/couriers/groups/:id",
 									"host": [
 										"{{base_url}}"
 									],
 									"path": [
 										"{{api}}",
 										"admin",
-										"coupons",
-										"initial_data",
-										"purpose",
+										"couriers",
+										"groups",
 										":id"
 									],
 									"variable": [
@@ -1377,7 +1336,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":{},"meta":{"code":"500","errors":[],"message":"Delete a purpose failed","type":"Internal Error"}}
+							"body": {"data":{},"meta":{"code":"500","errors":[],"message":"Delete a group failed","type":"Internal Error"}}
 						}
 					]
 				}

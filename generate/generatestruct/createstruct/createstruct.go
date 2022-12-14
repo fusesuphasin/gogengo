@@ -24,27 +24,29 @@ func ParseJson(input io.Reader) (interface{}, error) {
 	return result, nil
 }
 
-func CreateStruct(path string, action string, jsonValue *string, name *string, method *string, subStructMap map[string]int, subStructMap1 map[string]int, folderName *string, subFolderName *string, sub2FolderName *string, isHaveFolderInSideSub2 *bool) {
+func CreateStruct(path string, action string, jsonValue *string, name *string, method *string, subStructMap map[string]int, subStructMap1 map[string]int, folderName *string, subFolderName *string, sub2FolderName *string, isHaveFolderInSideSub2 *bool, requestDescription map[string]map[string]string) {
+	
 	i := strings.NewReader(*jsonValue)
 	editName := strings.Join(strings.Split(*name, " "), "")
 	newName := strings.Title(editName)
 	packageName := "domain"
+
 	var data []byte
-	
 	switch action {
 	case "request":
 		{
 			if newName[0:5] == "Update" {
-				data, _ = gojson.Generate(i, ParseJson, newName+"req", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "req")
+				data, _ = gojson.Generate(i, ParseJson, newName+"req", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "req", requestDescription)
 			} else {
-				data, _ = gojson.Generate(i, ParseJson, newName+"req", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "req")
+				data, _ = gojson.Generate(i, ParseJson, newName+"req", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "req", requestDescription)
 			}
 		}
 	case "response":
 		{
-			data, _ = gojson.Generate(i, ParseJson, newName+"res", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "res")
+			data, _ = gojson.Generate(i, ParseJson, newName+"res", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "res", requestDescription)
 		}
 	}
+
 	count := 0
 
 	var NEwdata []byte

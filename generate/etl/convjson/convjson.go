@@ -35,7 +35,7 @@ func (cjp *convJsonParse) doConvertJSON() {
 		if err, ok := valuePart.(error); ok {
 			log.Fatalln(err)
 		}
-
+		
 		cjp.Part = fmt.Sprintf("%v", valuePart)
 		cjp.PartSplit = strings.Split(cjp.Part, ".")
 		cjp.LengthPartSplit = len(cjp.PartSplit)
@@ -50,11 +50,13 @@ func checkPartJSON(cjp *convJsonParse) {
 				setValueJSON(cjp)
 			}
 		}
+		
 	}
 }
 
 func setValueJSON(cjp *convJsonParse) {
 	getValue := gjson.GetBytes(cjp.BodyBytes, cjp.Part).String()
+
 	var msg interface{}
 	
 	_ = json.Unmarshal([]byte(getValue), &msg)

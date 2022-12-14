@@ -39,7 +39,6 @@ func  ETL() {
 
 }
 
-
 func (cjson *MainConvertJSON) readJsonFileToBytes(part string) {
 	f, err := os.Open(part)
 	if err != nil {
