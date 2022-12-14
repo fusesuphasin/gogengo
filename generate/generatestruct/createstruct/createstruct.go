@@ -6,6 +6,7 @@ import (
 	"gogenerate/generate/gojson2"
 	"io"
 	"io/ioutil"
+	"log"
 	"os"
 	"strings"
 )
@@ -79,7 +80,7 @@ func CreateStruct(path string, action string, jsonValue *string, name *string, m
 			count++
 			NEwdata = nil
 			if StrcutGenerate == nil || string(StrcutGenerate) == "" {
-				//fmt.Println("skip struct", newName)
+				//log.Println("skip struct", newName)
 			} else {
 				switch action {
 				case "request":
@@ -91,7 +92,7 @@ func CreateStruct(path string, action string, jsonValue *string, name *string, m
 						fileName = fmt.Sprintf("%v/app/domain/%v.go" , path, StructName)
 						err := ioutil.WriteFile(fileName, (StrcutGenerate), 0777)
 						if err != nil {
-							fmt.Println(err)
+							log.Println(err)
 						}
 					}
 	
@@ -103,7 +104,7 @@ func CreateStruct(path string, action string, jsonValue *string, name *string, m
 						fileName = fmt.Sprintf("%v/app/domain/%v.go", path, StructName)
 						err := ioutil.WriteFile(fileName, (StrcutGenerate), 0777)
 						if err != nil {
-							fmt.Println(err)
+							log.Println(err)
 						}
 					}
 				}

@@ -213,7 +213,7 @@ func (pv *ParseValue) ParseFloat(value reflect.Value) reflect.Value {
 	case "string":
 		convValue, err := strconv.ParseFloat(value.String(), 64)
 		if err == nil {
-			fmt.Println(convValue)
+			log.Println(convValue)
 		}
 		newValueType = reflect.ValueOf(convValue)
 		return newValueType
@@ -232,7 +232,7 @@ func (pv *ParseValue) ParseInteger(value reflect.Value) reflect.Value {
 	case "string":
 		convValue, err := strconv.Atoi(value.String())
 		if err == nil {
-			fmt.Println(convValue)
+			log.Println(convValue)
 		}
 		newValueType = reflect.ValueOf(convValue)
 		return newValueType
@@ -274,14 +274,14 @@ func (pv *ParseValue) ParseBool(value reflect.Value) reflect.Value {
 	case "byte":
 		convValue, err := strconv.ParseBool((string(value.Bytes())))
 		if err == nil {
-			fmt.Println(convValue)
+			log.Println(convValue)
 		}
 		newValueType = reflect.ValueOf(convValue)
 		return newValueType
 	case "string":
 		convValue, err := strconv.ParseBool((value.String()))
 		if err == nil {
-			fmt.Println(convValue)
+			log.Println(convValue)
 		}
 		newValueType = reflect.ValueOf(convValue)
 		return newValueType

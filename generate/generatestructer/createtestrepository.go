@@ -1,8 +1,8 @@
 package generatestructer
 
 import (
-	"fmt"
 	"gogenerate/generate/generatestructer/gotemplate"
+	"log"
 	"strings"
 	"time"
 )
@@ -40,7 +40,7 @@ func (tr *TestRepository) CreateTestRepositoryCreate(RPMethodService string, Ctl
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -72,7 +72,7 @@ func (tr *TestRepository) CreateTestRepositoryGetAll(RPMethodService string, Ctl
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -104,7 +104,7 @@ func (tr *TestRepository) CreateTestRepositoryGetBy(RPMethodService string, CtlS
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -136,7 +136,7 @@ func (tr *TestRepository) CreateTestRepositoryUpdate(RPMethodService string, Ctl
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -168,7 +168,7 @@ func (tr *TestRepository) CreateTestRepositoryPatch(RPMethodService string, CtlS
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -200,6 +200,6 @@ func (tr *TestRepository) CreateTestRepositoryDelete(RPMethodService string, Ctl
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }

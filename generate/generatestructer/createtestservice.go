@@ -1,8 +1,8 @@
 package generatestructer
 
 import (
-	"fmt"
 	"gogenerate/generate/generatestructer/gotemplate"
+	"log"
 	"time"
 )
 
@@ -38,7 +38,7 @@ func (ts *TestService) CreateTestService(CtlMethodService string, CtlStructName 
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -69,7 +69,7 @@ func (ts *TestService) CreateTestServiceGetAll(CtlMethodService string, CtlStruc
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -100,7 +100,7 @@ func (ts *TestService) CreateTestServiceGetBy(CtlMethodService string, CtlStruct
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -131,7 +131,7 @@ func (ts *TestService) CreateTestServiceUpdate(CtlMethodService string, CtlStruc
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -162,7 +162,7 @@ func (ts *TestService)CreateTestServicePatch(CtlMethodService string, CtlStructN
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -193,6 +193,6 @@ func (ts *TestService) CreateTestServiceDelete(CtlMethodService string, CtlStruc
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }

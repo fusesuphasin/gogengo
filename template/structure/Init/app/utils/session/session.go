@@ -1,4 +1,9 @@
-package session
+package gotemplate
+
+import "html/template"
+
+var SessionTemplate = template.Must(template.New("").Parse(
+`package session
 
 import (
 	"gogengotest/app/service"
@@ -44,3 +49,4 @@ func GetSession() *session.Session {
 func GetAuth() *SessionData {
 	return dataAuth
 }
+`))

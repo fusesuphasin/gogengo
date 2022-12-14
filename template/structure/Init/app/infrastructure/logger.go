@@ -1,4 +1,9 @@
-package infrastructure
+package gotemplate
+
+import "html/template"
+
+var LoggerTemplate = template.Must(template.New("").Parse(
+`package infrastructure
 
 import (
 	"gogengotest/app/interfaces"
@@ -43,3 +48,5 @@ func (l *Logger) LogAccess(format string, v ...interface{}) {
 
 	log.Printf(format, v...)
 }
+`))
+

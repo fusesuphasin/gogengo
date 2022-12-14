@@ -1,8 +1,8 @@
 package generatestructer
 
 import (
-	"fmt"
 	"gogenerate/generate/generatestructer/gotemplate"
+	"log"
 	"strings"
 	"time"
 )
@@ -39,7 +39,7 @@ func (rp *Repository) CreateRepository(RPMethodService string, CtlStructName str
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -71,7 +71,7 @@ func (rp *Repository) CreateRepositoryCreate(RPMethodService string, CtlStructNa
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -103,7 +103,7 @@ func (rp *Repository) CreateRepositoryGetAll(RPMethodService string, CtlStructNa
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -135,7 +135,7 @@ func (rp *Repository) CreateRepositoryGetBy(RPMethodService string, CtlStructNam
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -167,7 +167,7 @@ func (rp *Repository) CreateRepositoryUpdate(RPMethodService string, CtlStructNa
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -199,7 +199,7 @@ func (rp *Repository) CreateRepositoryPatch(RPMethodService string, CtlStructNam
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -231,6 +231,6 @@ func (rp *Repository) CreateRepositoryDelete(RPMethodService string, CtlStructNa
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }

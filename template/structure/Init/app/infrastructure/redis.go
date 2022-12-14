@@ -1,4 +1,9 @@
-package infrastructure
+package gotemplate
+
+import "html/template"
+
+var RedisTemplate = template.Must(template.New("").Parse(
+`package infrastructure
 
 import (
 	"context"
@@ -19,7 +24,9 @@ func RedisInit() ( *redis.Client) {
 	})
 	
 	pong, err := redisClient.Ping(context.Background()).Result()
-	fmt.Println(pong, err)
+	log.Println(pong, err)
 
 	return redisClient
 }
+
+`))

@@ -1,4 +1,9 @@
-package infrastructure
+package gotemplate
+
+import "html/template"
+
+var RabbitTemplate = template.Must(template.New("").Parse(
+`package infrastructure
 
 import (
 	"fmt"
@@ -26,7 +31,7 @@ func RabbitConn() (ch *amqp.Connection, err error) {
 }
 
 func SendQueue(data string, queuename string) {
-	fmt.Println("data : ", data)
+	log.Println("data : ", data)
 	//str := fmt.Sprintf("%v", data)
 	conn, _ := RabbitConn()
 	defer conn.Close()
@@ -103,3 +108,4 @@ func GetQueue(queuename string) string{
 	<-forever
 	return "message"
 }
+`))

@@ -765,7 +765,7 @@
 								"groups"
 							]
 						},
-						"description": "| **attribute** | **type** | **value** | **requried** | **validate** | **description** |\n| --- | --- | --- | --- | --- | --- |\n| name | string | SCG | true | min=3,max=20 | name of courier |\n| logo_url | string | example.com | false |  | aaa |\n| icon_url | string | example.com | false |  |  |"
+						"description": "| **attribute** | **type** | **value** | **requried** | **validate** | **description** |\n| --- | --- | --- | --- | --- | --- |\n| name | string | SCG | true | min=3,max=20 | name of courier |\n| logo_url | string | example.com | false |  |  |\n| icon_url | string | example.com | false |  |  |"
 					},
 					"response": [
 						{

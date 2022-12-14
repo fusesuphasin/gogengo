@@ -1,8 +1,12 @@
-package middleware
+package gotemplate
+
+import "html/template"
+
+var ACLTemplate = template.Must(template.New("").Parse(
+`package middleware
 
 import (
 	"errors"
-	"gogengotest/app/utils/response"
 
 	"github.com/casbin/casbin/v2"
 	"github.com/gofiber/fiber/v2"
@@ -43,3 +47,5 @@ func CheckPermission(enforcer *casbin.Enforcer, page string) fiber.Handler {
 		return c.Next()
 	}
 }
+`))
+

@@ -1,4 +1,9 @@
-package service
+package gotemplate
+
+import "html/template"
+
+var RedisSVTemplate = template.Must(template.New("").Parse(
+`package service
 
 import (
 	"time"
@@ -17,3 +22,5 @@ func (us *RedisService) InsertToken(key string, value interface{}, expires time.
 func (us *RedisService) FetchToken(key string) (res string, err error) {
 	return us.RedisRepository.GettRedis(key)
 }
+
+`))

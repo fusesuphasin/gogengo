@@ -1,4 +1,9 @@
-package middleware
+package gotemplate
+
+import "html/template"
+
+var JWTTemplate = template.Must(template.New("").Parse(
+`package middleware
 
 import (
 	"gogengotest/app/service"
@@ -35,3 +40,4 @@ func JWTProtected(svc service.RedisService) fiber.Handler {
 
 	}
 }
+`))

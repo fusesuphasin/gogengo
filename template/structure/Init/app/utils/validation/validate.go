@@ -1,4 +1,9 @@
-package validation
+package gotemplate
+
+import "html/template"
+
+var ValidateTemplate = template.Must(template.New("").Parse(
+`package validation
 
 import (
 	"github.com/go-playground/validator/v10"
@@ -6,10 +11,10 @@ import (
 
 // ErrorValidationResponse - Standarize the response for validation
 type ErrorValidationResponse struct {
-	FailedField string `json:"-"`
-	Input       string `json:"input"`
-	Value       string `json:"-"`
-	Message     string `json:"message"`
+	FailedField string 
+	Input       string 
+	Value       string 
+	Message     string 
 }
 
 // return errors Field had error
@@ -46,3 +51,6 @@ func ValidateStruct(class interface{}) []*ErrorValidationResponse {
 	}
 	return errors
 }
+`))
+
+

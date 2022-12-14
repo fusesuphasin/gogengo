@@ -1,3 +1,9 @@
+package gotemplate
+
+import "html/template"
+
+var AppTemplate = template.Must(template.New("").Parse(
+`
 package bootstrap
 
 import (
@@ -7,7 +13,6 @@ import (
 	"syscall"
 	"time"
 
-	"gogengotest/app/interfaces"
 	"gogengotest/app/routes"
 
 	"github.com/casbin/casbin/v2"
@@ -51,3 +56,6 @@ func Dispatch(ctx context.Context, log interfaces.Logger, enforcer *casbin.Enfor
 	// 	log.LogError("%s", errApp)
 	// }
 }
+
+`))
+

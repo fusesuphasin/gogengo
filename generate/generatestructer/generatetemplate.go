@@ -101,13 +101,13 @@ func (g *Genenrate) Createroute(url *map[string][]string, keys *[]string, urlStr
 
 	g.RouteURL.RouteFile, g.RouteURL.RouteFileErr = os.Create(fmt.Sprintf("%v/app/routes/route.go", g.Path))
 	if(g.RouteURL.RouteFileErr != nil){
-		fmt.Println(g.RouteURL.RouteFileErr)
+		log.Println(g.RouteURL.RouteFileErr)
 	}
 	die(g.RouteURL.RouteFileErr)
 
 	g.RouteURL.RouteFileTest, g.RouteURL.RouteFileErrTest = os.Create(fmt.Sprintf("%v/app/routes/route_test.go", g.Path))
 	if(g.RouteURL.RouteFileErrTest != nil){
-		fmt.Println(g.RouteURL.RouteFileErrTest)
+		log.Println(g.RouteURL.RouteFileErrTest)
 	}
 	die(g.RouteURL.RouteFileErrTest)
 
@@ -333,7 +333,7 @@ func (g *Genenrate) GenerateControllerRouteTemplate(ctl *os.File, cURL string, c
 		}
 
 		if checkDupicateURL[createNewDupicate] == 1 {
-			//	fmt.Println(ctl, cURL, NewmethodURL)
+			//	log.Println(ctl, cURL, NewmethodURL)
 			g.Template.BodyTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.Ctl)
 			g.Template.BodyTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.TestCtl)
 		}

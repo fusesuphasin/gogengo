@@ -1,4 +1,9 @@
-package repository
+package gotemplate
+
+import "html/template"
+
+var RedisRepoTemplate = template.Must(template.New("").Parse(
+`package repository
 
 import (
 	"context"
@@ -24,8 +29,9 @@ func (rr *RedisRepository) GettRedis(key string) (res string, err error) {
 	
 	get, err := redisClient.Get(rr.Ctx, key).Result()
 	if err != nil {
-		fmt.Println("Error: ", err)
+		log.Println("Error: ", err)
 	}
 	defer redisClient.Close()
 	return get, err 
 }
+`))

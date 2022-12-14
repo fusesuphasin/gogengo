@@ -193,7 +193,7 @@ func (fjson *FieldJSON) extractPartJSONInit(valuePart *interface{}) {
 	if hasRequest && PartSplit[len(PartSplit)-1] == "method" {
 		valuePartLast := gjson.GetBytes(fjson.BodyBytes, Part).String()
 		fjson.Methodroute = valuePartLast
-		//	fmt.Println(fjson.URLroute, "____", fjson.Methodroute)
+		//	log.Println(fjson.URLroute, "____", fjson.Methodroute)
 	}
 
 	if hasRequest && PartSplit[len(PartSplit)-1] == "raw" && PartSplit[len(PartSplit)-2] == "url" {

@@ -1,3 +1,9 @@
+package gotemplate
+
+import "html/template"
+
+var CasbinTemplate = template.Must(template.New("").Parse(
+`
 package infrastructure
 
 import (
@@ -31,7 +37,7 @@ func CasbinLoad(driver *options.ClientOptions, dbName string) *casbin.Enforcer {
 	e, err := casbin.NewEnforcer(m, a)
 	if err != nil {
 		/* panic(err) */
-		/* fmt.Println("casnin 2: ", err) */
+		/* log.Println("casnin 2: ", err) */
 	}
 
 	// Load the policy from DB.
@@ -39,3 +45,4 @@ func CasbinLoad(driver *options.ClientOptions, dbName string) *casbin.Enforcer {
 	e.SavePolicy()
 	return e
 }
+`))

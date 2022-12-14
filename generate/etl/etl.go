@@ -18,8 +18,8 @@ type MainConvertJSON struct {
 }
 
 
-func  ETL() {
-	FileName := "./generate/etl/beforeconv/interface.json"
+func ETL(byteContainer []byte) {
+	//FileName := "./generate/etl/beforeconv/interface.json"
 	OutputFileNameConvJSON := "./generate/etl/afterconv/interface_parse.json"
 
 	QueryParameter := `paths | join(".")`
@@ -28,7 +28,8 @@ func  ETL() {
 	mainConvJSON := MainConvertJSON{QueryParameter: QueryParameter}
 
 	//Read File
-	mainConvJSON.readJsonFileToBytes(FileName)
+	mainConvJSON.BodyBytes = byteContainer
+	//mainConvJSON.readJsonFileToBytes(FileName)
 
 	//Parse Read File from Bytes
 	mainConvJSON.decoderJsonFileFromByte()

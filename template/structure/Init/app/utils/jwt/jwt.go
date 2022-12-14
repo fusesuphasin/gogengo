@@ -1,3 +1,9 @@
+package gotemplate
+
+import "html/template"
+
+var InterfaceLoggerTemplate = template.Must(template.New("").Parse(
+`
 package jwt
 
 import (
@@ -22,10 +28,10 @@ type AccessDetails struct {
 type TokenDetails struct {
 	AccessToken  string
 	RefreshToken string
-	AccessUuid   string `json:"-"`
-	RefreshUuid  string `json:"-"`
-	AtExpires    int64  `json:"-"`
-	RtExpires    int64  `json:"-"`
+	AccessUuid   string 
+	RefreshUuid  string 
+	AtExpires    int64  
+	RtExpires    int64  
 }
 
 func CreateToken(userName string) (*TokenDetails, error) {
@@ -137,3 +143,4 @@ func FetchAuth(service service.RedisService, authD *AccessDetails) (string, stri
 	
 	return userName, authD.UserName, nil
 }
+`))

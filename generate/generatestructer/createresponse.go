@@ -3,6 +3,7 @@ package generatestructer
 import (
 	"fmt"
 	"gogenerate/generate/generatestructer/gotemplate"
+	"log"
 	"os"
 	"time"
 )
@@ -16,7 +17,7 @@ func (rp *Response) CreateResponseTemplate(path string) {
 	controllerFileName := fmt.Sprintf("%v/app/utils/response/response.go", path)
 	res, err := os.Create(controllerFileName)
 	if(err!=nil){
-		fmt.Println(err)
+		log.Println(err)
 	}
 	
 	gotemplate.RespackageTemplate.Execute(res, struct {

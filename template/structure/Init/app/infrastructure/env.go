@@ -1,4 +1,9 @@
-package infrastructure
+package gotemplate
+
+import "html/template"
+
+var ENVTemplate = template.Must(template.New("").Parse(
+`package infrastructure
 
 import (
 	"gogengotest/app/interfaces"
@@ -12,3 +17,4 @@ func Load(logger interfaces.Logger) {
 		logger.LogError("%s", err)
 	}
 }
+`))

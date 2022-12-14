@@ -1,30 +1,37 @@
-package response
+package gotemplate
+
+import "html/template"
+
+var ResTemplate = template.Must(template.New("").Parse(
+`package response
 
 type SuccessResponse struct {
-	Success bool        `json:"success"`
-	Data    interface{} `json:"data"`
-	Message string      `json:"message"`
+	Success bool        
+	Data    interface{}
+	Message string      
 }
 
 type ErrorResponse struct {
-	Success bool        `json:"success"`
-	Message interface{} `json:"message"`
-	Error  interface{} `json:"error"`
+	Success bool        
+	Message interface{} 
+	Error  interface{} 
 }
 
 type RegisterResponse struct {
-	Name     string `json:"name"`
-	Username string `json:"username"`
-	Token    string `json:"token"`
+	Name     string 
+	Username string 
+	Token    string 
 }
 
 type LoginResponse struct {
-	Name     string `json:"name"`
-	Username string `json:"username"`
-	Token    string `json:"token"`
+	Name     string
+	Username string
+	Token    string 
 }
 
 type CurrentResponse struct {
-	Name     string `json:"name"`
-	Username string `json:"username"`
+	Name     string 
+	Username string 
 }
+`))
+

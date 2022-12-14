@@ -85,7 +85,7 @@ func Createroute(url *map[string][]string, keys *[]string) {
 						checkDupicateURL := make(map[string]int)
 						checkDupicateURL2 := make(map[string]int)
 						for cURL, cValue := range copyURL {
-							fmt.Println(cURL)
+							log.Println(cURL)
 							checkURLprev := strings.Split(j, "/")
 							checkURLcurr := strings.Split(cURL, "/")
 
@@ -156,7 +156,7 @@ func Createroute(url *map[string][]string, keys *[]string) {
 									createNewDupicate := newMethod + cURL
 									checkDupicateURL[createNewDupicate]++
 									if(checkDupicateURL[createNewDupicate]==1){
-										//fmt.Println(cURL, NewmethodURL)
+										//log.Println(cURL, NewmethodURL)
 										gotemplate.BodyTemplate.Execute(ctl, struct {
 											Timestamp      time.Time
 											URL            string
@@ -256,7 +256,7 @@ func Createroute(url *map[string][]string, keys *[]string) {
 									createNewDupicate2 := newMethod + cURL
 									checkDupicateURL2[createNewDupicate2]++
 									if(checkDupicateURL2[createNewDupicate2]==1){
-										//fmt.Println(newMethod, cURL, ctlMethod, NewmethodURL)
+										//log.Println(newMethod, cURL, ctlMethod, NewmethodURL)
 										gotemplate.MethodctlTemplate.Execute(ctl, struct {
 											Timestamp      time.Time
 											URL            string

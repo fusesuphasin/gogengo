@@ -1,8 +1,8 @@
 package generatestructer
 
 import (
-	"fmt"
 	"gogenerate/generate/generatestructer/gotemplate"
+	"log"
 	"time"
 )
 
@@ -37,7 +37,7 @@ func (sv *Service) CreateServiceCreate(CtlMethodService string, CtlStructName st
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -68,7 +68,7 @@ func (sv *Service) CreateServiceGetAll(CtlMethodService string, CtlStructName st
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -99,7 +99,7 @@ func (sv *Service) CreateServiceGetBy(CtlMethodService string, CtlStructName str
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -130,7 +130,7 @@ func (sv *Service) CreateServiceUpdate(CtlMethodService string, CtlStructName st
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -161,7 +161,7 @@ func (sv *Service) CreateServicePatch(CtlMethodService string, CtlStructName str
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }
 
@@ -192,6 +192,6 @@ func (sv *Service) CreateServiceDelete(CtlMethodService string, CtlStructName st
 		
 	})
 	if err!=nil{
-		fmt.Println(err)
+		log.Println(err)
 	}
 }

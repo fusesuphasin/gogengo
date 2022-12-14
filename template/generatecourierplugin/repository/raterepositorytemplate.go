@@ -35,7 +35,7 @@ var raterepositoryTemplate = template.Must(template.New("").Parse(
 	func courierAreaCollecttion() *mongo.Collection{
 		coll, err := infrastructure.GetMongoDbCollection("courier","area")
 		if err != nil {
-			fmt.Println("courier:" , err)
+			log.Println("courier:" , err)
 		}
 		return coll
 	}
