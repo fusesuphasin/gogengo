@@ -37,7 +37,6 @@ func ETL(byteContainer []byte) {
 
 	//Main Convert JSON
 	convjson.ConvertJSON(&OutputFileNameConvJSON, &mainConvJSON.BodyBytes, &mainConvJSON.JqQueryBodyDecoder)
-
 }
 
 func (cjson *MainConvertJSON) readJsonFileToBytes(part string) {

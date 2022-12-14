@@ -32,6 +32,7 @@ func (controller *GenerateStructureController) GenerateStructureRouter() {
 	v1 := api.Group("/v1") // /api/v1
 	
 	v1.Post("/go/template/generate" , controller.GenerateGoTemplate)
+	v1.Post("/postman/json/etl" , controller.ETL)
 	v1.Post("/courier_plugin/template/generate" , controller.GenerateCourierPluginTemplate)
 }
 
@@ -42,6 +43,7 @@ func (controller *GenerateStructureController) GenerateGoTemplate(c *fiber.Ctx) 
 			Status: "Failed",
 		})
 	}
+
 	fileReader, err := file.Open()
 	if err != nil {
 		return c.Status(http.StatusOK).JSON(&model.ShotResponse{
@@ -64,15 +66,13 @@ func (controller *GenerateStructureController) GenerateGoTemplate(c *fiber.Ctx) 
 		})
 	}
 
-	path := "C:/backend"
-
-	structure.CreateStructure(path)
+	structure.CreateStructure(requestBody.OutputPath)
 
 	//etl json file
 	etl.ETL(byteContainer)
 
 	// generate struct and retrive route
-	routeMethod, urlStruct, urlCode := generatestruct.GenerateStruct(path)
+	routeMethod, urlStruct, urlCode := generatestruct.GenerateStruct(requestBody.OutputPath)
 
 	//routeMethod = {{url}}/courier-accounts/:id:[GET PUT DELETE]
 	//urlStruct = {{url}}/bulk-downloads?limit=20&offset=0:[Listbulkdownload]
@@ -84,12 +84,50 @@ func (controller *GenerateStructureController) GenerateGoTemplate(c *fiber.Ctx) 
 	}
 	
     sort.Strings(keys)
-	generatestructer.GenerateTemplate(&routeMethod, &keys, &urlStruct, &urlCode, path)
+	generatestructer.GenerateTemplate(&routeMethod, &keys, &urlStruct, &urlCode, requestBody.OutputPath)
 
 	//gitdiff.Gitdiff()
 	return c.JSON("Success")
 }
 
+
+func (controller *GenerateStructureController) ETL(c *fiber.Ctx) error{
+	file, err := c.FormFile("file")
+	if err != nil {
+		return c.Status(http.StatusBadRequest).JSON(&model.ShotResponse{
+			Status: "Failed",
+		})
+	}
+
+	fileReader, err := file.Open()
+	if err != nil {
+		return c.Status(http.StatusOK).JSON(&model.ShotResponse{
+			Status: "Failed",
+		})
+	}
+	defer fileReader.Close()
+
+	byteContainer, err := io.ReadAll(fileReader)
+	if err != nil {
+		return c.Status(http.StatusOK).JSON(&model.ShotResponse{
+			Status: "Failed",
+		})
+	}
+
+	var requestBody model.Gotemplate
+	if err := c.BodyParser(&requestBody); err != nil {
+		return c.Status(http.StatusBadRequest).JSON(&model.ShotResponse{
+			Status: "Failed",
+		})
+	}
+
+	structure.CreateStructure(requestBody.OutputPath)
+
+	//etl json file
+	etl.ETL(byteContainer)
+
+	return c.Download("./generate/etl/afterconv/interface_parse.json")
+}
 
 func (controller *GenerateStructureController) GenerateCourierPluginTemplate(c *fiber.Ctx) error{
 	controller.CourierPluginTemplate.GenerateCourierPluginTemplate()
