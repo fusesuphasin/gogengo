@@ -114,15 +114,6 @@ func (controller *GenerateStructureController) ETL(c *fiber.Ctx) error{
 		})
 	}
 
-	var requestBody model.Gotemplate
-	if err := c.BodyParser(&requestBody); err != nil {
-		return c.Status(http.StatusBadRequest).JSON(&model.ShotResponse{
-			Status: "Failed",
-		})
-	}
-
-	structure.CreateStructure(requestBody.OutputPath)
-
 	//etl json file
 	etl.ETL(byteContainer)
 
