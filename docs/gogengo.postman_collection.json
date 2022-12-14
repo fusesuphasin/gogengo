@@ -1,0 +1,87 @@
+{
+	"info": {
+		"_postman_id": "2badd4a9-8434-49e7-922d-41b7cf600e8c",
+		"name": "GoGenGo",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "18395872"
+	},
+	"item": [
+		{
+			"name": "Generate go template",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "rHzucvEdD/Courier.postman_collection.json"
+						},
+						{
+							"key": "output_path",
+							"value": "C:/backend",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9000/api/v1/go/template/generate",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v1",
+						"go",
+						"template",
+						"generate"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "ETL",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "rHzucvEdD/Courier.postman_collection.json"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://127.0.0.1:9000/api/v1/postman/json/etl",
+					"protocol": "http",
+					"host": [
+						"127",
+						"0",
+						"0",
+						"1"
+					],
+					"port": "9000",
+					"path": [
+						"api",
+						"v1",
+						"postman",
+						"json",
+						"etl"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
