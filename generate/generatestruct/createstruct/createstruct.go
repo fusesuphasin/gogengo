@@ -3,12 +3,11 @@ package createstruct
 import (
 	"encoding/json"
 	"fmt"
+	"gogenerate/generate/gojson2"
 	"io"
 	"io/ioutil"
 	"os"
 	"strings"
-
-	gojson "github.com/ChimeraCoder/gojson"
 )
 
 type User struct {
@@ -36,14 +35,14 @@ func CreateStruct(path string, action string, jsonValue *string, name *string, m
 	case "request":
 		{
 			if newName[0:5] == "Update" {
-				data, _ = gojson.Generate(i, ParseJson, newName+"req", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "req", requestDescription)
+				data, _ = gojson2.Generate(i, ParseJson, newName+"req", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "req", requestDescription)
 			} else {
-				data, _ = gojson.Generate(i, ParseJson, newName+"req", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "req", requestDescription)
+				data, _ = gojson2.Generate(i, ParseJson, newName+"req", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "req", requestDescription)
 			}
 		}
 	case "response":
 		{
-			data, _ = gojson.Generate(i, ParseJson, newName+"res", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "res", requestDescription)
+			data, _ = gojson2.Generate(i, ParseJson, newName+"res", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "res", requestDescription)
 		}
 	}
 
