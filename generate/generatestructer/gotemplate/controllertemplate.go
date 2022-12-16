@@ -3,7 +3,7 @@ package gotemplate
 import "html/template"
 
 var CtlpackageTemplate = template.Must(template.New("").Parse(
-`package controller
+	`package controller
 
 import (
 	"context"
@@ -39,9 +39,8 @@ func New{{.ControllerName}}Controller(logger interfaces.Logger, fiber *fiber.App
 func (controller *{{.ControllerName}}Controller) {{.ControllerName}}Router(){
 `))
 
-
 /*
-// @Success {{.Anotation.CodeSuccess}} {object} *domainrequest.{{.CtlStructName}}  
+// @Success {{.Anotation.CodeSuccess}} {object} *domainrequest.{{.CtlStructName}}
 {{range .Anotation.CodeFailure}}// @Failure {{.}} {object}
 {{end}} */
 var MethodctlTemplate = template.Must(template.New("").Parse(
@@ -73,7 +72,7 @@ func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}
 `))
 
 var MethodctlTemplateGetAll = template.Must(template.New("").Parse(
-`// {{.Anotation.Method}}{{.Anotation.Name}}
+	`// {{.Anotation.Method}}{{.Anotation.Name}}
 // @Summary {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Description {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Tags {{.Anotation.NameLower}}
@@ -98,7 +97,7 @@ func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}
 `))
 
 var MethodctlTemplateGetBy = template.Must(template.New("").Parse(
-`// {{.Anotation.Method}}{{.Anotation.Name}}
+	`// {{.Anotation.Method}}{{.Anotation.Name}}
 // @Summary {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Description {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Tags {{.Anotation.NameLower}}
@@ -122,7 +121,7 @@ func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}
 `))
 
 var MethodctlTemplateCreate = template.Must(template.New("").Parse(
-`// {{.Anotation.Method}}{{.Anotation.Name}}
+	`// {{.Anotation.Method}}{{.Anotation.Name}}
 // @Summary {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Description {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Tags {{.Anotation.NameLower}}
@@ -155,7 +154,7 @@ func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}
 `))
 
 var MethodctlTemplateUpdate = template.Must(template.New("").Parse(
-`// {{.Anotation.Method}}{{.Anotation.Name}}
+	`// {{.Anotation.Method}}{{.Anotation.Name}}
 // @Summary {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Description {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Tags {{.Anotation.NameLower}}
@@ -187,7 +186,7 @@ func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}
 `))
 
 var MethodctlTemplatePatch = template.Must(template.New("").Parse(
-`// {{.Anotation.Method}}{{.Anotation.Name}}
+	`// {{.Anotation.Method}}{{.Anotation.Name}}
 // @Summary {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Description {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Tags {{.Anotation.NameLower}}
@@ -211,7 +210,7 @@ func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}
 `))
 
 var MethodctlTemplateDelete = template.Must(template.New("").Parse(
-`// {{.Anotation.Method}}{{.Anotation.Name}}
+	`// {{.Anotation.Method}}{{.Anotation.Name}}
 // @Summary {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Description {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Tags {{.Anotation.NameLower}}

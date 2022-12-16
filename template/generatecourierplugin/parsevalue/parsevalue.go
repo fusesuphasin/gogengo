@@ -1,6 +1,22 @@
 package parsevalue
 
 import (
+	"html/template"
+	"os"
+)
+
+type ParseValueTemplate struct{}
+
+func (mt *ParseValueTemplate) ParseValueTemplate(file *os.File) {
+
+	parseValueTemplate.Execute(file, struct {
+	}{})
+}
+
+var parseValueTemplate = template.Must(template.New("").Parse(
+	`package parsevalue
+
+import (
 	"fmt"
 	"log"
 	"net/url"
@@ -300,3 +316,4 @@ func (pv *ParseValue) ParseBool(value reflect.Value) reflect.Value {
 
 	return newValueType
 }
+`))

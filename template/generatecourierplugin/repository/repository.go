@@ -7,20 +7,20 @@ import (
 )
 
 type RepositoryTemplate struct {
-	Path string
-	RateRepositoryTemplate RateRepositoryTemplate
+	Path                         string
+	RateRepositoryTemplate       RateRepositoryTemplate
 	CredentialRepositoryTemplate CredentialRepositoryTemplate
-	SettingRepositoryTemplate SettingRepositoryTemplate
-	AreaRepositoryTemplate AreaRepositoryTemplate
+	SettingRepositoryTemplate    SettingRepositoryTemplate
+	AreaRepositoryTemplate       AreaRepositoryTemplate
 }
 
 func (rt *RepositoryTemplate) GenerateReporitoryTemplate(path string) {
 	rt.Path = fmt.Sprintf("%v/%v", path, "repository")
 	err := os.Mkdir(rt.Path, os.ModePerm)
-	if(err!=nil){
+	if err != nil {
 		log.Println(err)
 	}
-	
+
 	rt.generateSettingRepository()
 	rt.generateCredentialRepository()
 	rt.generateRateRepository()
@@ -30,7 +30,7 @@ func (rt *RepositoryTemplate) GenerateReporitoryTemplate(path string) {
 func (rt *RepositoryTemplate) generateSettingRepository() {
 	createName := fmt.Sprintf("%v/settingrepository.go", rt.Path)
 	file, err := os.Create(createName)
-	if(err!=nil){
+	if err != nil {
 		log.Println(err)
 	}
 	rt.SettingRepositoryTemplate.CreateSettingRepositoryTemplate(file)
@@ -39,7 +39,7 @@ func (rt *RepositoryTemplate) generateSettingRepository() {
 func (rt *RepositoryTemplate) generateCredentialRepository() {
 	createName := fmt.Sprintf("%v/credentialrepository.go", rt.Path)
 	file, err := os.Create(createName)
-	if(err!=nil){
+	if err != nil {
 		log.Println(err)
 	}
 
@@ -49,7 +49,7 @@ func (rt *RepositoryTemplate) generateCredentialRepository() {
 func (rt *RepositoryTemplate) generateRateRepository() {
 	createName := fmt.Sprintf("%v/raterepository.go", rt.Path)
 	file, err := os.Create(createName)
-	if(err!=nil){
+	if err != nil {
 		log.Println(err)
 	}
 
@@ -59,7 +59,7 @@ func (rt *RepositoryTemplate) generateRateRepository() {
 func (rt *RepositoryTemplate) generateAreaRepository() {
 	createName := fmt.Sprintf("%v/arearepository.go", rt.Path)
 	file, err := os.Create(createName)
-	if(err!=nil){
+	if err != nil {
 		log.Println(err)
 	}
 

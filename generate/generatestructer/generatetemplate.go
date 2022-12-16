@@ -31,13 +31,13 @@ type RouteURL struct {
 	GetRequestURL    string
 	MethodRequestURL string
 	RouteFile        *os.File
-	RouteFileTest        *os.File
+	RouteFileTest    *os.File
 	RouteFileErr     error
-	RouteFileErrTest     error
+	RouteFileErrTest error
 
-	ControllerName   string
-	NewcURLmethod    string
-	RouteMethod      string
+	ControllerName string
+	NewcURLmethod  string
+	RouteMethod    string
 }
 
 type CtlSvRepo struct {
@@ -45,15 +45,15 @@ type CtlSvRepo struct {
 	GetRequestURL    string
 	MethodRequestURL string
 	RouteFile        *os.File
-	
+
 	RouteFileErr     error
 	ControllerName   string
 	NewcURLmethod    string
 	RouteMethod      string
 	Qeury            []string
-	QeuryParameters            []string
+	QeuryParameters  []string
 	Params           []string
-	ParamsParameters           []string
+	ParamsParameters []string
 	ParamsCheck      string
 	StructName       []string
 }
@@ -67,25 +67,25 @@ type Genenrate struct {
 	RouteURL *RouteURL
 
 	//Generate Structer
-	Controller	Controller
-	Repository	Repository
-	Service	Service
-	Response	Response
-	TestController	TestController
-	TestRepository	TestRepository
-	TestService	TestService
-	Template	Template
+	Controller     Controller
+	Repository     Repository
+	Service        Service
+	Response       Response
+	TestController TestController
+	TestRepository TestRepository
+	TestService    TestService
+	Template       Template
 
 	//
 	CtlSvRepo *CtlSvRepo
 
 	//Create Files
-	Ctl *os.File
+	Ctl     *os.File
 	TestCtl *os.File
-	SV *os.File
-	TestSV *os.File
-	RP *os.File
-	TestRP *os.File
+	SV      *os.File
+	TestSV  *os.File
+	RP      *os.File
+	TestRP  *os.File
 }
 
 func GenerateTemplate(url *map[string][]string, keys *[]string, urlStruct *map[string][]string, urlCode *map[string][]string, path string) {
@@ -100,16 +100,16 @@ func (g *Genenrate) Createroute(url *map[string][]string, keys *[]string, urlStr
 	g.CtlSvRepo = new(CtlSvRepo)
 
 	g.RouteURL.RouteFile, g.RouteURL.RouteFileErr = os.Create(fmt.Sprintf("%v/app/routes/route.go", g.Path))
-	if(g.RouteURL.RouteFileErr != nil){
+	if g.RouteURL.RouteFileErr != nil {
 		log.Println(g.RouteURL.RouteFileErr)
 	}
 	die(g.RouteURL.RouteFileErr)
 
-	g.RouteURL.RouteFileTest, g.RouteURL.RouteFileErrTest = os.Create(fmt.Sprintf("%v/app/routes/route_test.go", g.Path))
-	if(g.RouteURL.RouteFileErrTest != nil){
-		log.Println(g.RouteURL.RouteFileErrTest)
-	}
-	die(g.RouteURL.RouteFileErrTest)
+	// g.RouteURL.RouteFileTest, g.RouteURL.RouteFileErrTest = os.Create(fmt.Sprintf("%v/app/routes/route_test.go", g.Path))
+	// if(g.RouteURL.RouteFileErrTest != nil){
+	// 	log.Println(g.RouteURL.RouteFileErrTest)
+	// }
+	// die(g.RouteURL.RouteFileErrTest)
 
 	g.RouteURL.RequestURL = *url
 
@@ -123,7 +123,7 @@ func (g *Genenrate) Createroute(url *map[string][]string, keys *[]string, urlStr
 	g.GenenrateCtlTemplate(keys, urlStruct)
 
 	g.Template.EndTemplate(g.RouteURL.RouteFile)
-	g.Template.EndTemplate(g.RouteURL.RouteFileTest)
+	// g.Template.EndTemplate(g.RouteURL.RouteFileTest)
 	g.Response.CreateResponseTemplate(g.Path)
 }
 
@@ -159,7 +159,7 @@ func (g *Genenrate) GenenrateCtlTemplate(keys *[]string, urlStruct *map[string][
 							}
 						}
 						g.Template.EndTemplate(g.Ctl)
-						g.Template.EndTemplate(g.TestCtl)
+						// g.Template.EndTemplate(g.TestCtl)
 
 						//write method for route
 						for _, cURL := range *keys {
@@ -181,14 +181,14 @@ func (g *Genenrate) GenenrateCtlTemplate(keys *[]string, urlStruct *map[string][
 				{
 					if checkDupicate[g.RouteURL.ControllerName] == 1 {
 						g.Controller.CallControllerTemplate(g.RouteURL.ControllerName, g.RouteURL.RouteFile)
-						g.Controller.CallControllerTemplate(g.RouteURL.ControllerName, g.RouteURL.RouteFileTest)
+						// g.Controller.CallControllerTemplate(g.RouteURL.ControllerName, g.RouteURL.RouteFileTest)
 					}
 				}
 			}
 
 		}
 		gotemplate.NewLineTemplate.Execute(g.RouteURL.RouteFile, struct{}{})
-		gotemplate.NewLineTemplate.Execute(g.RouteURL.RouteFileTest, struct{}{})
+		// gotemplate.NewLineTemplate.Execute(g.RouteURL.RouteFileTest, struct{}{})
 	}
 }
 
@@ -270,7 +270,6 @@ func (g *Genenrate) CheckAdminType(checkURLprev []string, checkURLcurr []string)
 	return checkAdminType
 }
 
-//
 func (g *Genenrate) GenerateRequestMethodRouteURL(newcURL []string, URLmethod *string) {
 	countUncharactor := 0
 	var newcURLmethod []string
@@ -304,10 +303,10 @@ func (g *Genenrate) GenerateRequestMethodRouteURL(newcURL []string, URLmethod *s
 	*URLmethod = strings.Title(*URLmethod)
 
 	SplitNewmethodURL := strings.Split(*URLmethod, "_")
-		*URLmethod = ""
-		for _, v := range SplitNewmethodURL {
-			*URLmethod += v
-		}
+	*URLmethod = ""
+	for _, v := range SplitNewmethodURL {
+		*URLmethod += v
+	}
 }
 
 func (g *Genenrate) GenerateControllerRouteTemplate(ctl *os.File, cURL string, checkDupicateURL map[string]int, groupCount *int, checkURLcurr []string) {
@@ -329,13 +328,13 @@ func (g *Genenrate) GenerateControllerRouteTemplate(ctl *os.File, cURL string, c
 
 		if *groupCount == 0 {
 			g.Template.GroupTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.Ctl)
-			g.Template.GroupTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.TestCtl)
+			// g.Template.GroupTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.TestCtl)
 		}
 
 		if checkDupicateURL[createNewDupicate] == 1 {
 			//	log.Println(ctl, cURL, NewmethodURL)
 			g.Template.BodyTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.Ctl)
-			g.Template.BodyTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.TestCtl)
+			// g.Template.BodyTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.TestCtl)
 		}
 		*groupCount++
 	}
@@ -380,7 +379,7 @@ func (g *Genenrate) GenerateStructName(urlStruct *map[string][]string, cURL stri
 	}
 }
 
-func (g *Genenrate) GenerateCtlSvRepoTemplate(cURL string, checkURLcurr []string,checkNextDupicateURL map[string]int) {
+func (g *Genenrate) GenerateCtlSvRepoTemplate(cURL string, checkURLcurr []string, checkNextDupicateURL map[string]int) {
 	for i, method := range g.RouteURL.RequestURL[cURL] {
 		var CtlStructName string
 
@@ -403,61 +402,61 @@ func (g *Genenrate) GenerateCtlSvRepoTemplate(cURL string, checkURLcurr []string
 
 		if checkNextDupicateURL[createNewDupicate2] == 1 {
 			//annotation.CodeSuccess = getURLCode(copyURLCode, cURL, newMethod)
-			switch(CtlMethodService){
+			switch CtlMethodService {
 			case "GetAll":
 				g.Controller.CreateControllerGetAll(newMethod, CtlMethodService, CtlStructName, g)
 				g.Service.CreateServiceGetAll(CtlMethodService, CtlStructName, g)
 				g.Repository.CreateRepositoryGetAll(CtlMethodService, CtlStructName, g)
 
-				g.TestController.CreateTestControllerGetAll(newMethod, CtlMethodService, CtlStructName, g)
-				g.TestService.CreateTestServiceGetAll(CtlMethodService, CtlStructName, g)
-				g.TestRepository.CreateTestRepositoryGetAll(CtlMethodService, CtlStructName, g)
+				// g.TestController.CreateTestControllerGetAll(newMethod, CtlMethodService, CtlStructName, g)
+				// g.TestService.CreateTestServiceGetAll(CtlMethodService, CtlStructName, g)
+				// g.TestRepository.CreateTestRepositoryGetAll(CtlMethodService, CtlStructName, g)
 			case "Create":
 				g.Controller.CreateControllerCreate(newMethod, CtlMethodService, CtlStructName, g)
 				g.Service.CreateServiceCreate(CtlMethodService, CtlStructName, g)
 				g.Repository.CreateRepositoryCreate(CtlMethodService, CtlStructName, g)
-				
-				g.TestController.CreateTestControllerCreate(newMethod, CtlMethodService, CtlStructName, g)
-				g.TestService.CreateTestService(CtlMethodService, CtlStructName, g)
-				g.TestRepository.CreateTestRepositoryCreate(CtlMethodService, CtlStructName, g)
+
+				// g.TestController.CreateTestControllerCreate(newMethod, CtlMethodService, CtlStructName, g)
+				// g.TestService.CreateTestService(CtlMethodService, CtlStructName, g)
+				// g.TestRepository.CreateTestRepositoryCreate(CtlMethodService, CtlStructName, g)
 			case "UpdateAll":
 				g.Controller.CreateControllerUpdate(newMethod, CtlMethodService, CtlStructName, g)
 				g.Service.CreateServiceUpdate(CtlMethodService, CtlStructName, g)
 				g.Repository.CreateRepositoryUpdate(CtlMethodService, CtlStructName, g)
 
-				g.TestController.CreateTestControllerUpdate(newMethod, CtlMethodService, CtlStructName, g)
-				g.TestService.CreateTestServiceUpdate(CtlMethodService, CtlStructName, g)
-				g.TestRepository.CreateTestRepositoryUpdate(CtlMethodService, CtlStructName, g)
+				// g.TestController.CreateTestControllerUpdate(newMethod, CtlMethodService, CtlStructName, g)
+				// g.TestService.CreateTestServiceUpdate(CtlMethodService, CtlStructName, g)
+				// g.TestRepository.CreateTestRepositoryUpdate(CtlMethodService, CtlStructName, g)
 			case "Update":
 				g.Controller.CreateControllerPatch(newMethod, CtlMethodService, CtlStructName, g)
 				g.Service.CreateServicePatch(CtlMethodService, CtlStructName, g)
 				g.Repository.CreateRepositoryPatch(CtlMethodService, CtlStructName, g)
 
-				g.TestController.CreateTestControllerPatch(newMethod, CtlMethodService, CtlStructName, g)
-				g.TestService.CreateTestServicePatch(CtlMethodService, CtlStructName, g)
-				g.TestRepository.CreateTestRepositoryPatch(CtlMethodService, CtlStructName, g)
+				// g.TestController.CreateTestControllerPatch(newMethod, CtlMethodService, CtlStructName, g)
+				// g.TestService.CreateTestServicePatch(CtlMethodService, CtlStructName, g)
+				// g.TestRepository.CreateTestRepositoryPatch(CtlMethodService, CtlStructName, g)
 			case "Delete":
 				g.Controller.CreateControllerDelete(newMethod, CtlMethodService, CtlStructName, g)
 				g.Service.CreateServiceDelete(CtlMethodService, CtlStructName, g)
 				g.Repository.CreateRepositoryDelete(CtlMethodService, CtlStructName, g)
-			
-				g.TestController.CreateTestControllerDelete(newMethod, CtlMethodService, CtlStructName, g)
-				g.TestService.CreateTestServiceDelete(CtlMethodService, CtlStructName, g)
-				g.TestRepository.CreateTestRepositoryDelete(CtlMethodService, CtlStructName, g)
+
+				// g.TestController.CreateTestControllerDelete(newMethod, CtlMethodService, CtlStructName, g)
+				// g.TestService.CreateTestServiceDelete(CtlMethodService, CtlStructName, g)
+				// g.TestRepository.CreateTestRepositoryDelete(CtlMethodService, CtlStructName, g)
 			default: //Get By
 				g.Controller.CreateControllerGetBy(newMethod, CtlMethodService, CtlStructName, g)
 				g.Service.CreateServiceGetBy(CtlMethodService, CtlStructName, g)
 				g.Repository.CreateRepositoryGetBy(CtlMethodService, CtlStructName, g)
 
-				g.TestController.CreateTestControllerGetBy(newMethod, CtlMethodService, CtlStructName, g)
-				g.TestService.CreateTestServiceGetBy(CtlMethodService, CtlStructName, g)
-				g.TestRepository.CreateTestRepositoryGetBy(CtlMethodService, CtlStructName, g)
+				// g.TestController.CreateTestControllerGetBy(newMethod, CtlMethodService, CtlStructName, g)
+				// g.TestService.CreateTestServiceGetBy(CtlMethodService, CtlStructName, g)
+				// g.TestRepository.CreateTestRepositoryGetBy(CtlMethodService, CtlStructName, g)
 			}
 		}
 	}
 }
 
-func (g *Genenrate) GenerateCtlSvRepoMethod(Method string, newMethod string, checkURLcurr []string){
+func (g *Genenrate) GenerateCtlSvRepoMethod(Method string, newMethod string, checkURLcurr []string) {
 	g.CtlSvRepo.MethodRequestURL, g.Annotation.Method = getctlMethod(newMethod, checkURLcurr)
 	ctlMethod := strings.Split(g.CtlSvRepo.MethodRequestURL, "_")
 	g.CtlSvRepo.MethodRequestURL = ""
@@ -532,33 +531,33 @@ func getURLCode(URLCode map[string][]string, url string, method string) string /
 	return "success" /* , code[1:] */
 }
 
-func (gr *Genenrate) createFile()  {
+func (gr *Genenrate) createFile() {
 	// create controller package
-	controllerName := fmt.Sprintf("%v/app/controller/%vcontroller.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
+	controllerName := fmt.Sprintf("%v/app/controller/%vcontroller.go", gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
 	gr.Ctl, _ = os.Create(controllerName)
 	gr.Template.ControllerTemplate(gr.Ctl, gr.RouteURL.RouteFile, gr.RouteURL.ControllerName)
 
-	TestControllerName := fmt.Sprintf("%v/app/controller/%vcontroller_test.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
-	gr.TestCtl, _ = os.Create(TestControllerName)
-	gr.Template.TestControllerTemplate(gr.TestCtl, gr.RouteURL.RouteFileTest, gr.RouteURL.ControllerName)
+	// TestControllerName := fmt.Sprintf("%v/app/controller/%vcontroller_test.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
+	// gr.TestCtl, _ = os.Create(TestControllerName)
+	// gr.Template.TestControllerTemplate(gr.TestCtl, gr.RouteURL.RouteFileTest, gr.RouteURL.ControllerName)
 
 	// create service package
-	serviceName := fmt.Sprintf("%v/app/service/%vservice.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
+	serviceName := fmt.Sprintf("%v/app/service/%vservice.go", gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
 	gr.SV, _ = os.Create(serviceName)
 	gr.Template.ServiceTemplate(gr.SV, gr.RouteURL.ControllerName)
 
-	TestServiceName := fmt.Sprintf("%v/app/service/%vservice_test.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
-	gr.TestSV, _ = os.Create(TestServiceName)
-	gr.Template.TestServiceTemplate(gr.TestSV, gr.RouteURL.ControllerName)
+	// TestServiceName := fmt.Sprintf("%v/app/service/%vservice_test.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
+	// gr.TestSV, _ = os.Create(TestServiceName)
+	// gr.Template.TestServiceTemplate(gr.TestSV, gr.RouteURL.ControllerName)
 
 	// create repository package
-	repositoryName := fmt.Sprintf("%v/app/repository/%vrepository.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
+	repositoryName := fmt.Sprintf("%v/app/repository/%vrepository.go", gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
 	gr.RP, _ = os.Create(repositoryName)
 	gr.Template.RepositoryTemplate(gr.RP, gr.RouteURL.ControllerName)
 
-	TestRepositoryName := fmt.Sprintf("%v/app/repository/%vrepository_test.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
-	gr.TestRP, _ = os.Create(TestRepositoryName)
-	gr.Template.TestRepositoryTemplate(gr.TestRP, gr.RouteURL.ControllerName)
+	// TestRepositoryName := fmt.Sprintf("%v/app/repository/%vrepository_test.go",gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
+	// gr.TestRP, _ = os.Create(TestRepositoryName)
+	// gr.Template.TestRepositoryTemplate(gr.TestRP, gr.RouteURL.ControllerName)
 }
 
 func unique(duplicateSlice []string) []string {
@@ -596,31 +595,29 @@ func (g *Genenrate) findParam(newParams []string) {
 	var newparameter []string
 	var newparameterParameters []string
 	for i, v := range parameter {
-		
+
 		newparameter = append(newparameter, v[1:])
-		if(i==0){
+		if i == 0 {
 			newparameterParameters = append(newparameterParameters, fmt.Sprintf("%v", v[1:]))
-		}else{
+		} else {
 			newparameterParameters = append(newparameterParameters, fmt.Sprintf(", %v ", v[1:]))
 		}
 	}
-
-	
 
 	var newqeury []string
 	var newqeuryParamaters []string
 	for i, v := range qeury {
 		spirtQeury := strings.Split(v, "=")
 		qeuryParameters := ""
-		if(i==0){
+		if i == 0 {
 			qeuryParameters = fmt.Sprintf("%v", spirtQeury[0])
-		}else{
+		} else {
 			qeuryParameters = fmt.Sprintf(", %v", spirtQeury[0])
 		}
 		newqeury = append(newqeury, spirtQeury[0])
-		newqeuryParamaters =  append(newqeuryParamaters, qeuryParameters)
+		newqeuryParamaters = append(newqeuryParamaters, qeuryParameters)
 	}
-	
+
 	g.CtlSvRepo.Qeury = newqeury
 	g.CtlSvRepo.QeuryParameters = newqeuryParamaters
 	g.CtlSvRepo.Params = newparameter

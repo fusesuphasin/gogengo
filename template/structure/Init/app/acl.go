@@ -3,7 +3,7 @@ package app
 import "html/template"
 
 var ACLTemplate = template.Must(template.New("").Parse(
-`package middleware
+	`package middleware
 
 import (
 	"errors"
@@ -48,4 +48,3 @@ func CheckPermission(enforcer *casbin.Enforcer, page string) fiber.Handler {
 	}
 }
 `))
-

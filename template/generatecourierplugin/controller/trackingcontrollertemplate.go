@@ -9,8 +9,7 @@ type TrackingTemplate struct{}
 
 func (ct *TrackingTemplate) CreatTrackingControllerTemplate(file *os.File) {
 	trackingcontrollerTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var trackingcontrollerTemplate = template.Must(template.New("").Parse(

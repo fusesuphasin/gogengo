@@ -3,7 +3,7 @@ package app
 import "html/template"
 
 var JWTUTILTemplate = template.Must(template.New("").Parse(
-`
+	`
 package jwt
 
 import (

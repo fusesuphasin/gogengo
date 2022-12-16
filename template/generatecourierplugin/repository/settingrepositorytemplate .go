@@ -9,8 +9,7 @@ type SettingRepositoryTemplate struct{}
 
 func (ct *SettingRepositoryTemplate) CreateSettingRepositoryTemplate(file *os.File) {
 	settingrepositoryTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var settingrepositoryTemplate = template.Must(template.New("").Parse(

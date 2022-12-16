@@ -17,24 +17,24 @@ import (
 
 // A UserController belong to the interface layer.
 type GenerateStructureController struct {
-	Fiber       *fiber.App
+	Fiber                 *fiber.App
 	CourierPluginTemplate generatecourierplugin.GenerateCourierPluginTemplate
-	GoTemplate structure.GoTemplate
+	GoTemplate            structure.GoTemplate
 }
 
 func NewGenerateStructureController(fiber *fiber.App) *GenerateStructureController {
 	return &GenerateStructureController{
-		Fiber:    fiber,
+		Fiber: fiber,
 	}
 }
 
 func (controller *GenerateStructureController) GenerateStructureRouter() {
 	api := controller.Fiber.Group("/api") // /api
-	v1 := api.Group("/v1") // /api/v1
-	
-	v1.Post("/go/template/generate" , controller.GenerateGoTemplate)
-	v1.Post("/postman/json/etl" , controller.ETL)
-	v1.Post("/courier_plugin/template/generate" , controller.GenerateCourierPluginTemplate)
+	v1 := api.Group("/v1")                // /api/v1
+
+	v1.Post("/go/template/generate", controller.GenerateGoTemplate)
+	v1.Post("/postman/json/etl", controller.ETL)
+	v1.Post("/courier_plugin/template/generate", controller.GenerateCourierPluginTemplate)
 }
 
 func (controller *GenerateStructureController) GenerateGoTemplate(c *fiber.Ctx) error {
@@ -77,20 +77,19 @@ func (controller *GenerateStructureController) GenerateGoTemplate(c *fiber.Ctx) 
 	//urlStruct = {{url}}/bulk-downloads?limit=20&offset=0:[Listbulkdownload]
 	//urlCode = {{url}}/users/profile_GET:[200 500]
 	//generate route
-	keys := make([]string, 0,len(routeMethod))
-    for k := range routeMethod {
+	keys := make([]string, 0, len(routeMethod))
+	for k := range routeMethod {
 		keys = append(keys, k)
 	}
-	
-    sort.Strings(keys)
+
+	sort.Strings(keys)
 	generatestructer.GenerateTemplate(&routeMethod, &keys, &urlStruct, &urlCode, outputPath)
 
 	//gitdiff.Gitdiff()
 	return c.JSON("Success")
 }
 
-
-func (controller *GenerateStructureController) ETL(c *fiber.Ctx) error{
+func (controller *GenerateStructureController) ETL(c *fiber.Ctx) error {
 	file, err := c.FormFile("file")
 	if err != nil {
 		return c.Status(http.StatusBadRequest).JSON(&model.ShotResponse{
@@ -119,7 +118,7 @@ func (controller *GenerateStructureController) ETL(c *fiber.Ctx) error{
 	return c.Download("./generate/etl/afterconv/interface_parse.json")
 }
 
-func (controller *GenerateStructureController) GenerateCourierPluginTemplate(c *fiber.Ctx) error{
+func (controller *GenerateStructureController) GenerateCourierPluginTemplate(c *fiber.Ctx) error {
 	controller.CourierPluginTemplate.GenerateCourierPluginTemplate()
 
 	return c.JSON("Success")

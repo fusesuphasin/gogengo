@@ -300,7 +300,7 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 		for _, t := range tags {
 			if t == "json" && requestDescription[key]["Omitempty"] == "true" {
 				tagList = append(tagList, fmt.Sprintf("%s:\"%s,omitempty\"", t, key))
-			}else{
+			} else {
 				tagList = append(tagList, fmt.Sprintf("%s:\"%s\"", t, key))
 			}
 		}
@@ -313,7 +313,7 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 		} else if requestDescription[key]["Required"] == "false" && requestDescription[key]["Validate"] != "" {
 			tagList = append(tagList, fmt.Sprintf("validate:\"%s\"", requestDescription[key]["Validate"]))
 		}
-		log.Printf("--%v--%v--\n",key, "22")
+		log.Printf("--%v--%v--\n", key, "22")
 		if requestDescription[key]["Omitempty"] == "true" {
 			valueType = "*" + valueType
 		}

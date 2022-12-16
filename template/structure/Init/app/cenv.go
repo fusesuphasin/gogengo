@@ -3,8 +3,7 @@ package app
 import "html/template"
 
 var ENVCTemplate = template.Must(template.New("").Parse(
-`
-    DB_NAME=Test
+	`DB_NAME=Test
     URI=mongodb://localhost:27017
     APP_PORT=3000
     REDIS_HOST=localhost
@@ -27,4 +26,3 @@ var ENVCTemplate = template.Must(template.New("").Parse(
     MONGO_INITDB_PASSWORD=couriertest204
     MONGO_REPLICA_SET_NAME=rs0
 `))
-

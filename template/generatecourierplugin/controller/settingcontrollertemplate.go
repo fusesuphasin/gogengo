@@ -9,8 +9,7 @@ type SettingTemplate struct{}
 
 func (ct *SettingTemplate) CreatSettingControllerTemplate(file *os.File) {
 	settingcontrollerTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var settingcontrollerTemplate = template.Must(template.New("").Parse(

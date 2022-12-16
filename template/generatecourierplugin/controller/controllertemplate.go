@@ -9,8 +9,7 @@ type ControllerTemplate struct{}
 
 func (ct *ControllerTemplate) CreateControllerTemplate(file *os.File) {
 	controllerTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var controllerTemplate = template.Must(template.New("").Parse(

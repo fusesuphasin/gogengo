@@ -9,8 +9,7 @@ type AreaserviceTemplate struct{}
 
 func (ct *AreaserviceTemplate) CreateAreaServiceTemplate(file *os.File) {
 	areaserviceTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var areaserviceTemplate = template.Must(template.New("").Parse(

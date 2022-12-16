@@ -15,13 +15,12 @@ type GenStruct struct {
 	BodyDecoder        gjson.Result
 	QueryParameter     string
 	JqQueryBodyDecoder gojq.Iter
-	routes			   map[string][]string
-	urlstruct			   map[string][]string
-	urlcode		   map[string][]string
+	routes             map[string][]string
+	urlstruct          map[string][]string
+	urlcode            map[string][]string
 }
 
-
-func GenerateStruct(path string)  (map[string][]string, map[string][]string, map[string][]string){
+func GenerateStruct(path string) (map[string][]string, map[string][]string, map[string][]string) {
 	FileName := "./generate/etl/afterconv/interface_parse.json"
 	QueryParameter := `paths | join(".")`
 
@@ -37,19 +36,18 @@ func GenerateStruct(path string)  (map[string][]string, map[string][]string, map
 
 	//generate Struct
 	routeMethod, urlStruct, urlCode := genStruct.writeStruct(&genStruct.BodyBytes, path)
-	
+
 	return routeMethod, urlStruct, urlCode
 }
 
-func (gs *GenStruct) writeStruct(BodyBytes *[]byte, path string) (map[string][]string, map[string][]string, map[string][]string){
+func (gs *GenStruct) writeStruct(BodyBytes *[]byte, path string) (map[string][]string, map[string][]string, map[string][]string) {
 	//create struct in folder logismate/domain/interface
 	//createstruct.CreateStruct(&gs.BodyBytes)
 
 	newRetrive := GenStruct{}
-	newRetrive.routes, newRetrive.urlstruct, newRetrive.urlcode  = extractfield.ExtractFieldJSON(&gs.BodyBytes, &gs.JqQueryBodyDecoder, path)
+	newRetrive.routes, newRetrive.urlstruct, newRetrive.urlcode = extractfield.ExtractFieldJSON(&gs.BodyBytes, &gs.JqQueryBodyDecoder, path)
 	return newRetrive.routes, newRetrive.urlstruct, newRetrive.urlcode
 }
-
 
 func (gs *GenStruct) readJsonFileToBytes(part string) {
 	f, err := os.Open(part)

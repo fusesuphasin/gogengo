@@ -3,7 +3,7 @@ package gotemplate
 import "html/template"
 
 var RepopackageTemplate = template.Must(template.New("").Parse(
-`package repository
+	`package repository
 
 import (
 	"context"
@@ -24,7 +24,7 @@ type {{.ControllerName}}Repository struct {
 `))
 
 var MethodRepoTemplate = template.Must(template.New("").Parse(
-`
+	`
 func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{.CtlStructName}}Req *domain.{{.CtlStructName}}req) (data *domain.{{.CtlStructName}}res, err error)  {
 	var {{.CtlStructName}}Res *domain.{{.CtlStructName}}res
 
@@ -33,7 +33,7 @@ func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}(
 `))
 
 var MethodRepoTemplateGetAll = template.Must(template.New("").Parse(
-`
+	`
 func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type"}}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}} {{range $index, $qeury := .QeuryParameters}} {{ if eq $qeury "type" }}get{{ else }}{{ end }}{{.}}{{ if eq $qeury ", type" }}s{{ else }}{{ end }} string{{end}}) (data *domain.{{.CtlStructName}}res, err error)  {
 	var {{.CtlStructName}}Res *domain.{{.CtlStructName}}res
 
@@ -57,7 +57,7 @@ func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}(
 `))
 
 var MethodRepoTemplateGetBy = template.Must(template.New("").Parse(
-`
+	`
 func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (data *domain.{{.CtlStructName}}res, err error)  {
 	var {{.CtlStructName}}Res *domain.{{.CtlStructName}}res
 
@@ -83,7 +83,7 @@ func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}(
 `))
 
 var MethodRepoTemplateCreate = template.Must(template.New("").Parse(
-`
+	`
 func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{.CtlStructName}}Req *domain.{{.CtlStructName}}req{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (data *domain.{{.CtlStructName}}res, err error)  {
 	var {{.CtlStructName}}Res *domain.{{.CtlStructName}}res
 
@@ -103,7 +103,7 @@ func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}(
 `))
 
 var MethodRepoTemplateUpdate = template.Must(template.New("").Parse(
-`
+	`
 func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{.CtlStructName}}Req *domain.{{.CtlStructName}}req{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (data *domain.{{.CtlStructName}}res, err error)  {
 	var {{.CtlStructName}}Res *domain.{{.CtlStructName}}res
 
@@ -128,7 +128,7 @@ func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}(
 `))
 
 var MethodRepoTemplatePatch = template.Must(template.New("").Parse(
-`
+	`
 func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (data *mongo.UpdateResult, err error)  {
 	
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
@@ -155,7 +155,7 @@ func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}(
 `))
 
 var MethodRepoTemplateDelete = template.Must(template.New("").Parse(
-`
+	`
 func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (data *mongo.DeleteResult, err error)  {
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)

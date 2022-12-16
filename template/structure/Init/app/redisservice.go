@@ -3,7 +3,7 @@ package app
 import "html/template"
 
 var RedisSVTemplate = template.Must(template.New("").Parse(
-`package service
+	`package service
 
 import (
 	"time"

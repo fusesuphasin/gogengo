@@ -9,8 +9,7 @@ type HTTPRequestTemplate struct{}
 
 func (ct *ControllerTemplate) CreateHTTPRequestControllerTemplate(file *os.File) {
 	HTTPRequestcontrollerTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var HTTPRequestcontrollerTemplate = template.Must(template.New("").Parse(

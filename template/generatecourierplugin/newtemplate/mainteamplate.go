@@ -10,8 +10,7 @@ type MainTemplate struct{}
 func (mt *MainTemplate) CreateMainTemplate(file *os.File) {
 
 	mainTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var mainTemplate = template.Must(template.New("").Parse(

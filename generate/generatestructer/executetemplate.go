@@ -6,8 +6,7 @@ import (
 	"time"
 )
 
-type Template struct{
-	
+type Template struct {
 }
 
 func (tp *Template) EndTemplate(f *os.File) {
@@ -18,7 +17,7 @@ func (tp *Template) EndTemplate(f *os.File) {
 	})
 }
 
-func (tp *Template) GroupTemplate(cURL string, newMethod string, ControllerName string, ctlMethod string, NewmethodURL string, ctl *os.File){
+func (tp *Template) GroupTemplate(cURL string, newMethod string, ControllerName string, ctlMethod string, NewmethodURL string, ctl *os.File) {
 	gotemplate.GroupTemplate.Execute(ctl, struct {
 		Timestamp      time.Time
 		URL            string
@@ -36,7 +35,7 @@ func (tp *Template) GroupTemplate(cURL string, newMethod string, ControllerName 
 	})
 }
 
-func (tp *Template) BodyTemplate(cURL string, newMethod string, ControllerName string, ctlMethod string, NewmethodURL string, ctl *os.File){
+func (tp *Template) BodyTemplate(cURL string, newMethod string, ControllerName string, ctlMethod string, NewmethodURL string, ctl *os.File) {
 	gotemplate.BodyTemplate.Execute(ctl, struct {
 		Timestamp      time.Time
 		URL            string
@@ -54,7 +53,7 @@ func (tp *Template) BodyTemplate(cURL string, newMethod string, ControllerName s
 	})
 }
 
-func (tp *Template) PackageTamplate(f *os.File,t *os.File, url *map[string][]string, urlKeys []string){
+func (tp *Template) PackageTamplate(f *os.File, t *os.File, url *map[string][]string, urlKeys []string) {
 	gotemplate.PackageTemplate.Execute(f, struct {
 		Timestamp time.Time
 		URL       map[string][]string
@@ -65,18 +64,18 @@ func (tp *Template) PackageTamplate(f *os.File,t *os.File, url *map[string][]str
 		URLKeys:   urlKeys,
 	})
 
-	gotemplate.TestPackageTemplate.Execute(t, struct {
-		Timestamp time.Time
-		URL       map[string][]string
-		URLKeys   []string
-	}{
-		Timestamp: time.Now(),
-		URL:       *url,
-		URLKeys:   urlKeys,
-	})
+	// gotemplate.TestPackageTemplate.Execute(t, struct {
+	// 	Timestamp time.Time
+	// 	URL       map[string][]string
+	// 	URLKeys   []string
+	// }{
+	// 	Timestamp: time.Now(),
+	// 	URL:       *url,
+	// 	URLKeys:   urlKeys,
+	// })
 }
 
-func (tp *Template) ControllerTemplate(ctl *os.File, f *os.File, ControllerName string){
+func (tp *Template) ControllerTemplate(ctl *os.File, f *os.File, ControllerName string) {
 	gotemplate.CtlpackageTemplate.Execute(ctl, struct {
 		Timestamp      time.Time
 		ControllerName string
@@ -94,7 +93,7 @@ func (tp *Template) ControllerTemplate(ctl *os.File, f *os.File, ControllerName 
 	})
 }
 
-func (tp *Template) TestControllerTemplate(ctl *os.File, f *os.File, ControllerName string){
+func (tp *Template) TestControllerTemplate(ctl *os.File, f *os.File, ControllerName string) {
 	gotemplate.TestCtlpackageTemplate.Execute(ctl, struct {
 		Timestamp      time.Time
 		ControllerName string
@@ -112,7 +111,7 @@ func (tp *Template) TestControllerTemplate(ctl *os.File, f *os.File, ControllerN
 	})
 }
 
-func (tp *Template) ServiceTemplate(sv *os.File, ControllerName string){
+func (tp *Template) ServiceTemplate(sv *os.File, ControllerName string) {
 	gotemplate.SVpackageTemplate.Execute(sv, struct {
 		Timestamp      time.Time
 		ControllerName string
@@ -122,7 +121,7 @@ func (tp *Template) ServiceTemplate(sv *os.File, ControllerName string){
 	})
 }
 
-func (tp *Template) TestServiceTemplate(sv *os.File, ControllerName string){
+func (tp *Template) TestServiceTemplate(sv *os.File, ControllerName string) {
 	gotemplate.TestSVpackageTemplate.Execute(sv, struct {
 		Timestamp      time.Time
 		ControllerName string
@@ -132,7 +131,7 @@ func (tp *Template) TestServiceTemplate(sv *os.File, ControllerName string){
 	})
 }
 
-func (tp *Template) RepositoryTemplate(rp *os.File, ControllerName string){
+func (tp *Template) RepositoryTemplate(rp *os.File, ControllerName string) {
 	gotemplate.RepopackageTemplate.Execute(rp, struct {
 		Timestamp      time.Time
 		ControllerName string
@@ -142,7 +141,7 @@ func (tp *Template) RepositoryTemplate(rp *os.File, ControllerName string){
 	})
 }
 
-func (tp *Template) TestRepositoryTemplate(rp *os.File, ControllerName string){
+func (tp *Template) TestRepositoryTemplate(rp *os.File, ControllerName string) {
 	gotemplate.TestRepopackageTemplate.Execute(rp, struct {
 		Timestamp      time.Time
 		ControllerName string

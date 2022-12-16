@@ -3,7 +3,7 @@ package gotemplate
 import "html/template"
 
 var MainTemplate = template.Must(template.New("").Parse(
-`package main
+	`package main
 
 import (
 	"context"

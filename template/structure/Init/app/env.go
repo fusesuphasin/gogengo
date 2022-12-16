@@ -3,7 +3,7 @@ package app
 import "html/template"
 
 var ENVTemplate = template.Must(template.New("").Parse(
-`package infrastructure
+	`package infrastructure
 
 import (
 	"gogengotest/app/interfaces"

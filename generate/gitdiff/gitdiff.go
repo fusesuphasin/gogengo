@@ -42,7 +42,7 @@ func LoadConfig() Config {
 		MinLineLength int      "min-line-length"
 		MinHunkSize   int      "min-hunk-size"
 	}{}
-	
+
 	err = yaml.Unmarshal(data, &t)
 	if err != nil {
 		log.Fatalf("error: %v", err)

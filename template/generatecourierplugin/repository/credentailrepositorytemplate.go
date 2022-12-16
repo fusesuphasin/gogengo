@@ -9,8 +9,7 @@ type CredentialRepositoryTemplate struct{}
 
 func (ct *CredentialRepositoryTemplate) CreateCredentialRepositoryTemplate(file *os.File) {
 	credentialrepositoryTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var credentialrepositoryTemplate = template.Must(template.New("").Parse(

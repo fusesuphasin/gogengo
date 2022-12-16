@@ -3,7 +3,7 @@ package app
 import "html/template"
 
 var CasbinTemplate = template.Must(template.New("").Parse(
-`
+	`
 package infrastructure
 
 import (

@@ -9,8 +9,7 @@ type AreaRepositoryTemplate struct{}
 
 func (ct *AreaRepositoryTemplate) CreateAreaRepositoryTemplate(file *os.File) {
 	arearepositoryTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var arearepositoryTemplate = template.Must(template.New("").Parse(

@@ -3,7 +3,7 @@ package gotemplate
 import "html/template"
 
 var TestSVpackageTemplate = template.Must(template.New("").Parse(
-`package service
+	`package service
 
 import (
 	"gogengotest/app/domain"
@@ -18,7 +18,7 @@ type Test{{.ControllerName}}Service struct {
 `))
 
 var TestMethodSVTemplate = template.Must(template.New("").Parse(
-`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
+	`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
 	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Req)
 
 	return data, nil
@@ -26,7 +26,7 @@ var TestMethodSVTemplate = template.Must(template.New("").Parse(
 `))
 
 var TestMethodSVTemplateGetAll = template.Must(template.New("").Parse(
-`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
+	`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
 	{{range $index, $param := .Param}}
 	{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }} := ""{{end}}{{range $index, $query :=.Query}}
 	{{.}}{{ if eq $query "type" }}s{{ else }}{{ end }} := ""{{end}}
@@ -38,7 +38,7 @@ var TestMethodSVTemplateGetAll = template.Must(template.New("").Parse(
 `))
 
 var TestMethodSVTemplateGetBy = template.Must(template.New("").Parse(
-`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
+	`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
 	{{range $index, $param := .Param}}
 	{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }} := ""{{end}}
 
@@ -47,7 +47,7 @@ var TestMethodSVTemplateGetBy = template.Must(template.New("").Parse(
 `))
 
 var TestMethodSVTemplateCreate = template.Must(template.New("").Parse(
-`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
+	`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
 	{{.CtlStructName}}Req := &domain.{{.CtlStructName}}req{}
 	
 	{{range $index, $param := .Param}}
@@ -60,7 +60,7 @@ var TestMethodSVTemplateCreate = template.Must(template.New("").Parse(
 `))
 
 var TestMethodSVTemplateUpdate = template.Must(template.New("").Parse(
-`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
+	`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
 	{{.CtlStructName}}Req := &domain.{{.CtlStructName}}req{}
 	
 	{{range $index, $param := .Param}}
@@ -73,7 +73,7 @@ var TestMethodSVTemplateUpdate = template.Must(template.New("").Parse(
 `))
 
 var TestMethodSVTemplatePatch = template.Must(template.New("").Parse(
-`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
+	`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
 	{{range $index, $param := .Param}}
 	{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }} := c.Params("{{.}}"){{end}}
 
@@ -84,7 +84,7 @@ var TestMethodSVTemplatePatch = template.Must(template.New("").Parse(
 `))
 
 var TestMethodSVTemplateDelete = template.Must(template.New("").Parse(
-`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
+	`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
 	{{range $index, $param := .Param}}
 	{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }} := c.Params("{{.}}"){{end}}
 
@@ -93,4 +93,3 @@ var TestMethodSVTemplateDelete = template.Must(template.New("").Parse(
 	return data, nil
 }
 `))
-

@@ -9,8 +9,7 @@ type TokenTemplate struct{}
 
 func (ct *TokenTemplate) CreatTokenControllerTemplate(file *os.File) {
 	tokencontrollerTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var tokencontrollerTemplate = template.Must(template.New("").Parse(

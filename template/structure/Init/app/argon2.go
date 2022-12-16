@@ -3,7 +3,7 @@ package app
 import "html/template"
 
 var Argon2Template = template.Must(template.New("").Parse(
-`package encrypt
+	`package encrypt
 
 // Package argon2id provides a convience wrapper around Go's golang.org/x/crypto/argon2
 // implementation, making it simpler to securely hash and verify passwords
@@ -184,4 +184,3 @@ func DecodeHash(hash string) (params *Params, salt, key []byte, err error) {
 }
 
 `))
-

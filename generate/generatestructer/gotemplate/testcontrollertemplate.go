@@ -3,7 +3,7 @@ package gotemplate
 import "html/template"
 
 var TestCtlpackageTemplate = template.Must(template.New("").Parse(
-`
+	`
 package controller
 
 type Test{{.ControllerName}}Controller struct {
@@ -20,13 +20,12 @@ func TestNew{{.ControllerName}}Controller(t *testing.T) {
 func Test{{.ControllerName}}Router(t *testing.T) {
 `))
 
-
 /*
-// @Success {{.Anotation.CodeSuccess}} {object} *domainrequest.{{.CtlStructName}}  
+// @Success {{.Anotation.CodeSuccess}} {object} *domainrequest.{{.CtlStructName}}
 {{range .Anotation.CodeFailure}}// @Failure {{.}} {object}
 {{end}} */
 var TestMethodctlTemplate = template.Must(template.New("").Parse(
-`
+	`
 func Test{{.CtlMethod}}{{.NewmethodURL}}(t *testing.T) {
 	{{.CtlStructName}}Req := &domain.{{.CtlStructName}}req{}
 	{{range .Param}}
@@ -45,7 +44,7 @@ func Test{{.CtlMethod}}{{.NewmethodURL}}(t *testing.T) {
 `))
 
 var TestMethodctlTemplateGetAll = template.Must(template.New("").Parse(
-`
+	`
 func Test{{.CtlMethod}}{{.NewmethodURL}}(t *testing.T) {
 	{{range $index, $param := .Param}}
 	{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }} := c.Params("{{.}}"){{end}}{{range $index, $query :=.Query}}
@@ -63,7 +62,7 @@ func Test{{.CtlMethod}}{{.NewmethodURL}}(t *testing.T) {
 `))
 
 var TestMethodctlTemplateGetBy = template.Must(template.New("").Parse(
-`
+	`
 func Test{{.CtlMethod}}{{.NewmethodURL}}(t *testing.T) {
 	{{range $index, $param := .Param}}
 	{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }} := ""{{end}}
@@ -80,7 +79,7 @@ func Test{{.CtlMethod}}{{.NewmethodURL}}(t *testing.T) {
 `))
 
 var TestMethodctlTemplateCreate = template.Must(template.New("").Parse(
-`
+	`
 func Test{{.CtlMethod}}{{.NewmethodURL}}(t *testing.T) {
 	{{.CtlStructName}}Req := &domain.{{.CtlStructName}}req{}
 	{{range $index, $param := .Param}}
@@ -98,7 +97,7 @@ func Test{{.CtlMethod}}{{.NewmethodURL}}(t *testing.T) {
 `))
 
 var TestMethodctlTemplateUpdate = template.Must(template.New("").Parse(
-`
+	`
 func Test{{.CtlMethod}}{{.NewmethodURL}}(t *testing.T) {
 	{{.CtlStructName}}Req := &domain.{{.CtlStructName}}req{}
 	{{range $index, $param := .Param}}
@@ -116,7 +115,7 @@ func Test{{.CtlMethod}}{{.NewmethodURL}}(t *testing.T) {
 `))
 
 var TestMethodctlTemplatePatch = template.Must(template.New("").Parse(
-`
+	`
 func Test{{.CtlMethod}}{{.NewmethodURL}}(t *testing.T) {
 	{{range $index, $param := .Param}}
 	{{.}}{{ if eq $param "type" }}s{{ else }} := ""{{ end }}{{end}}
@@ -133,7 +132,7 @@ func Test{{.CtlMethod}}{{.NewmethodURL}}(t *testing.T) {
 `))
 
 var TestMethodctlTemplateDelete = template.Must(template.New("").Parse(
-`
+	`
 func Test{{.CtlMethod}}{{.NewmethodURL}}(t *testing.T) {
 	{{range $index, $param := .Param}}
 	{{.}}{{ if eq $param "type" }}s{{ else }} := ""{{ end }}{{end}}

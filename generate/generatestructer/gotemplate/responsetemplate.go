@@ -3,7 +3,7 @@ package gotemplate
 import "html/template"
 
 var RespackageTemplate = template.Must(template.New("").Parse(
-`package response
+	`package response
 
 type SuccessResponse struct {
 	Success bool        {{.DoubleQuote}}json:"data"{{.DoubleQuote}}

@@ -9,8 +9,7 @@ type LabelTemplate struct{}
 
 func (ct *LabelTemplate) CreatLabelControllerTemplate(file *os.File) {
 	labelcontrollerTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var labelcontrollerTemplate = template.Must(template.New("").Parse(

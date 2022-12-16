@@ -9,8 +9,7 @@ type CredentialServiceTemplate struct{}
 
 func (ct *CredentialServiceTemplate) CreateCredentialServiceTemplate(file *os.File) {
 	credentialserviceTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var credentialserviceTemplate = template.Must(template.New("").Parse(

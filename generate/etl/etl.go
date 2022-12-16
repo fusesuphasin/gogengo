@@ -17,7 +17,6 @@ type MainConvertJSON struct {
 	JqQueryBodyDecoder gojq.Iter
 }
 
-
 func ETL(byteContainer []byte) {
 	//FileName := "./generate/etl/beforeconv/interface.json"
 	OutputFileNameConvJSON := "./generate/etl/afterconv/interface_parse.json"

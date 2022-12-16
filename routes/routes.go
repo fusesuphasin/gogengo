@@ -18,4 +18,4 @@ func RegisterRoute(app *fiber.App, ctx context.Context) {
 		return c.Status(http.StatusOK).JSON(struct{ Status string }{"Go generate is working"})
 	})
 	app.Get("/health", controller.HealthCheckHanlder)
-}  
+}

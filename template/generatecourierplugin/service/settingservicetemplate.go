@@ -9,8 +9,7 @@ type SettingServiceTemplate struct{}
 
 func (ct *SettingServiceTemplate) CreateSettingServiceTemplate(file *os.File) {
 	settingserviceTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var settingserviceTemplate = template.Must(template.New("").Parse(

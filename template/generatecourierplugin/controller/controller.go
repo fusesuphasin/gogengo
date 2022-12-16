@@ -7,21 +7,21 @@ import (
 )
 
 type Controller struct {
-	Path string
-	ControllerTemplate ControllerTemplate
+	Path                string
+	ControllerTemplate  ControllerTemplate
 	HTTPRequestTemplate HTTPRequestTemplate
-	SettingTemplate SettingTemplate
-	AreaTemplate AreaTemplate
-	LabelTemplate LabelTemplate
-	RateTemplate RateTemplate
-	TrackingTemplate TrackingTemplate
-	TokenTemplate TokenTemplate
+	SettingTemplate     SettingTemplate
+	AreaTemplate        AreaTemplate
+	LabelTemplate       LabelTemplate
+	RateTemplate        RateTemplate
+	TrackingTemplate    TrackingTemplate
+	TokenTemplate       TokenTemplate
 }
 
 func (ct *Controller) GenerateControllerTemplate(path string) {
 	ct.Path = fmt.Sprintf("%v/%v", path, "controller")
 	err := os.Mkdir(ct.Path, os.ModePerm)
-	if(err!=nil){
+	if err != nil {
 		log.Println(err)
 	}
 
@@ -38,7 +38,7 @@ func (ct *Controller) GenerateControllerTemplate(path string) {
 func (ct *Controller) generateController() {
 	createName := fmt.Sprintf("%v/controller.go", ct.Path)
 	file, err := os.Create(createName)
-	if(err!=nil){
+	if err != nil {
 		log.Println(err)
 	}
 
@@ -48,7 +48,7 @@ func (ct *Controller) generateController() {
 func (ct *Controller) generateHTTPRequestController() {
 	createName := fmt.Sprintf("%v/httprequestcontroller.go", ct.Path)
 	file, err := os.Create(createName)
-	if(err!=nil){
+	if err != nil {
 		log.Println(err)
 	}
 
@@ -58,7 +58,7 @@ func (ct *Controller) generateHTTPRequestController() {
 func (ct *Controller) generateSettingController() {
 	createName := fmt.Sprintf("%v/settingcontroller.go", ct.Path)
 	file, err := os.Create(createName)
-	if(err!=nil){
+	if err != nil {
 		log.Println(err)
 	}
 
@@ -68,7 +68,7 @@ func (ct *Controller) generateSettingController() {
 func (ct *Controller) generateAreaController() {
 	createName := fmt.Sprintf("%v/areacontroller.go", ct.Path)
 	file, err := os.Create(createName)
-	if(err!=nil){
+	if err != nil {
 		log.Println(err)
 	}
 
@@ -78,7 +78,7 @@ func (ct *Controller) generateAreaController() {
 func (ct *Controller) generateLabelController() {
 	createName := fmt.Sprintf("%v/labelcontroller.go", ct.Path)
 	file, err := os.Create(createName)
-	if(err!=nil){
+	if err != nil {
 		log.Println(err)
 	}
 
@@ -88,7 +88,7 @@ func (ct *Controller) generateLabelController() {
 func (ct *Controller) generateTokenController() {
 	createName := fmt.Sprintf("%v/tokencontroller.go", ct.Path)
 	file, err := os.Create(createName)
-	if(err!=nil){
+	if err != nil {
 		log.Println(err)
 	}
 
@@ -98,7 +98,7 @@ func (ct *Controller) generateTokenController() {
 func (ct *Controller) generateRateController() {
 	createName := fmt.Sprintf("%v/ratecontroller.go", ct.Path)
 	file, err := os.Create(createName)
-	if(err!=nil){
+	if err != nil {
 		log.Println(err)
 	}
 
@@ -108,7 +108,7 @@ func (ct *Controller) generateRateController() {
 func (ct *Controller) generateTrackingController() {
 	createName := fmt.Sprintf("%v/trackingcontroller.go", ct.Path)
 	file, err := os.Create(createName)
-	if(err!=nil){
+	if err != nil {
 		log.Println(err)
 	}
 

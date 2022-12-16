@@ -3,8 +3,7 @@ package app
 import "html/template"
 
 var AppTemplate = template.Must(template.New("").Parse(
-`
-package bootstrap
+	`package bootstrap
 
 import (
 	"context"
@@ -58,4 +57,3 @@ func Dispatch(ctx context.Context, log interfaces.Logger, enforcer *casbin.Enfor
 }
 
 `))
-

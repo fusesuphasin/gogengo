@@ -3,7 +3,7 @@ package app
 import "html/template"
 
 var AirConfTemplate = template.Must(template.New("").Parse(
-`# Config file for [Air](https://github.com/cosmtrek/air) in TOML format
+	`# Config file for [Air](https://github.com/cosmtrek/air) in TOML format
 
 # Working directory
 # . or absolute path, please note that the directories following must be under root.
@@ -47,4 +47,3 @@ runner = "green"
 # Delete tmp directory on exit
 clean_on_exit = true
 `))
-

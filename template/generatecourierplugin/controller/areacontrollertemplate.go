@@ -9,8 +9,7 @@ type AreaTemplate struct{}
 
 func (ct *AreaTemplate) CreatAreaControllerTemplate(file *os.File) {
 	areacontrollerTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var areacontrollerTemplate = template.Must(template.New("").Parse(

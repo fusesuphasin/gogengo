@@ -3,7 +3,7 @@ package app
 import "html/template"
 
 var DockerfileTemplate = template.Must(template.New("").Parse(
-`FROM golang:1.17-buster 
+	`FROM golang:1.17-buster 
 
 RUN apt update && apt install git \
     binutils-gold \
@@ -59,4 +59,3 @@ USER golang
 
 CMD ["air"]
 `))
-

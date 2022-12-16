@@ -3,7 +3,7 @@ package app
 import "html/template"
 
 var ResTemplate = template.Must(template.New("").Parse(
-`package response
+	`package response
 
 type SuccessResponse struct {
 	Success bool        
@@ -34,4 +34,3 @@ type CurrentResponse struct {
 	Username string 
 }
 `))
-

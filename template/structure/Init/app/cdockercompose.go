@@ -3,7 +3,7 @@ package app
 import "html/template"
 
 var DockerComposeTemplate = template.Must(template.New("").Parse(
-`version: "3.9"
+	`version: "3.9"
 services:
   golang:
     container_name: "golang"
@@ -84,4 +84,3 @@ volumes:
 networks:
   dev:
 `))
-

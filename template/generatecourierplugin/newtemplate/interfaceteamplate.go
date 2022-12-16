@@ -9,8 +9,7 @@ type InterfaceTemplate struct{}
 
 func (mt *MainTemplate) CreateInterfaceTemplate(file *os.File) {
 	interfaceTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var interfaceTemplate = template.Must(template.New("").Parse(

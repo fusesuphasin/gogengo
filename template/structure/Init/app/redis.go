@@ -3,7 +3,7 @@ package app
 import "html/template"
 
 var RedisTemplate = template.Must(template.New("").Parse(
-`package infrastructure
+	`package infrastructure
 
 import (
 	"context"

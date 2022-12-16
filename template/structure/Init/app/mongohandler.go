@@ -3,7 +3,7 @@ package app
 import "html/template"
 
 var MongoTemplate = template.Must(template.New("").Parse(
-`
+	`
 package infrastructure
 
 import (
@@ -76,5 +76,3 @@ func GetMongoDbCollection(DbName string, CollectionName string) (*mongo.Collecti
 	return collection, nil
 }
 `))
-
-

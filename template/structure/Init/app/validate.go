@@ -3,7 +3,7 @@ package app
 import "html/template"
 
 var ValidateTemplate = template.Must(template.New("").Parse(
-`package validation
+	`package validation
 
 import (
 	"github.com/go-playground/validator/v10"
@@ -52,5 +52,3 @@ func ValidateStruct(class interface{}) []*ErrorValidationResponse {
 	return errors
 }
 `))
-
-

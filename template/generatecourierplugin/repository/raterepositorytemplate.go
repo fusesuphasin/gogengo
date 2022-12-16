@@ -9,8 +9,7 @@ type RateRepositoryTemplate struct{}
 
 func (ct *RateRepositoryTemplate) CreateRateRepositoryTemplate(file *os.File) {
 	raterepositoryTemplate.Execute(file, struct {
-		}{
-	})
+	}{})
 }
 
 var raterepositoryTemplate = template.Must(template.New("").Parse(

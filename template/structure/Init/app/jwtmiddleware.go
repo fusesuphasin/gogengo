@@ -3,7 +3,7 @@ package app
 import "html/template"
 
 var JWTTemplate = template.Must(template.New("").Parse(
-`package middleware
+	`package middleware
 
 import (
 	"gogengotest/app/service"
