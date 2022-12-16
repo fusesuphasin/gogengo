@@ -19,6 +19,7 @@ import (
 type GenerateStructureController struct {
 	Fiber       *fiber.App
 	CourierPluginTemplate generatecourierplugin.GenerateCourierPluginTemplate
+	GoTemplate structure.GoTemplate
 }
 
 func NewGenerateStructureController(fiber *fiber.App) *GenerateStructureController {
@@ -58,21 +59,19 @@ func (controller *GenerateStructureController) GenerateGoTemplate(c *fiber.Ctx) 
 			Status: "Failed",
 		})
 	}
-
-	var requestBody model.Gotemplate
-	if err := c.BodyParser(&requestBody); err != nil {
+	outputPath := c.FormValue("output_path")
+	if err != nil {
 		return c.Status(http.StatusBadRequest).JSON(&model.ShotResponse{
 			Status: "Failed",
 		})
 	}
-
-	structure.CreateStructure(requestBody.OutputPath)
+	controller.GoTemplate.CreateStructure(outputPath)
 
 	//etl json file
 	etl.ETL(byteContainer)
 
 	// generate struct and retrive route
-	routeMethod, urlStruct, urlCode := generatestruct.GenerateStruct(requestBody.OutputPath)
+	routeMethod, urlStruct, urlCode := generatestruct.GenerateStruct(outputPath)
 
 	//routeMethod = {{url}}/courier-accounts/:id:[GET PUT DELETE]
 	//urlStruct = {{url}}/bulk-downloads?limit=20&offset=0:[Listbulkdownload]
@@ -84,7 +83,7 @@ func (controller *GenerateStructureController) GenerateGoTemplate(c *fiber.Ctx) 
 	}
 	
     sort.Strings(keys)
-	generatestructer.GenerateTemplate(&routeMethod, &keys, &urlStruct, &urlCode, requestBody.OutputPath)
+	generatestructer.GenerateTemplate(&routeMethod, &keys, &urlStruct, &urlCode, outputPath)
 
 	//gitdiff.Gitdiff()
 	return c.JSON("Success")

@@ -1,0 +1,17 @@
+version: "3.8"
+
+services:
+  webservice:
+    container_name: gogengo
+    build:
+      context: ./
+      dockerfile: dev.Dockerfile
+    ports:
+      - 9000:9000
+    env_file:
+      - .env
+    environment:
+      - SERVICE_NAME=webservice
+    command: "air -c air.conf"
+    volumes:
+      - .:/app/

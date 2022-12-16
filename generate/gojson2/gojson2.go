@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"go/format"
 	"io"
+	"log"
 	"math"
 	"reflect"
 	"strconv"
@@ -297,7 +298,11 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 
 		tagList := make([]string, 0)
 		for _, t := range tags {
-			tagList = append(tagList, fmt.Sprintf("%s:\"%s\"", t, key))
+			if t == "json" && requestDescription[key]["Omitempty"] == "true" {
+				tagList = append(tagList, fmt.Sprintf("%s:\"%s,omitempty\"", t, key))
+			}else{
+				tagList = append(tagList, fmt.Sprintf("%s:\"%s\"", t, key))
+			}
 		}
 		if requestDescription[key]["Required"] == "true" && requestDescription[key]["Validate"] != "" {
 			tagList = append(tagList, fmt.Sprintf("validate:\"%s,%s\"", "required", requestDescription[key]["Validate"]))
@@ -307,9 +312,11 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 
 		} else if requestDescription[key]["Required"] == "false" && requestDescription[key]["Validate"] != "" {
 			tagList = append(tagList, fmt.Sprintf("validate:\"%s\"", requestDescription[key]["Validate"]))
-
 		}
-
+		log.Printf("--%v--%v--\n",key, "22")
+		if requestDescription[key]["Omitempty"] == "true" {
+			valueType = "*" + valueType
+		}
 		sortfieldName = append(sortfieldName, fieldName)
 		sortvalueType = append(sortvalueType, valueType)
 		sorttagsName = append(sorttagsName, strings.Join(tagList, " "))
