@@ -141,7 +141,7 @@ func (gt *GoTemplate) CreateAppTemplate() {
 	// ------------------------------------------------------------------------------------------------------------
 	// repository
 
-	f, ferr = os.Create(gt.AppPath + "/middleware/redisrepository.go")
+	f, ferr = os.Create(gt.AppPath + "/repository/redisrepository.go")
 	if ferr != nil {
 		log.Println(ferr)
 	}
@@ -150,7 +150,7 @@ func (gt *GoTemplate) CreateAppTemplate() {
 	// ------------------------------------------------------------------------------------------------------------
 	// service
 
-	f, ferr = os.Create(gt.AppPath + "/middleware/redisservice.go")
+	f, ferr = os.Create(gt.AppPath + "/service/redisservice.go")
 	if ferr != nil {
 		log.Println(ferr)
 	}

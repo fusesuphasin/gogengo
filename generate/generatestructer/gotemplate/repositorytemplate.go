@@ -13,7 +13,6 @@ import (
 	"time"
 
 	"go.mongodb.org/mongo-driver/bson"
-	"go.mongodb.org/mongo-driver/bson/primitive"
 	"go.mongodb.org/mongo-driver/mongo"
 )
 
@@ -66,12 +65,7 @@ func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}(
 
 	coll, err := infrastructure.GetMongoDbCollection("DataBaseName","CollectionName")
 
-	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil {
-		log.Println(err)
-	}
-
-	filter := bson.M{"_id": objectId}
+	filter := bson.M{}
 
 	err = coll.FindOne(ctx, filter).Decode(&{{.CtlStructName}}Res)
 	if err != nil{
@@ -112,14 +106,7 @@ func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}(
 
 	coll, err := infrastructure.GetMongoDbCollection("DataBaseName","CollectionName")
 
-	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil {
-		log.Println(err)
-	}
-
-	filter := bson.D{
-		{Key: "_id", Value: objectId},
-	}
+	filter := bson.D{}
 	result, err := coll.UpdateOne(ctx, filter, {{.CtlStructName}}Req)
 	_ = result
 
@@ -136,14 +123,9 @@ func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}(
 
 	coll, err := infrastructure.GetMongoDbCollection("DataBaseName","CollectionName")
 	
-	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil {
-		log.Println(err)
-	}
+	
 
-	filter := bson.D{
-		{Key: "_id", Value: objectId},
-	}
+	filter := bson.D{}
 
 	update := bson.D{
 		{Key: "$set", Value: ""},
@@ -163,14 +145,9 @@ func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}(
 
 	coll, err := infrastructure.GetMongoDbCollection("DataBaseName","CollectionName")
 
-	objectId, err := primitive.ObjectIDFromHex(id)
-	if err != nil {
-		log.Println(err)
-	}
+	
+	filter := bson.D{}
 
-	filter := bson.D{
-		{Key: "_id", Value: objectId},
-	}
 	result, err := coll.DeleteOne(ctx, filter)
 	if err != nil {
 		log.Println(err)

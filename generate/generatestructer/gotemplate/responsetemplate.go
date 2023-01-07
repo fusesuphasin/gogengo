@@ -6,7 +6,7 @@ var RespackageTemplate = template.Must(template.New("").Parse(
 	`package response
 
 type SuccessResponse struct {
-	Success bool        {{.DoubleQuote}}json:"data"{{.DoubleQuote}}
+	Success bool        {{.DoubleQuote}}json:"success"{{.DoubleQuote}}
 	Data    interface{} {{.DoubleQuote}}json:"data"{{.DoubleQuote}}
 	Message string      {{.DoubleQuote}}json:"message"{{.DoubleQuote}}
 }

@@ -7,7 +7,7 @@ var RedisTemplate = template.Must(template.New("").Parse(
 
 import (
 	"context"
-	"fmt"
+	"log"
 	"os"
 
 	"github.com/go-redis/redis/v8"

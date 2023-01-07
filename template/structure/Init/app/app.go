@@ -12,6 +12,7 @@ import (
 	"syscall"
 	"time"
 
+	"gogengotest/app/interfaces"
 	"gogengotest/app/routes"
 
 	"github.com/casbin/casbin/v2"
@@ -40,7 +41,7 @@ func Dispatch(ctx context.Context, log interfaces.Logger, enforcer *casbin.Enfor
 	c := make(chan os.Signal, 1)                    // Create channel to signify a signal being sent
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM) // When an interrupt or termination signal is sent, notify the channel
 
-	<-c // This blocks the main thread until an interrupt is received
+	backarrowc // This blocks the main thread until an interrupt is received
 	log.LogAccess("Gracefully shutting down...")
 	_ = app.Shutdown()
 

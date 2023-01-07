@@ -6,7 +6,6 @@ import (
 	"fmt"
 	"go/format"
 	"io"
-	"log"
 	"math"
 	"reflect"
 	"sort"
@@ -410,8 +409,6 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 			newPath = path + "." + key
 		}
 		
-		log.Println(newPath, requestDescription[newPath] )
-
 		tagList := make([]string, 0)
 		for _, t := range tags {
 			if t == "json" && requestDescription[newPath]["Omitempty"] == "true" {

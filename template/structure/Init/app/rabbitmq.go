@@ -6,7 +6,6 @@ var RabbitTemplate = template.Must(template.New("").Parse(
 	`package infrastructure
 
 import (
-	"fmt"
 	"log"
 	"os"
 
@@ -101,11 +100,11 @@ func GetQueue(queuename string) string{
 	forever := make(chan bool) 
 	go func() {
 		for d := range msgs {
-		  fmt.Printf("Received a message: %s", d.Body)
+		  log.Printf("Received a message: %s", d.Body)
 		}
 	}()
 
-	<-forever
+	backarrowforever
 	return "message"
 }
 `))

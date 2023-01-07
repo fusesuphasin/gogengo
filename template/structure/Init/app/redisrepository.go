@@ -7,7 +7,7 @@ var RedisRepoTemplate = template.Must(template.New("").Parse(
 
 import (
 	"context"
-	"fmt"
+	"log"
 	"time"
 
 	"gogengotest/app/infrastructure"
