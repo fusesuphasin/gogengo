@@ -28,7 +28,7 @@ func (gt *GoTemplate) CreateStructure(path string) {
 
 func (gt *GoTemplate) CreateInitTemplate() {
 	gt.AppPath = fmt.Sprintf("%v/app", gt.Path)
-	folderInapp := [...]string{"bootstrap", "controller", "domain", "infrastructure", "interfaces", "middleware", "repository", "routes", "rules", "service", "utils"}
+	folderInapp := [...]string{"bootstrap", "controller", "domain"/* , "domain/request", "domain/response" */, "infrastructure", "interfaces", "middleware", "repository", "routes", "rules", "service", "utils"}
 	folderInUtils := [...]string{"encrypt", "jwt", "response", "session", "interfaces", "validation"}
 
 	err := os.RemoveAll(gt.Path)

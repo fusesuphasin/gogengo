@@ -7,7 +7,6 @@ import (
 	"io"
 	"io/ioutil"
 	"log"
-	"os"
 	"strings"
 )
 
@@ -36,14 +35,14 @@ func CreateStruct(path string, action string, jsonValue *string, name *string, m
 	case "request":
 		{
 			if newName[0:5] == "Update" {
-				data, _ = gojson2.Generate(i, ParseJson, newName+"req", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "req", requestDescription)
+				data, _ = gojson2.Generate(i, ParseJson, newName+"req", packageName, []string{"json", "bson"}, false, true, subStructMap, subStructMap1, "req", requestDescription)
 			} else {
-				data, _ = gojson2.Generate(i, ParseJson, newName+"req", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "req", requestDescription)
+				data, _ = gojson2.Generate(i, ParseJson, newName+"req", packageName, []string{"json", "bson"}, false, true, subStructMap, subStructMap1, "req", requestDescription)
 			}
 		}
 	case "response":
-		{
-			data, _ = gojson2.Generate(i, ParseJson, newName+"res", packageName, []string{"json", "bson"}, true, true, subStructMap, subStructMap1, "res", requestDescription)
+		{	
+			data, _ = gojson2.Generate(i, ParseJson, newName+"res", packageName, []string{"json", "bson"}, false, true, subStructMap, subStructMap1, "res", requestDescription)
 		}
 	}
 
@@ -86,8 +85,8 @@ func CreateStruct(path string, action string, jsonValue *string, name *string, m
 				case "request":
 					{
 						fileName := ""
-						creaetfileName := fmt.Sprintf("%v/app/domain", path)
-						os.Mkdir(creaetfileName, 0777)
+						/* creaetfileName := fmt.Sprintf("%v/app/domain/request", path)
+						os.Mkdir(creaetfileName, 0777) */
 
 						fileName = fmt.Sprintf("%v/app/domain/%v.go", path, StructName)
 						err := ioutil.WriteFile(fileName, (StrcutGenerate), 0777)
@@ -99,8 +98,8 @@ func CreateStruct(path string, action string, jsonValue *string, name *string, m
 				case "response":
 					{
 						fileName := ""
-						creaetfileName := fmt.Sprintf("%v/app/domain", path)
-						os.Mkdir(creaetfileName, 0777)
+						/* creaetfileName := fmt.Sprintf("%v/app/domain/response", path)
+						os.Mkdir(creaetfileName, 0777) */
 						fileName = fmt.Sprintf("%v/app/domain/%v.go", path, StructName)
 						err := ioutil.WriteFile(fileName, (StrcutGenerate), 0777)
 						if err != nil {

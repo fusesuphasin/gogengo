@@ -9,6 +9,7 @@ import (
 	"log"
 	"math"
 	"reflect"
+	"sort"
 	"strconv"
 	"strings"
 	"unicode"
@@ -78,6 +79,8 @@ var intToWordMap = []string{
 	"eight",
 	"nine",
 }
+var oldpath = ""
+var path = ""
 
 type Parser func(io.Reader) (interface{}, error)
 
@@ -132,6 +135,7 @@ func Generate(input io.Reader, parser Parser, structName, pkgName string, tags [
 		result = convertKeysToStrings(iresult)
 	case map[string]interface{}:
 		result = iresult
+
 	case []interface{}:
 		src := fmt.Sprintf("package %v\n\ntype %v %v\n",
 			pkgName,
@@ -169,10 +173,11 @@ func Generate(input io.Reader, parser Parser, structName, pkgName string, tags [
 		return nil, fmt.Errorf("unexpected type: %T", iresult)
 	}
 
+	path = ""
 	src := fmt.Sprintf("package %s\ntype %s %s}",
 		pkgName,
 		structName,
-		generateTypes(result, structName, tags, 0, subStructMapValue, convertFloats, requestDescription))
+		generateTypes(result, structName, tags, 0, subStructMapValue, convertFloats, requestDescription, path, oldpath))
 
 	keys := make([]string, 0, len(subStructMapValue))
 
@@ -216,21 +221,99 @@ func convertKeysToStrings(obj map[interface{}]interface{}) map[string]interface{
 	return res
 }
 
+func getKeyPaths(m map[string]interface{}, prefix string) []string {
+	var paths []string
+
+	for key, value := range m {
+		// If the value is another map, call the function recursively
+		if subMap, ok := value.(map[string]interface{}); ok {
+			subPaths := getKeyPaths(subMap, prefix+key+".")
+			paths = append(paths, subPaths...)
+		} else {
+			// Otherwise, add the key to the list of paths
+			paths = append(paths, prefix+key)
+		}
+	}
+
+	return paths
+}
+
+var i int = 0
+var valueObj []interface{}
+
 // Generate go struct entries for a map[string]interface{} structure
-func generateTypes(obj map[string]interface{}, structName string, tags []string, depth int, subStructMap map[string]string, convertFloats bool, requestDescription map[string]map[string]string) string {
+func generateTypes(obj map[string]interface{}, structName string, tags []string, depth int, subStructMap map[string]string, convertFloats bool, requestDescription map[string]map[string]string, path string, oldpath string) string {
+	oldpath = path
+
 	structure := "struct {"
 
 	sortfieldName := make([]string, 0, len(obj))
 	sortvalueType := make([]string, 0, len(obj))
 	sorttagsName := make([]string, 0, len(obj))
 	keys := make([]string, 0, len(obj))
+	//paths := getKeyPaths(obj, "")
+
 	for key := range obj {
 		keys = append(keys, key)
 	}
+
+	// Sort the slice of keys by the type of the corresponding values
+	sort.Slice(keys, func(i, j int) bool {
+		// Get the types of the values
+		t1 := reflect.TypeOf(obj[keys[i]]).String()
+		t2 := reflect.TypeOf(obj[keys[j]]).String()
+
+		// Use a custom ordering for certain types
+		switch t1 {
+		case "bool":
+			return true
+		case "int":
+			if t2 == "bool" {
+				return false
+			}
+			return true
+		case "float64":
+			if t2 == "bool" || t2 == "int" {
+				return false
+			}
+			return true
+		case "string":
+			if t2 == "bool" || t2 == "int" || t2 == "float64" {
+				return false
+			}
+			return true
+		case "slice":
+			if t2 == "bool" || t2 == "int" || t2 == "float64" || t2 == "string" {
+				return false
+			}
+			return true
+		}
+
+		// For all other types, use the default ordering
+		return t1 > t2
+	})
+
+	
+
+	if i == 0 {
+		for _, key := range keys {
+			valueObj = append(valueObj, obj[key])
+		}
+		i++
+	}
+
 	//sort.Strings(keys)
 	for _, key := range keys {
-
 		value := obj[key]
+
+		for _, v := range valueObj {
+			value1 := fmt.Sprintf("%v", value)
+			value2 := fmt.Sprintf("%v", v)
+			if value1 == value2 {
+				path = ""
+			}
+		}
+
 		valueType := typeForValue(value, structName, tags, subStructMap, convertFloats, requestDescription)
 
 		//value = mergeElements(value)
@@ -241,9 +324,19 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 			if len(value) > 0 {
 				sub := ""
 				if v, ok := value[0].(map[interface{}]interface{}); ok {
-					sub = generateTypes(convertKeysToStrings(v), structName, tags, depth+1, subStructMap, convertFloats, requestDescription) + "}"
+					if path != "" {
+						path += "." + key
+					} else {
+						path += key
+					}
+					sub = generateTypes(convertKeysToStrings(v), structName, tags, depth+1, subStructMap, convertFloats, requestDescription, path, oldpath) + "}"
 				} else if v, ok := value[0].(map[string]interface{}); ok {
-					sub = generateTypes(v, structName, tags, depth+1, subStructMap, convertFloats, requestDescription) + "}"
+					if path != "" {
+						path += "." + key
+					} else {
+						path += key
+					}
+					sub = generateTypes(v, structName, tags, depth+1, subStructMap, convertFloats, requestDescription, path, oldpath) + "}"
 				}
 
 				if sub != "" {
@@ -263,7 +356,12 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 				}
 			}
 		case map[interface{}]interface{}:
-			sub := generateTypes(convertKeysToStrings(value), structName, tags, depth+1, subStructMap, convertFloats, requestDescription) + "}"
+			if path != "" {
+				path += "." + key
+			} else {
+				path += key
+			}
+			sub := generateTypes(convertKeysToStrings(value), structName, tags, depth+1, subStructMap, convertFloats, requestDescription, path, oldpath) + "}"
 			subName := sub
 
 			if subStructMap != nil {
@@ -278,7 +376,13 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 			}
 			valueType = subName
 		case map[string]interface{}:
-			sub := generateTypes(value, structName, tags, depth+1, subStructMap, convertFloats, requestDescription) + "}"
+			if path != "" {
+				path += "." + key
+			} else {
+				path += key
+			}
+
+			sub := generateTypes(value, structName, tags, depth+1, subStructMap, convertFloats, requestDescription, path, oldpath) + "}"
 			subName := sub
 
 			if subStructMap != nil {
@@ -293,28 +397,39 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 
 			valueType = subName
 		}
-
+		pathSplit := strings.Split(path, ".")
 		fieldName := FmtFieldName(key)
+		newPath := ""
+		if path == "" {
+			newPath = key
+		} else if path == key {
+			newPath = key
+		} else if pathSplit[len(pathSplit)-1] == key {
+			newPath = path
+		} else {
+			newPath = path + "." + key
+		}
+		
+		log.Println(newPath, requestDescription[newPath] )
 
 		tagList := make([]string, 0)
 		for _, t := range tags {
-			if t == "json" && requestDescription[key]["Omitempty"] == "true" {
+			if t == "json" && requestDescription[newPath]["Omitempty"] == "true" {
 				tagList = append(tagList, fmt.Sprintf("%s:\"%s,omitempty\"", t, key))
 			} else {
 				tagList = append(tagList, fmt.Sprintf("%s:\"%s\"", t, key))
 			}
 		}
-		if requestDescription[key]["Required"] == "true" && requestDescription[key]["Validate"] != "" {
-			tagList = append(tagList, fmt.Sprintf("validate:\"%s,%s\"", "required", requestDescription[key]["Validate"]))
+		if requestDescription[newPath]["Required"] == "true" && requestDescription[newPath]["Validate"] != "" {
+			tagList = append(tagList, fmt.Sprintf("validate:\"%s,%s\"", "required", requestDescription[newPath]["Validate"]))
 
-		} else if requestDescription[key]["Required"] == "true" && requestDescription[key]["Validate"] == "" {
+		} else if requestDescription[newPath]["Required"] == "true" && requestDescription[newPath]["Validate"] == "" {
 			tagList = append(tagList, fmt.Sprintf("validate:\"%s\"", "required"))
 
-		} else if requestDescription[key]["Required"] == "false" && requestDescription[key]["Validate"] != "" {
-			tagList = append(tagList, fmt.Sprintf("validate:\"%s\"", requestDescription[key]["Validate"]))
+		} else if requestDescription[newPath]["Required"] == "false" && requestDescription[newPath]["Validate"] != "" {
+			tagList = append(tagList, fmt.Sprintf("validate:\"%s\"", requestDescription[newPath]["Validate"]))
 		}
-		log.Printf("--%v--%v--\n", key, "22")
-		if requestDescription[key]["Omitempty"] == "true" {
+		if requestDescription[newPath]["Omitempty"] == "true" {
 			valueType = "*" + valueType
 		}
 		sortfieldName = append(sortfieldName, fieldName)
@@ -498,10 +613,11 @@ func typeForValue(value interface{}, structName string, tags []string, subStruct
 		return "[]interface{}"
 
 	} else if object, ok := value.(map[interface{}]interface{}); ok {
-		return generateTypes(convertKeysToStrings(object), structName, tags, 0, subStructMap, convertFloats, requestDescription) + "}"
+
+		return generateTypes(convertKeysToStrings(object), structName, tags, 0, subStructMap, convertFloats, requestDescription, path, oldpath) + "}"
 
 	} else if object, ok := value.(map[string]interface{}); ok {
-		getStruct := fmt.Sprintf("%v", generateTypes(object, structName, tags, 0, subStructMap, convertFloats, requestDescription)+"}")
+		getStruct := fmt.Sprintf("%v", generateTypes(object, structName, tags, 0, subStructMap, convertFloats, requestDescription, path, oldpath)+"}")
 		return getStruct
 
 	} else if reflect.TypeOf(value) == nil {

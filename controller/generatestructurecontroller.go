@@ -34,7 +34,7 @@ func (controller *GenerateStructureController) GenerateStructureRouter() {
 
 	v1.Post("/go/template/generate", controller.GenerateGoTemplate)
 	v1.Post("/postman/json/etl", controller.ETL)
-	v1.Post("/courier_plugin/template/generate", controller.GenerateCourierPluginTemplate)
+	//v1.Post("/courier_plugin/template/generate", controller.GenerateCourierPluginTemplate)
 }
 
 func (controller *GenerateStructureController) GenerateGoTemplate(c *fiber.Ctx) error {
@@ -66,13 +66,10 @@ func (controller *GenerateStructureController) GenerateGoTemplate(c *fiber.Ctx) 
 		})
 	}
 	controller.GoTemplate.CreateStructure(outputPath)
-
 	//etl json file
 	etl.ETL(byteContainer)
-
 	// generate struct and retrive route
 	routeMethod, urlStruct, urlCode := generatestruct.GenerateStruct(outputPath)
-
 	//routeMethod = {{url}}/courier-accounts/:id:[GET PUT DELETE]
 	//urlStruct = {{url}}/bulk-downloads?limit=20&offset=0:[Listbulkdownload]
 	//urlCode = {{url}}/users/profile_GET:[200 500]
@@ -81,10 +78,8 @@ func (controller *GenerateStructureController) GenerateGoTemplate(c *fiber.Ctx) 
 	for k := range routeMethod {
 		keys = append(keys, k)
 	}
-
 	sort.Strings(keys)
 	generatestructer.GenerateTemplate(&routeMethod, &keys, &urlStruct, &urlCode, outputPath)
-
 	//gitdiff.Gitdiff()
 	return c.JSON("Success")
 }

@@ -35,6 +35,7 @@ type FieldJSON struct {
 	subStructMap           map[string]int
 	subStructMap1          map[string]int
 	Path                   string
+	Description			   string
 
 	//request description
 	RequestDescription  gojson2.RequestDescription
@@ -225,22 +226,25 @@ func (fjson *FieldJSON) extractPartJSONInit(valuePart *interface{}) {
 			}
 		}
 	}
+	if strings.Contains(Part, "request")  && strings.Contains(Part, "description") {
+		fjson.Description = gjson.GetBytes(fjson.BodyBytes, Part).String()
+	}
 
 	//create struct
 	if PartSplit[len(PartSplit)-1] == "raw" && PartSplit[len(PartSplit)-2] != "options" && PartSplit[len(PartSplit)-2] != "url" && hasNotOriginalRequest {
-		fjson.getDescription(PartSplit)
+		fjson.getReqeustDescription(PartSplit)
 
 		valuePartLast := gjson.GetBytes(fjson.BodyBytes, Part).String()
 		createstruct.CreateStruct(fjson.Path, "request", &valuePartLast, &fjson.Name, &fjson.Method, fjson.subStructMap, fjson.subStructMap1, &fjson.FolderName, &fjson.SubFolderName, &fjson.Sub2FolderName, &fjson.IsHaveFolderInSideSub2, fjson.RequestDescription2)
 
 	} else if PartSplit[len(PartSplit)-1] == "body" && PartSplit[len(PartSplit)-2] != "request" && PartSplit[len(PartSplit)-2] != "options" && hasNotOriginalRequest {
-		fjson.getDescription(PartSplit)
+		fjson.getResponseDescription()
 		valuePartLast := gjson.GetBytes(fjson.BodyBytes, Part+".data").String()
+
 		if PartSplit[len(PartSplit)-2] == "0" {
 			createstruct.CreateStruct(fjson.Path, "response", &valuePartLast, &fjson.Name, &fjson.Method, fjson.subStructMap, fjson.subStructMap1, &fjson.FolderName, &fjson.SubFolderName, &fjson.Sub2FolderName, &fjson.IsHaveFolderInSideSub2, fjson.RequestDescription2)
 		}
 	}
-
 	if hasRequest {
 		if hasRequest && hasRaw && indexBody+1 == indexRaw {
 			go fjson.extractPartJSONLast(&Part, &PartSplit, &indexRequest, &indexResponse, &indexRaw, &hasRequest, &hasResponse)
@@ -252,28 +256,48 @@ func (fjson *FieldJSON) extractPartJSONInit(valuePart *interface{}) {
 	fjson.RequestDescription2 = nil
 }
 
-func (fjson *FieldJSON) getDescription(partSplit []string) {
-	var pathDesciption string
-	for i := 0; i < len(partSplit)-2; i++ {
-		pathDesciption += partSplit[i] + "."
+func (fjson *FieldJSON) getReqeustDescription(path []string) {
+	newPath := ""
+	for i := 0; i < len(path)-2; i++ {
+		if(i<len(path)-3){
+			newPath += path[i] + "."
+		}else{
+			newPath += path[i]
+		}
 	}
-	pathDesciption += "description"
-	description := gjson.GetBytes(fjson.BodyBytes, pathDesciption).String()
+	newPath += ".description"
+	fjson.Description = gjson.GetBytes(fjson.BodyBytes, newPath).String()
 
-	body := strings.Split(description, "# body-postman-to-openapi")
-	splitRaw := strings.Split(body[len(body)-1], "\n")
-	log.Println(splitRaw[5])
+	markdown := strings.Split(fjson.Description, "# params-postman-to-openapi")
+	description := markdown[0]
+	_ = description
+
+	markdown = strings.Split(markdown[1], "# body-postman-to-openapi")
+	params := markdown[0]
+	_ = params
+
+	markdown = strings.Split(markdown[1], "# response-postman-to-openapi")
+	body := markdown[0]
+	response := markdown[1]
+	_ = body
+	_ = response
+	
+	splitBody := strings.Split(body, "\n")
 	fjson.RequestDescription2 = make(map[string]map[string]string)
 
-	for i, raw := range splitRaw {
+	for i, raw := range splitBody {
 
-		if i == 0 || i == 1 || i == 2 || i == 3 {
+		if i == 0 || i == 1 || i == 2 || i == 3 || raw == "" {
 			continue
 		}
 
 		splitColumn := strings.Split(raw, "|")
+		
+
 		splitColumn = splitColumn[1:]
+
 		splitColumn[0] = strings.ReplaceAll(splitColumn[0], " ", "")
+		splitColumn[0] = strings.ReplaceAll(splitColumn[0], ".0", "")
 
 		if len(splitColumn[1]) > 1 {
 			splitColumn[1] = splitColumn[1][1 : len(splitColumn[1])-1]
@@ -297,14 +321,130 @@ func (fjson *FieldJSON) getDescription(partSplit []string) {
 		if len(splitColumn[6]) > 1 {
 			splitColumn[6] = splitColumn[6][1 : len(splitColumn[6])-1]
 		}
-		fjson.RequestDescription2[splitColumn[1]] = make(map[string]string)
-		fjson.RequestDescription2[splitColumn[1]]["Type"] = splitColumn[2]
-		fjson.RequestDescription2[splitColumn[1]]["Required"] = splitColumn[3]
-		fjson.RequestDescription2[splitColumn[1]]["Omitempty"] = splitColumn[4]
-		fjson.RequestDescription2[splitColumn[1]]["Validate"] = splitColumn[5]
-		fjson.RequestDescription2[splitColumn[1]]["Description"] = splitColumn[6]
-		fjson.RequestDescription2[splitColumn[1]]["Example"] = splitColumn[7]
-	}
+
+		if len(splitColumn[7]) > 1 {
+			splitColumn[7] = splitColumn[7][1 : len(splitColumn[7])-1]
+		}
+
+		if len(splitColumn[8]) > 1 {
+			splitColumn[8] = splitColumn[8][1 : len(splitColumn[8])-1]
+		}
+
+		if len(splitColumn[9]) > 1 {
+			splitColumn[9] = splitColumn[9][1 : len(splitColumn[9])-1]
+		}
+
+		if len(splitColumn[10]) > 1 {
+			splitColumn[10] = splitColumn[10][1 : len(splitColumn[10])-1]
+		}
+		key:=""
+		if(splitColumn[0]!=""){
+			key=splitColumn[0]+"."+splitColumn[1]
+		}else{
+			key=splitColumn[1]
+		}
+		fjson.RequestDescription2[key] = make(map[string]string)
+		//fjson.RequestDescription2[splitColumn[1]]["Object"] = splitColumn[2]
+		//fjson.RequestDescription2[splitColumn[1]]["Name"] = splitColumn[3]
+		fjson.RequestDescription2[key]["Type"] = splitColumn[2]
+		fjson.RequestDescription2[key]["Required"] = splitColumn[3]
+		fjson.RequestDescription2[key]["Omitempty"] = splitColumn[4]
+		fjson.RequestDescription2[key]["Properties"] = splitColumn[5]
+		fjson.RequestDescription2[key]["Validate"] = splitColumn[6]
+		fjson.RequestDescription2[key]["Description"] = splitColumn[7]
+		fjson.RequestDescription2[key]["Example"] = splitColumn[8]
+		fjson.RequestDescription2[key]["Default"] = splitColumn[9]
+		fjson.RequestDescription2[key]["Enum"] = splitColumn[10]
+	} 
+}
+
+func (fjson *FieldJSON) getResponseDescription() {
+
+	markdown := strings.Split(fjson.Description, "# params-postman-to-openapi")
+	description := markdown[0]
+	_ = description
+
+	markdown = strings.Split(markdown[1], "# body-postman-to-openapi")
+	params := markdown[0]
+	_ = params
+
+	markdown = strings.Split(markdown[1], "# response-postman-to-openapi")
+	body := markdown[0]
+	_ = body
+
+	markdown = strings.Split(markdown[1], "#### status-code")
+	response := markdown[0]
+	
+	splitBody := strings.Split(response, "\n")
+	fjson.RequestDescription2 = make(map[string]map[string]string)
+
+	for i, raw := range splitBody {
+
+		if i == 0 || i == 1 || i == 2 || i == 3 || raw == "" {
+			continue
+		}
+
+		splitColumn := strings.Split(raw, "|")
+		
+
+		splitColumn = splitColumn[1:]
+
+		splitColumn[1] = strings.ReplaceAll(splitColumn[1], " ", "")
+		splitColumn[1] = strings.ReplaceAll(splitColumn[1], ".0", "")
+		splitColumn[1] = strings.ReplaceAll(splitColumn[1], "data.", "")
+
+		if len(splitColumn[2]) > 1 {
+			splitColumn[2] = splitColumn[2][1 : len(splitColumn[2])-1]
+		}
+
+		if len(splitColumn[3]) > 1 {
+			splitColumn[3] = splitColumn[3][1 : len(splitColumn[3])-1]
+		}
+
+		if len(splitColumn[4]) > 1 {
+			splitColumn[4] = splitColumn[4][1 : len(splitColumn[4])-1]
+		}
+
+		if len(splitColumn[5]) > 1 {
+			splitColumn[5] = splitColumn[5][1 : len(splitColumn[5])-1]
+		}
+
+		if len(splitColumn[6]) > 1 {
+			splitColumn[6] = splitColumn[6][1 : len(splitColumn[6])-1]
+		}
+		
+		if len(splitColumn[7]) > 1 {
+			splitColumn[7] = splitColumn[7][1 : len(splitColumn[7])-1]
+		}
+
+		if len(splitColumn[8]) > 1 {
+			splitColumn[8] = splitColumn[8][1 : len(splitColumn[8])-1]
+		}
+
+		if len(splitColumn[9]) > 1 {
+			splitColumn[9] = splitColumn[9][1 : len(splitColumn[9])-1]
+		}
+
+		key:=""
+		if(splitColumn[1]!=""){
+			key=splitColumn[1]+"."+splitColumn[2]
+		}else{
+			key=splitColumn[2]
+		}
+		key = strings.ReplaceAll(key, "data.", "")
+
+		fjson.RequestDescription2[key] = make(map[string]string)
+		//fjson.RequestDescription2[splitColumn[1]]["Object"] = splitColumn[2]
+		//fjson.RequestDescription2[splitColumn[1]]["Name"] = splitColumn[3]
+		fjson.RequestDescription2[key]["Code"] = splitColumn[0]
+		fjson.RequestDescription2[key]["Type"] = splitColumn[3]
+		fjson.RequestDescription2[key]["Omitempty"] = splitColumn[4]
+		fjson.RequestDescription2[key]["Properties"] = splitColumn[5]
+		fjson.RequestDescription2[key]["Description"] = splitColumn[6]
+		fjson.RequestDescription2[key]["Example"] = splitColumn[7]
+		fjson.RequestDescription2[key]["Default"] = splitColumn[8]
+		fjson.RequestDescription2[key]["Enum"] = splitColumn[9]
+	} 
 
 }
 

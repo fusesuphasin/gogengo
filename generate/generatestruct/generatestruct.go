@@ -26,17 +26,13 @@ func GenerateStruct(path string) (map[string][]string, map[string][]string, map[
 
 	//Declear Object
 	genStruct := GenStruct{QueryParameter: QueryParameter}
-
 	//Read File
 	genStruct.readJsonFileToBytes(FileName)
-
 	//Parse Read File from Bytes
 	genStruct.decoderJsonFileFromByte()
 	genStruct.parseJqParameter()
-
 	//generate Struct
 	routeMethod, urlStruct, urlCode := genStruct.writeStruct(&genStruct.BodyBytes, path)
-
 	return routeMethod, urlStruct, urlCode
 }
 
