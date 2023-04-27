@@ -19,36 +19,36 @@ type Test{{.ControllerName}}Repository struct {
 
 var TestMethodRepoTemplate = template.Must(template.New("").Parse(
 	`func Test{{.RPMethod}}{{.NewmethodURL}}(t *testing.T) {
-	{{.CtlStructName}}Res := &domain.{{.CtlStructName}}res{}
+	{{.CtlStructName}}Response := &domain.{{.CtlStructName}}Response{}
 
 }
 `))
 
 var TestMethodRepoTemplateGetAll = template.Must(template.New("").Parse(
 	`func (repository *{{.RepositoryName}}Repository) Test{{.RPMethod}}{{.NewmethodURL}}(t *testing.T) {
-	{{.CtlStructName}}Res := &domain.{{.CtlStructName}}res{}
-	_ = {{.CtlStructName}}Res
+	{{.CtlStructName}}Response := &domain.{{.CtlStructName}}Response{}
+	_ = {{.CtlStructName}}Response
 }
 `))
 
 var TestMethodRepoTemplateGetBy = template.Must(template.New("").Parse(
 	`func (repository *{{.RepositoryName}}Repository) Test{{.RPMethod}}{{.NewmethodURL}}(t *testing.T) {
-	{{.CtlStructName}}Res := &domain.{{.CtlStructName}}res{}
-	_ = {{.CtlStructName}}Res
+	{{.CtlStructName}}Response := &domain.{{.CtlStructName}}Response{}
+	_ = {{.CtlStructName}}Response
 }
 `))
 
 var TestMethodRepoTemplateCreate = template.Must(template.New("").Parse(
 	`func (repository *{{.RepositoryName}}Repository) Test{{.RPMethod}}{{.NewmethodURL}}(t *testing.T) {
-	{{.CtlStructName}}Res := &domain.{{.CtlStructName}}res{}
-	_ = {{.CtlStructName}}Res
+	{{.CtlStructName}}Response := &domain.{{.CtlStructName}}Response{}
+	_ = {{.CtlStructName}}Response
 }
 `))
 
 var TestMethodRepoTemplateUpdate = template.Must(template.New("").Parse(
 	`func Test{{.RPMethod}}{{.NewmethodURL}}(t *testing.T) {
-	{{.CtlStructName}}Res := &domain.{{.CtlStructName}}res{}
-	_ = {{.CtlStructName}}Res
+	{{.CtlStructName}}Response := &domain.{{.CtlStructName}}Response{}
+	_ = {{.CtlStructName}}Response
 }
 `))
 

@@ -35,17 +35,22 @@ type FieldJSON struct {
 	subStructMap           map[string]int
 	subStructMap1          map[string]int
 	Path                   string
-	Description			   string
+	Description            string
+	isAdmin                bool
 
 	//request description
 	RequestDescription  gojson2.RequestDescription
 	RequestDescription2 map[string]map[string]string
 }
 
-func ExtractFieldJSON(BodyBytes *[]byte, JqQueryBodyDecoder *gojq.Iter, path string) (map[string][]string, map[string][]string, map[string][]string) {
+func ExtractFieldJSON(BodyBytes *[]byte, JqQueryBodyDecoder *gojq.Iter, path string, isAdminTemplate bool) (map[string][]string, map[string][]string, map[string][]string) {
 	efjson := FieldJSON{BodyBytes: *BodyBytes, JqQueryBodyDecoder: *JqQueryBodyDecoder}
 	efjson.Path = path
+	if isAdminTemplate{
+		efjson.isAdmin = true
+	}
 	url_method, url_struct, url_code := efjson.extractPartJSON()
+
 	return url_method, url_struct, url_code
 }
 
@@ -66,11 +71,11 @@ func (fjson *FieldJSON) extractPartJSON() (map[string][]string, map[string][]str
 		if err, ok := valuePart.(error); ok {
 			log.Fatalln(err)
 		}
-
 		fjson.extractPartJSONInit(&valuePart)
 	}
-
 	fjson.LengthJsonField = len(fjson.JsonField)
+	log.Println("_____________________", fjson.LengthJsonField)
+
 	return fjson.URL, fjson.URLstruct, fjson.Code
 }
 
@@ -151,6 +156,7 @@ func (fjson *FieldJSON) extractPartJSONInit(valuePart *interface{}) {
 	hasData := <-chBool
 	indexData := <-chInt
 	hasNotOriginalRequest := <-chBool
+
 	//find method and name
 	if len(PartSplit) > 1 && len(PartSplit) < 7 {
 		if len(PartSplit) == 2 {
@@ -184,7 +190,6 @@ func (fjson *FieldJSON) extractPartJSONInit(valuePart *interface{}) {
 			fjson.Name = strings.ToLower(fjson.FileName) + " " + strings.ToLower(valuePartLast)
 		}
 	}
-
 	if PartSplit[len(PartSplit)-1] == "method" {
 		valuePartLast := gjson.GetBytes(fjson.BodyBytes, Part).String()
 		fjson.Method = valuePartLast
@@ -201,11 +206,14 @@ func (fjson *FieldJSON) extractPartJSONInit(valuePart *interface{}) {
 		valuePartLast := gjson.GetBytes(fjson.BodyBytes, Part).String()
 		fjson.URLroute = valuePartLast
 		fjson.URL[fjson.URLroute] = append(fjson.URL[fjson.URLroute], fjson.Methodroute)
-		editName := strings.Join(strings.Split(fjson.Name, " "), "")
-		newName := strings.Title(editName)
-		fjson.URLstruct[fjson.URLroute] = append(fjson.URLstruct[fjson.URLroute], newName)
-	}
+		requestName := strings.Split(fjson.Name, " ")
+		newRequestName := ""
+		for _, v := range requestName {
+			newRequestName += strings.Title(v)
+		}
 
+		fjson.URLstruct[fjson.URLroute] = append(fjson.URLstruct[fjson.URLroute], newRequestName)
+	}
 	if fjson.URLroute != "" {
 		//code status
 		if PartSplit[len(PartSplit)-1] == "code" && len(PartSplit[len(PartSplit)-2]) == 1 && (PartSplit[len(PartSplit)-3]) == "response" {
@@ -226,7 +234,7 @@ func (fjson *FieldJSON) extractPartJSONInit(valuePart *interface{}) {
 			}
 		}
 	}
-	if strings.Contains(Part, "request")  && strings.Contains(Part, "description") {
+	if strings.Contains(Part, "request") && strings.Contains(Part, "description") {
 		fjson.Description = gjson.GetBytes(fjson.BodyBytes, Part).String()
 	}
 
@@ -235,16 +243,18 @@ func (fjson *FieldJSON) extractPartJSONInit(valuePart *interface{}) {
 		fjson.getReqeustDescription(PartSplit)
 
 		valuePartLast := gjson.GetBytes(fjson.BodyBytes, Part).String()
-		createstruct.CreateStruct(fjson.Path, "request", &valuePartLast, &fjson.Name, &fjson.Method, fjson.subStructMap, fjson.subStructMap1, &fjson.FolderName, &fjson.SubFolderName, &fjson.Sub2FolderName, &fjson.IsHaveFolderInSideSub2, fjson.RequestDescription2)
+		createstruct.CreateStruct(fjson.isAdmin, fjson.Path, "request", &valuePartLast, &fjson.Name, &fjson.Method, fjson.subStructMap, fjson.subStructMap1, &fjson.FolderName, &fjson.SubFolderName, &fjson.Sub2FolderName, &fjson.IsHaveFolderInSideSub2, fjson.RequestDescription2)
 
 	} else if PartSplit[len(PartSplit)-1] == "body" && PartSplit[len(PartSplit)-2] != "request" && PartSplit[len(PartSplit)-2] != "options" && hasNotOriginalRequest {
 		fjson.getResponseDescription()
 		valuePartLast := gjson.GetBytes(fjson.BodyBytes, Part+".data").String()
 
+		//log.Println("__________________________________________________1", fjson.Description)
 		if PartSplit[len(PartSplit)-2] == "0" {
-			createstruct.CreateStruct(fjson.Path, "response", &valuePartLast, &fjson.Name, &fjson.Method, fjson.subStructMap, fjson.subStructMap1, &fjson.FolderName, &fjson.SubFolderName, &fjson.Sub2FolderName, &fjson.IsHaveFolderInSideSub2, fjson.RequestDescription2)
+			createstruct.CreateStruct(fjson.isAdmin, fjson.Path, "response", &valuePartLast, &fjson.Name, &fjson.Method, fjson.subStructMap, fjson.subStructMap1, &fjson.FolderName, &fjson.SubFolderName, &fjson.Sub2FolderName, &fjson.IsHaveFolderInSideSub2, fjson.RequestDescription2)
 		}
 	}
+
 	if hasRequest {
 		if hasRequest && hasRaw && indexBody+1 == indexRaw {
 			go fjson.extractPartJSONLast(&Part, &PartSplit, &indexRequest, &indexResponse, &indexRaw, &hasRequest, &hasResponse)
@@ -259,16 +269,16 @@ func (fjson *FieldJSON) extractPartJSONInit(valuePart *interface{}) {
 func (fjson *FieldJSON) getReqeustDescription(path []string) {
 	newPath := ""
 	for i := 0; i < len(path)-2; i++ {
-		if(i<len(path)-3){
+		if i < len(path)-3 {
 			newPath += path[i] + "."
-		}else{
+		} else {
 			newPath += path[i]
 		}
 	}
 	newPath += ".description"
 	fjson.Description = gjson.GetBytes(fjson.BodyBytes, newPath).String()
 
-	markdown := strings.Split(fjson.Description, "# params-postman-to-openapi")
+	markdown := strings.Split(fjson.Description, "# path-postman-to-openapi")
 	description := markdown[0]
 	_ = description
 
@@ -281,7 +291,7 @@ func (fjson *FieldJSON) getReqeustDescription(path []string) {
 	response := markdown[1]
 	_ = body
 	_ = response
-	
+
 	splitBody := strings.Split(body, "\n")
 	fjson.RequestDescription2 = make(map[string]map[string]string)
 
@@ -292,7 +302,6 @@ func (fjson *FieldJSON) getReqeustDescription(path []string) {
 		}
 
 		splitColumn := strings.Split(raw, "|")
-		
 
 		splitColumn = splitColumn[1:]
 
@@ -337,11 +346,11 @@ func (fjson *FieldJSON) getReqeustDescription(path []string) {
 		if len(splitColumn[10]) > 1 {
 			splitColumn[10] = splitColumn[10][1 : len(splitColumn[10])-1]
 		}
-		key:=""
-		if(splitColumn[0]!=""){
-			key=splitColumn[0]+"."+splitColumn[1]
-		}else{
-			key=splitColumn[1]
+		key := ""
+		if splitColumn[0] != "" {
+			key = splitColumn[0] + "." + splitColumn[1]
+		} else {
+			key = splitColumn[1]
 		}
 		fjson.RequestDescription2[key] = make(map[string]string)
 		//fjson.RequestDescription2[splitColumn[1]]["Object"] = splitColumn[2]
@@ -355,29 +364,24 @@ func (fjson *FieldJSON) getReqeustDescription(path []string) {
 		fjson.RequestDescription2[key]["Example"] = splitColumn[8]
 		fjson.RequestDescription2[key]["Default"] = splitColumn[9]
 		fjson.RequestDescription2[key]["Enum"] = splitColumn[10]
-	} 
+	}
 }
 
 func (fjson *FieldJSON) getResponseDescription() {
-
-	markdown := strings.Split(fjson.Description, "# params-postman-to-openapi")
+	markdown := strings.Split(fjson.Description, "# path-postman-to-openapi")
 	description := markdown[0]
 	_ = description
-
 	markdown = strings.Split(markdown[1], "# body-postman-to-openapi")
 	params := markdown[0]
 	_ = params
-
 	markdown = strings.Split(markdown[1], "# response-postman-to-openapi")
 	body := markdown[0]
 	_ = body
-
 	markdown = strings.Split(markdown[1], "#### status-code")
 	response := markdown[0]
-	
+
 	splitBody := strings.Split(response, "\n")
 	fjson.RequestDescription2 = make(map[string]map[string]string)
-
 	for i, raw := range splitBody {
 
 		if i == 0 || i == 1 || i == 2 || i == 3 || raw == "" {
@@ -385,8 +389,6 @@ func (fjson *FieldJSON) getResponseDescription() {
 		}
 
 		splitColumn := strings.Split(raw, "|")
-		
-
 		splitColumn = splitColumn[1:]
 
 		splitColumn[1] = strings.ReplaceAll(splitColumn[1], " ", "")
@@ -412,7 +414,7 @@ func (fjson *FieldJSON) getResponseDescription() {
 		if len(splitColumn[6]) > 1 {
 			splitColumn[6] = splitColumn[6][1 : len(splitColumn[6])-1]
 		}
-		
+
 		if len(splitColumn[7]) > 1 {
 			splitColumn[7] = splitColumn[7][1 : len(splitColumn[7])-1]
 		}
@@ -425,11 +427,11 @@ func (fjson *FieldJSON) getResponseDescription() {
 			splitColumn[9] = splitColumn[9][1 : len(splitColumn[9])-1]
 		}
 
-		key:=""
-		if(splitColumn[1]!=""){
-			key=splitColumn[1]+"."+splitColumn[2]
-		}else{
-			key=splitColumn[2]
+		key := ""
+		if splitColumn[1] != "" {
+			key = splitColumn[1] + "." + splitColumn[2]
+		} else {
+			key = splitColumn[2]
 		}
 		key = strings.ReplaceAll(key, "data.", "")
 
@@ -444,7 +446,7 @@ func (fjson *FieldJSON) getResponseDescription() {
 		fjson.RequestDescription2[key]["Example"] = splitColumn[7]
 		fjson.RequestDescription2[key]["Default"] = splitColumn[8]
 		fjson.RequestDescription2[key]["Enum"] = splitColumn[9]
-	} 
+	}
 
 }
 

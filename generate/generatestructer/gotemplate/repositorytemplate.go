@@ -24,17 +24,17 @@ type {{.ControllerName}}Repository struct {
 
 var MethodRepoTemplate = template.Must(template.New("").Parse(
 	`
-func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{.CtlStructName}}Req *domain.{{.CtlStructName}}req) (data *domain.{{.CtlStructName}}res, err error)  {
-	var {{.CtlStructName}}Res *domain.{{.CtlStructName}}res
+func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{.CtlStructName}}Request *domain.{{.CtlStructName}}Request) (data *domain.{{.CtlStructName}}Response, err error)  {
+	var {{.CtlStructName}}Response *domain.{{.CtlStructName}}Response
 
-	return {{.CtlStructName}}Res, err
+	return {{.CtlStructName}}Response, err
 }
 `))
 
 var MethodRepoTemplateGetAll = template.Must(template.New("").Parse(
 	`
-func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type"}}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}} {{range $index, $qeury := .QeuryParameters}} {{ if eq $qeury "type" }}get{{ else }}{{ end }}{{.}}{{ if eq $qeury ", type" }}s{{ else }}{{ end }} string{{end}}) (data *domain.{{.CtlStructName}}res, err error)  {
-	var {{.CtlStructName}}Res *domain.{{.CtlStructName}}res
+func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type"}}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}} {{range $index, $qeury := .QeuryParameters}} {{ if eq $qeury "type" }}get{{ else }}{{ end }}{{.}}{{ if eq $qeury ", type" }}s{{ else }}{{ end }} string{{end}}) (data *domain.{{.CtlStructName}}Response, err error)  {
+	var {{.CtlStructName}}Response *domain.{{.CtlStructName}}Response
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -48,17 +48,17 @@ func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}(
 		{Key: "limit", Value: 20},
 		{Key: "skip", Value: 0},
 	})
-	cursor.All(ctx, &{{.CtlStructName}}Res)
+	cursor.All(ctx, &{{.CtlStructName}}Response)
 
 
-	return {{.CtlStructName}}Res, err
+	return {{.CtlStructName}}Response, err
 }
 `))
 
 var MethodRepoTemplateGetBy = template.Must(template.New("").Parse(
 	`
-func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (data *domain.{{.CtlStructName}}res, err error)  {
-	var {{.CtlStructName}}Res *domain.{{.CtlStructName}}res
+func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (data *domain.{{.CtlStructName}}Response, err error)  {
+	var {{.CtlStructName}}Response *domain.{{.CtlStructName}}Response
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -67,39 +67,39 @@ func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}(
 
 	filter := bson.M{}
 
-	err = coll.FindOne(ctx, filter).Decode(&{{.CtlStructName}}Res)
+	err = coll.FindOne(ctx, filter).Decode(&{{.CtlStructName}}Response)
 	if err != nil{
 		log.Println(err)
 	}
 	
-	return {{.CtlStructName}}Res, err
+	return {{.CtlStructName}}Response, err
 }
 `))
 
 var MethodRepoTemplateCreate = template.Must(template.New("").Parse(
 	`
-func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{.CtlStructName}}Req *domain.{{.CtlStructName}}req{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (data *domain.{{.CtlStructName}}res, err error)  {
-	var {{.CtlStructName}}Res *domain.{{.CtlStructName}}res
+func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{.CtlStructName}}Request *domain.{{.CtlStructName}}Request{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (data *domain.{{.CtlStructName}}Response, err error)  {
+	var {{.CtlStructName}}Response *domain.{{.CtlStructName}}Response
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
 
 	coll, err := infrastructure.GetMongoDbCollection("DataBaseName","CollectionName")
 
-	result, err :=  coll.InsertOne(ctx, {{.CtlStructName}}Req)
+	result, err :=  coll.InsertOne(ctx, {{.CtlStructName}}Request)
 	_ = result
 	if err != nil {
 		log.Println(err)
 	}
 
-	return {{.CtlStructName}}Res, err
+	return {{.CtlStructName}}Response, err
 }
 `))
 
 var MethodRepoTemplateUpdate = template.Must(template.New("").Parse(
 	`
-func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{.CtlStructName}}Req *domain.{{.CtlStructName}}req{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (data *domain.{{.CtlStructName}}res, err error)  {
-	var {{.CtlStructName}}Res *domain.{{.CtlStructName}}res
+func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}({{.CtlStructName}}Request *domain.{{.CtlStructName}}Request{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (data *domain.{{.CtlStructName}}Response, err error)  {
+	var {{.CtlStructName}}Response *domain.{{.CtlStructName}}Response
 
 	ctx, cancel := context.WithTimeout(context.Background(), 10*time.Second)
 	defer cancel()
@@ -107,10 +107,10 @@ func (repository *{{.RepositoryName}}Repository) {{.RPMethod}}{{.NewmethodURL}}(
 	coll, err := infrastructure.GetMongoDbCollection("DataBaseName","CollectionName")
 
 	filter := bson.D{}
-	result, err := coll.UpdateOne(ctx, filter, {{.CtlStructName}}Req)
+	result, err := coll.UpdateOne(ctx, filter, {{.CtlStructName}}Request)
 	_ = result
 
-	return {{.CtlStructName}}Res, err
+	return {{.CtlStructName}}Response, err
 }
 `))
 

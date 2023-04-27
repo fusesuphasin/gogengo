@@ -1,9 +1,9 @@
 package main
 
-import (
-	"gogenerate/modules"
-)
+import "gogenerate/controller"
 
 func main() {
-	modules.Webservice()
+	//modules.Webservice()
+	template := new(controller.GenerateStructureController)
+	template.GenerateGoTemplate()
 }

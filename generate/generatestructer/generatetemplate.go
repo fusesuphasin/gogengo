@@ -35,6 +35,7 @@ type RouteURL struct {
 	RouteFileErr     error
 	RouteFileErrTest error
 
+	FileName string
 	ControllerName string
 	NewcURLmethod  string
 	RouteMethod    string
@@ -60,7 +61,7 @@ type CtlSvRepo struct {
 
 type Genenrate struct {
 	Path string
-
+	FileName bool
 	Annotation *Anotation
 
 	//Generate Route API URL
@@ -88,9 +89,10 @@ type Genenrate struct {
 	TestRP  *os.File
 }
 
-func GenerateTemplate(url *map[string][]string, keys *[]string, urlStruct *map[string][]string, urlCode *map[string][]string, path string) {
+func GenerateTemplate(url *map[string][]string, keys *[]string, urlStruct *map[string][]string, urlCode *map[string][]string, path string, isAdminTemplate bool) {
 	GenerateTemplate := new(Genenrate)
 	GenerateTemplate.Path = path
+	GenerateTemplate.FileName = isAdminTemplate
 	GenerateTemplate.Createroute(url, keys, urlStruct, urlCode)
 }
 
@@ -124,6 +126,7 @@ func (g *Genenrate) Createroute(url *map[string][]string, keys *[]string, urlStr
 
 	g.Template.EndTemplate(g.RouteURL.RouteFile)
 	// g.Template.EndTemplate(g.RouteURL.RouteFileTest)
+
 	g.Response.CreateResponseTemplate(g.Path)
 }
 
@@ -135,6 +138,7 @@ func (g *Genenrate) GenenrateCtlTemplate(keys *[]string, urlStruct *map[string][
 		for _, j := range *keys {
 			url := strings.Split(j, "/")
 			g.GenerateControllerName(url)
+			g.GenerateFileName(url)
 			checkDupicate[g.RouteURL.ControllerName]++
 
 			switch i {
@@ -199,7 +203,7 @@ func (g *Genenrate) GenerateControllerName(url []string) {
 			continue
 		}
 		if url[i] == "admin" {
-			ctl = url[i] + url[i+1]
+			ctl = url[i] + strings.Title(url[i+1])
 			break
 		} else {
 			ctl = url[i]
@@ -207,15 +211,42 @@ func (g *Genenrate) GenerateControllerName(url []string) {
 		}
 
 	}
+
 	ControllerName := strings.Title(ctl)
 	g.RouteURL.ControllerName = ""
-
 	for _, v := range ControllerName {
 		v := string(v)
 		if v == ":" || v == "?" || v == "=" || v == "&" {
 			break
 		}
 		g.RouteURL.ControllerName += v
+	}
+}
+
+func (g *Genenrate) GenerateFileName(url []string) {
+	var ctl string
+	for i := 0; i < len(url)-1; i++ {
+		if string(url[i][0]) == "{" {
+			continue
+		}
+		if url[i] == "admin" {
+			ctl = url[i] + "_" + url[i+1]
+			break
+		} else {
+			ctl = url[i]
+			break
+		}
+
+	}
+
+	FileName := strings.Title(ctl)
+	g.RouteURL.FileName = ""
+	for _, v := range FileName {
+		v := string(v)
+		if v == ":" || v == "?" || v == "=" || v == "&" {
+			break
+		}
+		g.RouteURL.FileName += v
 	}
 }
 
@@ -240,7 +271,6 @@ func (g *Genenrate) GenerateNewMethodRequestRouteURL(checkURLcurr []string) {
 	}
 
 	g.RouteURL.RouteMethod = g.RouteURL.GetRequestURL
-
 	for _, v := range checkURLcurr {
 
 		for _, v1 := range v {
@@ -257,7 +287,6 @@ func (g *Genenrate) GenerateNewMethodRequestRouteURL(checkURLcurr []string) {
 			g.RouteURL.MethodRequestURL += "/"
 		}
 	}
-
 }
 
 func (g *Genenrate) CheckAdminType(checkURLprev []string, checkURLcurr []string) bool {
@@ -267,6 +296,7 @@ func (g *Genenrate) CheckAdminType(checkURLprev []string, checkURLcurr []string)
 	} else {
 		checkAdminType = checkURLprev[2] == checkURLcurr[2]
 	}
+
 	return checkAdminType
 }
 
@@ -300,8 +330,8 @@ func (g *Genenrate) GenerateRequestMethodRouteURL(newcURL []string, URLmethod *s
 			*URLmethod += strings.Title(newcURLmethod[i])
 		}
 	}
-	*URLmethod = strings.Title(*URLmethod)
 
+	*URLmethod = strings.Title(*URLmethod)
 	SplitNewmethodURL := strings.Split(*URLmethod, "_")
 	*URLmethod = ""
 	for _, v := range SplitNewmethodURL {
@@ -323,6 +353,10 @@ func (g *Genenrate) GenerateControllerRouteTemplate(ctl *os.File, cURL string, c
 			ctlMethod += strings.Title(v)
 		}
 
+		if g.FileName{
+			ctlMethod = "Admin" + ctlMethod
+		}
+
 		createNewDupicate := newMethod + cURL
 		checkDupicateURL[createNewDupicate]++
 
@@ -336,12 +370,12 @@ func (g *Genenrate) GenerateControllerRouteTemplate(ctl *os.File, cURL string, c
 			g.Template.BodyTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.Ctl)
 			// g.Template.BodyTemplate(g.RouteURL.RouteMethod, newMethod, g.RouteURL.ControllerName, ctlMethod, g.RouteURL.NewcURLmethod, g.TestCtl)
 		}
+
 		*groupCount++
 	}
 }
 func (g *Genenrate) GenerateNewMethodRequestCtlSvRepoURL(checkURLcurr []string, checkURLprev []string) {
 	var params []string
-
 	g.CtlSvRepo.NewRequestURL = ""
 
 	for _, v := range checkURLcurr {
@@ -370,6 +404,7 @@ func (g *Genenrate) GenerateNewMethodRequestCtlSvRepoURL(checkURLcurr []string, 
 
 func (g *Genenrate) GenerateStructName(urlStruct *map[string][]string, cURL string) {
 	g.CtlSvRepo.StructName = nil
+
 	for urlStruct, v := range *urlStruct {
 		for _, namestruct := range v {
 			if urlStruct == cURL {
@@ -388,6 +423,11 @@ func (g *Genenrate) GenerateCtlSvRepoTemplate(cURL string, checkURLcurr []string
 				CtlStructName = sn
 			}
 		}
+		
+		if g.FileName{
+			CtlStructName = "Admin" + CtlStructName
+		}
+
 		Method := strings.ToLower(method)
 		newMethod := strings.Title(Method)
 		g.GenerateCtlSvRepoMethod(Method, newMethod, checkURLcurr)
@@ -399,7 +439,6 @@ func (g *Genenrate) GenerateCtlSvRepoTemplate(cURL string, checkURLcurr []string
 		g.Annotation.CRUDMethod = strings.ToLower(Method)
 		g.Annotation.Name = g.RouteURL.ControllerName
 		g.Annotation.NameLower = strings.ToLower(g.RouteURL.ControllerName)
-
 		if checkNextDupicateURL[createNewDupicate2] == 1 {
 			//annotation.CodeSuccess = getURLCode(copyURLCode, cURL, newMethod)
 			switch CtlMethodService {
@@ -521,7 +560,6 @@ func getctlMethod(newMethod string, checkURLcurr []string) (string, string) {
 func getURLCode(URLCode map[string][]string, url string, method string) string /* , []string */ {
 	/* var code []string */
 	method = strings.ToUpper(method)
-
 	url = url + "_" + method
 
 	/* for _, v := range URLCode[url] {
@@ -533,7 +571,7 @@ func getURLCode(URLCode map[string][]string, url string, method string) string /
 
 func (gr *Genenrate) createFile() {
 	// create controller package
-	controllerName := fmt.Sprintf("%v/app/controller/%vcontroller.go", gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
+	controllerName := fmt.Sprintf("%v/app/controller/%v_controller.go", gr.Path, strings.ToLower(gr.RouteURL.FileName))
 	gr.Ctl, _ = os.Create(controllerName)
 	gr.Template.ControllerTemplate(gr.Ctl, gr.RouteURL.RouteFile, gr.RouteURL.ControllerName)
 
@@ -542,7 +580,7 @@ func (gr *Genenrate) createFile() {
 	// gr.Template.TestControllerTemplate(gr.TestCtl, gr.RouteURL.RouteFileTest, gr.RouteURL.ControllerName)
 
 	// create service package
-	serviceName := fmt.Sprintf("%v/app/service/%vservice.go", gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
+	serviceName := fmt.Sprintf("%v/app/service/%v_service.go", gr.Path, strings.ToLower(gr.RouteURL.FileName))
 	gr.SV, _ = os.Create(serviceName)
 	gr.Template.ServiceTemplate(gr.SV, gr.RouteURL.ControllerName)
 
@@ -551,7 +589,7 @@ func (gr *Genenrate) createFile() {
 	// gr.Template.TestServiceTemplate(gr.TestSV, gr.RouteURL.ControllerName)
 
 	// create repository package
-	repositoryName := fmt.Sprintf("%v/app/repository/%vrepository.go", gr.Path, strings.ToLower(gr.RouteURL.ControllerName))
+	repositoryName := fmt.Sprintf("%v/app/repository/%v_repository.go", gr.Path, strings.ToLower(gr.RouteURL.FileName))
 	gr.RP, _ = os.Create(repositoryName)
 	gr.Template.RepositoryTemplate(gr.RP, gr.RouteURL.ControllerName)
 
@@ -569,11 +607,11 @@ func unique(duplicateSlice []string) []string {
 			list = append(list, entry)
 		}
 	}
+
 	return list
 }
 
 func (g *Genenrate) findParam(newParams []string) {
-
 	var parameter []string
 	var qeury []string
 
@@ -595,7 +633,6 @@ func (g *Genenrate) findParam(newParams []string) {
 	var newparameter []string
 	var newparameterParameters []string
 	for i, v := range parameter {
-
 		newparameter = append(newparameter, v[1:])
 		if i == 0 {
 			newparameterParameters = append(newparameterParameters, fmt.Sprintf("%v", v[1:]))

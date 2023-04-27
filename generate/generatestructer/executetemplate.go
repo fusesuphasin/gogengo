@@ -3,6 +3,7 @@ package generatestructer
 import (
 	"gogenerate/generate/generatestructer/gotemplate"
 	"os"
+	"strings"
 	"time"
 )
 
@@ -36,6 +37,7 @@ func (tp *Template) GroupTemplate(cURL string, newMethod string, ControllerName 
 }
 
 func (tp *Template) BodyTemplate(cURL string, newMethod string, ControllerName string, ctlMethod string, NewmethodURL string, ctl *os.File) {
+	ctlMethod = strings.Replace(ctlMethod, "Admin", "", 1)
 	gotemplate.BodyTemplate.Execute(ctl, struct {
 		Timestamp      time.Time
 		URL            string

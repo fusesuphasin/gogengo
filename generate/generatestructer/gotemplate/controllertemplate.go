@@ -40,7 +40,7 @@ func (controller *{{.ControllerName}}Controller) {{.ControllerName}}Router(){
 `))
 
 /*
-// @Success {{.Anotation.CodeSuccess}} {object} *domainrequest.{{.CtlStructName}}
+// @Success {{.Anotation.CodeSuccess}} {object} *domainRequestuest.{{.CtlStructName}}
 {{range .Anotation.CodeFailure}}// @Failure {{.}} {object}
 {{end}} */
 var MethodctlTemplate = template.Must(template.New("").Parse(
@@ -54,13 +54,13 @@ var MethodctlTemplate = template.Must(template.New("").Parse(
 // @Success 200 {object} *respone.{{.CtlStructName}}  
 // @Router /{{.URL}} [{{.Anotation.CRUDMethod}}]
 func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}(c *fiber.Ctx) error {
-	//var {{.CtlStructName}}Req *domain.{{.CtlStructName}}req
-	//var {{.CtlStructName}}Res *domain.{{.CtlStructName}}res
+	//var {{.CtlStructName}}Request *domain.{{.CtlStructName}}Request
+	//var {{.CtlStructName}}Response *domain.{{.CtlStructName}}Response
 	{{range .Param}}
 	{{.}} := c.Params("{{.}}"){{end}}{{range $index, $query :=.Query}}
 	{{ if eq "type" "type" }}{{"get"}}{{ else }}{{"ges"}}{{.}}{{ end }} := c.Query("{{.}}"){{end}}
 
-	data{{.ControllerName}}, err := controller.{{.ControllerName}}Service.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Req)
+	data{{.ControllerName}}, err := controller.{{.ControllerName}}Service.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Request)
 
 	if err != nil {
 		c.Status(422)
@@ -72,7 +72,8 @@ func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}
 `))
 
 var MethodctlTemplateGetAll = template.Must(template.New("").Parse(
-	`// {{.Anotation.Method}}{{.Anotation.Name}}
+	`
+// {{.Anotation.Method}}{{.Anotation.Name}}
 // @Summary {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Description {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Tags {{.Anotation.NameLower}}
@@ -97,7 +98,8 @@ func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}
 `))
 
 var MethodctlTemplateGetBy = template.Must(template.New("").Parse(
-	`// {{.Anotation.Method}}{{.Anotation.Name}}
+	`
+// {{.Anotation.Method}}{{.Anotation.Name}}
 // @Summary {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Description {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Tags {{.Anotation.NameLower}}
@@ -121,7 +123,8 @@ func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}
 `))
 
 var MethodctlTemplateCreate = template.Must(template.New("").Parse(
-	`// {{.Anotation.Method}}{{.Anotation.Name}}
+	`
+// {{.Anotation.Method}}{{.Anotation.Name}}
 // @Summary {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Description {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Tags {{.Anotation.NameLower}}
@@ -130,8 +133,8 @@ var MethodctlTemplateCreate = template.Must(template.New("").Parse(
 // @Success 200 {object} *respone.{{.CtlStructName}}  
 // @Router /{{.URL}} [{{.Anotation.CRUDMethod}}]
 func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}(c *fiber.Ctx) error {
-	var {{.CtlStructName}}Req *domain.{{.CtlStructName}}req
-	err := c.BodyParser(&{{.CtlStructName}}Req)
+	var {{.CtlStructName}}Request *domain.{{.CtlStructName}}Request
+	err := c.BodyParser(&{{.CtlStructName}}Request)
 	if err != nil {
 		_ = c.JSON(&fiber.Map{
 			"success": false,
@@ -142,7 +145,7 @@ func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}
 	{{range $index, $param := .Param}}
 	{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }} := c.Params("{{.}}"){{end}}
 
-	data{{.ControllerName}}, err := controller.{{.ControllerName}}Service.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Req {{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
+	data{{.ControllerName}}, err := controller.{{.ControllerName}}Service.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Request {{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
 
 	if err != nil {
 		c.Status(422)
@@ -154,7 +157,8 @@ func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}
 `))
 
 var MethodctlTemplateUpdate = template.Must(template.New("").Parse(
-	`// {{.Anotation.Method}}{{.Anotation.Name}}
+	`
+// {{.Anotation.Method}}{{.Anotation.Name}}
 // @Summary {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Description {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Tags {{.Anotation.NameLower}}
@@ -163,8 +167,8 @@ var MethodctlTemplateUpdate = template.Must(template.New("").Parse(
 // @Success 200 {object} *respone.{{.CtlStructName}}  
 // @Router /{{.URL}} [{{.Anotation.CRUDMethod}}]
 func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}(c *fiber.Ctx) error {
-	var {{.CtlStructName}}Req *domain.{{.CtlStructName}}req
-	err := c.BodyParser(&{{.CtlStructName}}Req)
+	var {{.CtlStructName}}Request *domain.{{.CtlStructName}}Request
+	err := c.BodyParser(&{{.CtlStructName}}Request)
 	if err != nil {
 		_ = c.JSON(&fiber.Map{
 			"success": false,
@@ -174,7 +178,7 @@ func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}
 	{{range $index, $param := .Param}}
 	{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }} := c.Params("{{.}}"){{end}}
 
-	data{{.ControllerName}}, err := controller.{{.ControllerName}}Service.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Req {{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type"}}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
+	data{{.ControllerName}}, err := controller.{{.ControllerName}}Service.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Request {{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type"}}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
 
 	if err != nil {
 		c.Status(422)
@@ -186,7 +190,8 @@ func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}
 `))
 
 var MethodctlTemplatePatch = template.Must(template.New("").Parse(
-	`// {{.Anotation.Method}}{{.Anotation.Name}}
+	`
+// {{.Anotation.Method}}{{.Anotation.Name}}
 // @Summary {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Description {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Tags {{.Anotation.NameLower}}
@@ -210,7 +215,8 @@ func (controller *{{.ControllerName}}Controller) {{.CtlMethod}}{{.NewmethodURL}}
 `))
 
 var MethodctlTemplateDelete = template.Must(template.New("").Parse(
-	`// {{.Anotation.Method}}{{.Anotation.Name}}
+	`
+// {{.Anotation.Method}}{{.Anotation.Name}}
 // @Summary {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Description {{.Anotation.Method}} {{.Anotation.NameLower}}
 // @Tags {{.Anotation.NameLower}}

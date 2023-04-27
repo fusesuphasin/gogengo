@@ -123,26 +123,26 @@ func Generate(input io.Reader, parser Parser, structName, pkgName string, tags [
 	}
 
 	var result map[string]interface{}
-
 	iresult, err := parser(input)
 	if err != nil {
 		return nil, err
 	}
-
 	switch iresult := iresult.(type) {
 	case map[interface{}]interface{}:
 		result = convertKeysToStrings(iresult)
+
 	case map[string]interface{}:
 		result = iresult
 
 	case []interface{}:
+
 		src := fmt.Sprintf("package %v\n\ntype %v %v\n",
 			pkgName,
 			structName,
 			typeForValue(iresult, structName, tags, subStructMapValue, convertFloats, requestDescription))
-
 		subStructMap2 := subStructMapValue
 		keys := make([]string, 0, len(subStructMapValue))
+
 		for key := range subStructMapValue {
 			keys = append(keys, key)
 		}
@@ -162,7 +162,6 @@ func Generate(input io.Reader, parser Parser, structName, pkgName string, tags [
 				}
 			}
 		}
-
 		formatted, err := format.Source([]byte(src))
 		if err != nil {
 			err = fmt.Errorf("error formatting: %s, was formatting\n%s", err, src)
@@ -255,13 +254,29 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 	for key := range obj {
 		keys = append(keys, key)
 	}
-
 	// Sort the slice of keys by the type of the corresponding values
 	sort.Slice(keys, func(i, j int) bool {
 		// Get the types of the values
-		t1 := reflect.TypeOf(obj[keys[i]]).String()
-		t2 := reflect.TypeOf(obj[keys[j]]).String()
-
+		t1 := ""
+		t2 := ""
+		if obj[keys[i]] == nil {
+			var nilInterface interface{} = nil
+			t := reflect.TypeOf(nilInterface)
+			if t == nil {
+				t1 = "interface{}"
+			}
+		}else{
+			t1 = reflect.TypeOf(obj[keys[i]]).String()
+		}
+		if obj[keys[j]] == nil {
+			var nilInterface interface{} = nil
+			t := reflect.TypeOf(nilInterface)
+			if t == nil {
+				t2 = "interface{}"
+			}
+		}else{
+			t2 = reflect.TypeOf(obj[keys[j]]).String()
+		}
 		// Use a custom ordering for certain types
 		switch t1 {
 		case "bool":
@@ -286,18 +301,23 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 				return false
 			}
 			return true
+		case "interface{}":
+			if t2 == "bool" || t2 == "int" || t2 == "float64" || t2 == "string" || t2 == "slice" {
+				return false
+			}
+			return true
 		}
 
 		// For all other types, use the default ordering
 		return t1 > t2
 	})
 
-	
-
 	if i == 0 {
+
 		for _, key := range keys {
 			valueObj = append(valueObj, obj[key])
 		}
+
 		i++
 	}
 
@@ -408,7 +428,7 @@ func generateTypes(obj map[string]interface{}, structName string, tags []string,
 		} else {
 			newPath = path + "." + key
 		}
-		
+
 		tagList := make([]string, 0)
 		for _, t := range tags {
 			if t == "json" && requestDescription[newPath]["Omitempty"] == "true" {
@@ -599,6 +619,7 @@ func lintFieldName(name string) string {
 func typeForValue(value interface{}, structName string, tags []string, subStructMap map[string]string, convertFloats bool, requestDescription map[string]map[string]string) string {
 	//Check if this is an array
 	if objects, ok := value.([]interface{}); ok {
+
 		types := make(map[reflect.Type]bool, 0)
 		for _, o := range objects {
 			types[reflect.TypeOf(o)] = true
@@ -606,7 +627,6 @@ func typeForValue(value interface{}, structName string, tags []string, subStruct
 		if len(types) == 1 {
 			return "[]" + typeForValue(mergeElements(objects).([]interface{})[0], structName, tags, subStructMap, convertFloats, requestDescription)
 		}
-
 		return "[]interface{}"
 
 	} else if object, ok := value.(map[interface{}]interface{}); ok {
@@ -618,6 +638,7 @@ func typeForValue(value interface{}, structName string, tags []string, subStruct
 		return getStruct
 
 	} else if reflect.TypeOf(value) == nil {
+
 		return "interface{}"
 
 	}

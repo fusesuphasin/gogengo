@@ -19,15 +19,17 @@ type {{.ControllerName}}Service struct {
 `))
 
 var MethodSVTemplate = template.Must(template.New("").Parse(
-	`func (service *{{.ServiceName}}Service) {{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Req *domain.{{.CtlStructName}}req) (res *domain.{{.CtlStructName}}res, err error) {
-	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Req)
+	`
+func (service *{{.ServiceName}}Service) {{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Request *domain.{{.CtlStructName}}Request) (Response *domain.{{.CtlStructName}}Response, err error) {
+	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Request)
 
 	return data, nil
 }
 `))
 
 var MethodSVTemplateGetAll = template.Must(template.New("").Parse(
-	`func (service *{{.ServiceName}}Service) {{.CtlMethodService}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}} {{range $index, $query := .QeuryParameters}}{{.}}{{ if eq $query "type" }}s{{ else }}{{ end }}{{ if eq $query ", type" }}s{{ else }}{{ end }} string{{end}}) (res *domain.{{.CtlStructName}}res, err error) {
+	`
+func (service *{{.ServiceName}}Service) {{.CtlMethodService}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}} {{range $index, $query := .QeuryParameters}}{{.}}{{ if eq $query "type" }}s{{ else }}{{ end }}{{ if eq $query ", type" }}s{{ else }}{{ end }} string{{end}}) (Response *domain.{{.CtlStructName}}Response, err error) {
 	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}} {{range $index, $query := .QeuryParameters}}{{.}}{{ if eq $query "type" }}s{{ else }}{{ end }}{{ if eq $query ", type" }}s{{ else }}{{ end }}{{end}})
 
 	return data, nil
@@ -35,7 +37,8 @@ var MethodSVTemplateGetAll = template.Must(template.New("").Parse(
 `))
 
 var MethodSVTemplateGetBy = template.Must(template.New("").Parse(
-	`func (service *{{.ServiceName}}Service) {{.CtlMethodService}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (res *domain.{{.CtlStructName}}res, err error) {
+	`
+func (service *{{.ServiceName}}Service) {{.CtlMethodService}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (Response *domain.{{.CtlStructName}}Response, err error) {
 	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
 
 	return data, nil
@@ -43,23 +46,26 @@ var MethodSVTemplateGetBy = template.Must(template.New("").Parse(
 `))
 
 var MethodSVTemplateCreate = template.Must(template.New("").Parse(
-	`func (service *{{.ServiceName}}Service) {{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Req *domain.{{.CtlStructName}}req{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (res *domain.{{.CtlStructName}}res, err error) {
-	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Req{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
+	`
+func (service *{{.ServiceName}}Service) {{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Request *domain.{{.CtlStructName}}Request{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (Response *domain.{{.CtlStructName}}Response, err error) {
+	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Request{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
 
 	return data, nil
 }
 `))
 
 var MethodSVTemplateUpdate = template.Must(template.New("").Parse(
-	`func (service *{{.ServiceName}}Service) {{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Req *domain.{{.CtlStructName}}req{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}} {{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (res *domain.{{.CtlStructName}}res, err error) {
-	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Req{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}} {{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
+	`
+func (service *{{.ServiceName}}Service) {{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Request *domain.{{.CtlStructName}}Request{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}} {{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (Response *domain.{{.CtlStructName}}Response, err error) {
+	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Request{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}} {{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
 
 	return data, nil
 }
 `))
 
 var MethodSVTemplatePatch = template.Must(template.New("").Parse(
-	`func (service *{{.ServiceName}}Service) {{.CtlMethodService}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (res *mongo.UpdateResult, err error) {
+	`
+func (service *{{.ServiceName}}Service) {{.CtlMethodService}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (Response *mongo.UpdateResult, err error) {
 	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
 
 	return data, nil
@@ -67,7 +73,8 @@ var MethodSVTemplatePatch = template.Must(template.New("").Parse(
 `))
 
 var MethodSVTemplateDelete = template.Must(template.New("").Parse(
-	`func (service *{{.ServiceName}}Service) {{.CtlMethodService}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (res *mongo.DeleteResult, err error) {
+	`
+func (service *{{.ServiceName}}Service) {{.CtlMethodService}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }} string{{end}}) (Response *mongo.DeleteResult, err error) {
 	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
 
 	return data, nil

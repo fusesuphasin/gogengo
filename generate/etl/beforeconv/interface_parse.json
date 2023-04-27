@@ -91,7 +91,7 @@
 										}
 									],
 									"cookie": [],
-									"body": {"data":[{"id":"string","language":"en","name":"Kilometer"}]}
+									"body": "{\n    \"data\": [\n        {\n            \"id\": \"string\",\n            \"language\": \"en\",\n            \"name\": \"Kilometer\"\n        }\n    ]\n}"
 								},
 								{
 									"name": "500",
@@ -137,7 +137,7 @@
 										}
 									],
 									"cookie": [],
-									"body": {"code":"000","details":[{"message":"Message describing the error.","user_message":"A message.","user_title":"A title."}],"message":"Message describing the error.","type":"Exception","user_message":"A message.","user_title":"A title.","validations":[{"field":"name","message":"the format of the data is not valid as required.","param":"","path":"user.name","tag":"required","value":""}]}
+									"body": "{\n    \"code\": \"000\",\n    \"type\": \"Exception\",\n    \"message\": \"Message describing the error.\",\n    \"user_title\": \"A title.\",\n    \"user_message\": \"A message.\",\n    \"details\": [\n        {\n            \"message\": \"Message describing the error.\",\n            \"user_title\": \"A title.\",\n            \"user_message\": \"A message.\"\n        }\n    ],\n    \"validations\": [\n        {\n            \"field\": \"name\",\n            \"path\": \"user.name\",\n            \"tag\": \"required\",\n            \"param\": \"\",\n            \"value\": \"\",\n            \"message\": \"the format of the data is not valid as required.\"\n        }\n    ]\n}"
 								}
 							]
 						},
@@ -152,7 +152,15 @@
 										"type": "text"
 									}
 								],
-								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Kilometer"}},
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Kilometer\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{base_url}}/{{api}}/admin/units/initial_data/distance/:id/translation/language/:language",
 									"host": [
@@ -194,7 +202,15 @@
 												"type": "text"
 											}
 										],
-										"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Kilometer"}},
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Kilometer\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
 										"url": {
 											"raw": "{{base_url}}/{{api}}/admin/units/initial_data/distance/:id/translation/language/:language",
 											"host": [
@@ -234,7 +250,7 @@
 										}
 									],
 									"cookie": [],
-									"body": {"data":{"id":"string","name":"Kilometer"}}
+									"body": "{\n    \"data\": {\n        \"id\": \"string\",\n        \"name\": \"Kilometer\"\n    }\n}"
 								},
 								{
 									"name": "500",
@@ -247,7 +263,15 @@
 												"type": "text"
 											}
 										],
-										"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"@"}},
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"@\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
 										"url": {
 											"raw": "{{base_url}}/{{api}}/admin/units/initial_data/distance/:id/translation/language/:language",
 											"host": [
@@ -287,7 +311,7 @@
 										}
 									],
 									"cookie": [],
-									"body": {"code":"000","details":[{"message":"Message describing the error.","user_message":"A message.","user_title":"A title."}],"message":"Message describing the error.","type":"Exception","user_message":"A message.","user_title":"A title.","validations":[{"field":"name","message":"the format of the data is not valid as required.","param":"","path":"user.name","tag":"required","value":""}]}
+									"body": "{\n    \"code\": \"000\",\n    \"type\": \"Exception\",\n    \"message\": \"Message describing the error.\",\n    \"user_title\": \"A title.\",\n    \"user_message\": \"A message.\",\n    \"details\": [\n        {\n            \"message\": \"Message describing the error.\",\n            \"user_title\": \"A title.\",\n            \"user_message\": \"A message.\"\n        }\n    ],\n    \"validations\": [\n        {\n            \"field\": \"name\",\n            \"path\": \"user.name\",\n            \"tag\": \"required\",\n            \"param\": \"\",\n            \"value\": \"\",\n            \"message\": \"the format of the data is not valid as required.\"\n        }\n    ]\n}"
 								}
 							]
 						},
@@ -382,7 +406,7 @@
 										}
 									],
 									"cookie": [],
-									"body": {"data":{"id":"string","name":"Kilometer"}}
+									"body": "{\n    \"data\": {\n        \"id\": \"string\",\n        \"name\": \"Kilometer\"\n    }\n}"
 								},
 								{
 									"name": "500",
@@ -434,7 +458,7 @@
 										}
 									],
 									"cookie": [],
-									"body": {"code":"000","details":[{"message":"Message describing the error.","user_message":"A message.","user_title":"A title."}],"message":"Message describing the error.","type":"Exception","user_message":"A message.","user_title":"A title.","validations":[{"field":"name","message":"the format of the data is not valid as required.","param":"","path":"user.name","tag":"required","value":""}]}
+									"body": "{\n    \"code\": \"000\",\n    \"type\": \"Exception\",\n    \"message\": \"Message describing the error.\",\n    \"user_title\": \"A title.\",\n    \"user_message\": \"A message.\",\n    \"details\": [\n        {\n            \"message\": \"Message describing the error.\",\n            \"user_title\": \"A title.\",\n            \"user_message\": \"A message.\"\n        }\n    ],\n    \"validations\": [\n        {\n            \"field\": \"name\",\n            \"path\": \"user.name\",\n            \"tag\": \"required\",\n            \"param\": \"\",\n            \"value\": \"\",\n            \"message\": \"the format of the data is not valid as required.\"\n        }\n    ]\n}"
 								}
 							]
 						},
@@ -449,7 +473,15 @@
 										"type": "text"
 									}
 								],
-								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Kilometer"}},
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Kilometer\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{base_url}}/{{api}}/admin/units/initial_data/distance/:id/translation/language/:language",
 									"host": [
@@ -491,7 +523,15 @@
 												"type": "text"
 											}
 										],
-										"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"Kilometer"}},
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"Kilometer\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
 										"url": {
 											"raw": "{{base_url}}/{{api}}/admin/units/initial_data/distance/:id/translation/language/:language",
 											"host": [
@@ -531,7 +571,7 @@
 										}
 									],
 									"cookie": [],
-									"body": {"data":{"id":"string","name":"Kilometer"}}
+									"body": "{\n    \"data\": {\n        \"id\": \"string\",\n        \"name\": \"Kilometer\"\n    }\n}"
 								},
 								{
 									"name": "500",
@@ -544,7 +584,15 @@
 												"type": "text"
 											}
 										],
-										"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"name":"@"}},
+										"body": {
+											"mode": "raw",
+											"raw": "{\r\n    \"name\": \"@\"\r\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
 										"url": {
 											"raw": "{{base_url}}/{{api}}/admin/units/initial_data/distance/:id/translation/language/:language",
 											"host": [
@@ -584,7 +632,7 @@
 										}
 									],
 									"cookie": [],
-									"body": {"code":"000","details":[{"message":"Message describing the error.","user_message":"A message.","user_title":"A title."}],"message":"Message describing the error.","type":"Exception","user_message":"A message.","user_title":"A title.","validations":[{"field":"name","message":"the format of the data is not valid as required.","param":"","path":"user.name","tag":"required","value":""}]}
+									"body": "{\n    \"code\": \"000\",\n    \"type\": \"Exception\",\n    \"message\": \"Message describing the error.\",\n    \"user_title\": \"A title.\",\n    \"user_message\": \"A message.\",\n    \"details\": [\n        {\n            \"message\": \"Message describing the error.\",\n            \"user_title\": \"A title.\",\n            \"user_message\": \"A message.\"\n        }\n    ],\n    \"validations\": [\n        {\n            \"field\": \"name\",\n            \"path\": \"user.name\",\n            \"tag\": \"required\",\n            \"param\": \"\",\n            \"value\": \"\",\n            \"message\": \"the format of the data is not valid as required.\"\n        }\n    ]\n}"
 								}
 							]
 						}
@@ -721,7 +769,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":[{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_default_create":true,"is_deleted":false,"is_enabled":true,"name":"Kilomater","slug":"kilomater","symbol":"km","updated_at":"2022-02-12T04:30:30.359Z"}],"pagination":{"limit":20,"offset":0,"total":1,"total_page":1}}
+							"body": "{\n    \"data\": [\n        {\n            \"id\": \"string\",\n            \"slug\": \"kilomater\",\n            \"name\": \"Kilomater\",\n            \"symbol\": \"km\",\n            \"is_default_create\": true,\n            \"created_at\": \"2022-02-12T04:30:30.359Z\",\n            \"updated_at\": \"2022-02-12T04:30:30.359Z\",\n            \"is_enabled\": true,\n            \"is_deleted\": false\n        }\n    ],\n    \"pagination\": {\n        \"offset\": 0,\n        \"limit\": 20,\n        \"total\": 1,\n        \"total_page\": 1\n    }\n}"
 						},
 						{
 							"name": "500",
@@ -789,7 +837,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"code":"000","details":[{"message":"Message describing the error.","user_message":"A message.","user_title":"A title."}],"message":"Message describing the error.","type":"Exception","user_message":"A message.","user_title":"A title.","validations":[{"field":"name","message":"the format of the data is not valid as required.","param":"","path":"user.name","tag":"required","value":""}]}
+							"body": "{\n    \"code\": \"000\",\n    \"type\": \"Exception\",\n    \"message\": \"Message describing the error.\",\n    \"user_title\": \"A title.\",\n    \"user_message\": \"A message.\",\n    \"details\": [\n        {\n            \"message\": \"Message describing the error.\",\n            \"user_title\": \"A title.\",\n            \"user_message\": \"A message.\"\n        }\n    ],\n    \"validations\": [\n        {\n            \"field\": \"name\",\n            \"path\": \"user.name\",\n            \"tag\": \"required\",\n            \"param\": \"\",\n            \"value\": \"\",\n            \"message\": \"the format of the data is not valid as required.\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -804,7 +852,15 @@
 								"type": "text"
 							}
 						],
-						"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"is_default_create":true,"name":"Kilomater","symbol":"km"}},
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Kilomater\",\r\n    \"symbol\": \"km\",\r\n    \"is_default_create\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{base_url}}/{{api}}/admin/units/initial_data/distance",
 							"host": [
@@ -832,7 +888,15 @@
 										"type": "text"
 									}
 								],
-								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"is_default_create":true,"name":"Kilomater","symbol":"km"}},
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Kilomater\",\r\n    \"symbol\": \"km\",\r\n    \"is_default_create\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{base_url}}/{{api}}/admin/units/initial_data/distance",
 									"host": [
@@ -858,7 +922,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_default_create":true,"is_deleted":false,"is_enabled":true,"name":"Kilomater","slug":"kilomater","symbol":"km","updated_at":"2022-02-12T04:30:30.359Z"}}
+							"body": "{\n    \"data\": {\n        \"id\": \"string\",\n        \"slug\": \"kilomater\",\n        \"name\": \"Kilomater\",\n        \"symbol\": \"km\",\n        \"is_default_create\": true,\n        \"created_at\": \"2022-02-12T04:30:30.359Z\",\n        \"updated_at\": \"2022-02-12T04:30:30.359Z\",\n        \"is_enabled\": true,\n        \"is_deleted\": false\n    }\n}"
 						},
 						{
 							"name": "500",
@@ -871,7 +935,15 @@
 										"type": "text"
 									}
 								],
-								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"is_default_create":true,"name":"Kilomater","symbol":"km"}},
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Kilomater\",\r\n    \"symbol\": \"km\",\r\n    \"is_default_create\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{base_url}}/{{api}}/admin/units/initial_data/distance",
 									"host": [
@@ -897,7 +969,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"code":"000","details":[{"message":"Message describing the error.","user_message":"A message.","user_title":"A title."}],"message":"Message describing the error.","type":"Exception","user_message":"A message.","user_title":"A title.","validations":[{"field":"name","message":"the format of the data is not valid as required.","param":"","path":"user.name","tag":"required","value":""}]}
+							"body": "{\n    \"code\": \"000\",\n    \"type\": \"Exception\",\n    \"message\": \"Message describing the error.\",\n    \"user_title\": \"A title.\",\n    \"user_message\": \"A message.\",\n    \"details\": [\n        {\n            \"message\": \"Message describing the error.\",\n            \"user_title\": \"A title.\",\n            \"user_message\": \"A message.\"\n        }\n    ],\n    \"validations\": [\n        {\n            \"field\": \"name\",\n            \"path\": \"user.name\",\n            \"tag\": \"required\",\n            \"param\": \"\",\n            \"value\": \"\",\n            \"message\": \"the format of the data is not valid as required.\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -978,7 +1050,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_default_create":true,"is_deleted":false,"is_enabled":true,"name":"Kilomater","slug":"kilomater","symbol":"km","updated_at":"2022-02-12T04:30:30.359Z"}}
+							"body": "{\n    \"data\": {\n        \"id\": \"string\",\n        \"slug\": \"kilomater\",\n        \"name\": \"Kilomater\",\n        \"symbol\": \"km\",\n        \"is_default_create\": true,\n        \"created_at\": \"2022-02-12T04:30:30.359Z\",\n        \"updated_at\": \"2022-02-12T04:30:30.359Z\",\n        \"is_enabled\": true,\n        \"is_deleted\": false\n    }\n}"
 						},
 						{
 							"name": "500",
@@ -1023,7 +1095,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"code":"000","details":[{"message":"Message describing the error.","user_message":"A message.","user_title":"A title."}],"message":"Message describing the error.","type":"Exception","user_message":"A message.","user_title":"A title.","validations":[{"field":"name","message":"the format of the data is not valid as required.","param":"","path":"user.name","tag":"required","value":""}]}
+							"body": "{\n    \"code\": \"000\",\n    \"type\": \"Exception\",\n    \"message\": \"Message describing the error.\",\n    \"user_title\": \"A title.\",\n    \"user_message\": \"A message.\",\n    \"details\": [\n        {\n            \"message\": \"Message describing the error.\",\n            \"user_title\": \"A title.\",\n            \"user_message\": \"A message.\"\n        }\n    ],\n    \"validations\": [\n        {\n            \"field\": \"name\",\n            \"path\": \"user.name\",\n            \"tag\": \"required\",\n            \"param\": \"\",\n            \"value\": \"\",\n            \"message\": \"the format of the data is not valid as required.\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -1038,7 +1110,15 @@
 								"type": "text"
 							}
 						],
-						"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"is_default_create":true,"name":"Kilomater","symbol":"km"}},
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"name\": \"Kilomater\",\r\n    \"symbol\": \"km\",\r\n    \"is_default_create\": true\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
 						"url": {
 							"raw": "{{base_url}}/{{api}}/admin/units/initial_data/distance/:id",
 							"host": [
@@ -1073,7 +1153,15 @@
 										"type": "text"
 									}
 								],
-								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"is_default_create":true,"name":"Kilomater","symbol":"km"}},
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Kilomater\",\r\n    \"symbol\": \"km\",\r\n    \"is_default_create\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{base_url}}/{{api}}/admin/units/initial_data/distance/:id",
 									"host": [
@@ -1106,7 +1194,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_default_create":true,"is_deleted":false,"is_enabled":true,"name":"Kilomater","slug":"kilomater","symbol":"km","updated_at":"2022-02-12T04:30:30.359Z"}}
+							"body": "{\n    \"data\": {\n        \"id\": \"string\",\n        \"slug\": \"kilomater\",\n        \"name\": \"Kilomater\",\n        \"symbol\": \"km\",\n        \"is_default_create\": true,\n        \"created_at\": \"2022-02-12T04:30:30.359Z\",\n        \"updated_at\": \"2022-02-12T04:30:30.359Z\",\n        \"is_enabled\": true,\n        \"is_deleted\": false\n    }\n}"
 						},
 						{
 							"name": "500",
@@ -1119,7 +1207,15 @@
 										"type": "text"
 									}
 								],
-								"body": {"mode":"raw","options":{"raw":{"language":"json"}},"raw":{"is_default_create":true,"name":"Kilomater","symbol":"km"}},
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"name\": \"Kilomater\",\r\n    \"symbol\": \"km\",\r\n    \"is_default_create\": true\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
 								"url": {
 									"raw": "{{base_url}}/{{api}}/admin/units/initial_data/distance/:id",
 									"host": [
@@ -1152,7 +1248,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"code":"000","details":[{"message":"Message describing the error.","user_message":"A message.","user_title":"A title."}],"message":"Message describing the error.","type":"Exception","user_message":"A message.","user_title":"A title.","validations":[{"field":"name","message":"the format of the data is not valid as required.","param":"","path":"user.name","tag":"required","value":""}]}
+							"body": "{\n    \"code\": \"000\",\n    \"type\": \"Exception\",\n    \"message\": \"Message describing the error.\",\n    \"user_title\": \"A title.\",\n    \"user_message\": \"A message.\",\n    \"details\": [\n        {\n            \"message\": \"Message describing the error.\",\n            \"user_title\": \"A title.\",\n            \"user_message\": \"A message.\"\n        }\n    ],\n    \"validations\": [\n        {\n            \"field\": \"name\",\n            \"path\": \"user.name\",\n            \"tag\": \"required\",\n            \"param\": \"\",\n            \"value\": \"\",\n            \"message\": \"the format of the data is not valid as required.\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -1235,7 +1331,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_default_create":true,"is_deleted":false,"is_enabled":true,"name":"Kilomater","slug":"kilomater","symbol":"km","updated_at":"2022-02-12T04:30:30.359Z"}}
+							"body": "{\n    \"data\": {\n        \"id\": \"string\",\n        \"slug\": \"kilomater\",\n        \"name\": \"Kilomater\",\n        \"symbol\": \"km\",\n        \"is_default_create\": true,\n        \"created_at\": \"2022-02-12T04:30:30.359Z\",\n        \"updated_at\": \"2022-02-12T04:30:30.359Z\",\n        \"is_enabled\": true,\n        \"is_deleted\": false\n    }\n}"
 						},
 						{
 							"name": "500",
@@ -1281,7 +1377,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"code":"000","details":[{"message":"Message describing the error.","user_message":"A message.","user_title":"A title."}],"message":"Message describing the error.","type":"Exception","user_message":"A message.","user_title":"A title.","validations":[{"field":"name","message":"the format of the data is not valid as required.","param":"","path":"user.name","tag":"required","value":""}]}
+							"body": "{\n    \"code\": \"000\",\n    \"type\": \"Exception\",\n    \"message\": \"Message describing the error.\",\n    \"user_title\": \"A title.\",\n    \"user_message\": \"A message.\",\n    \"details\": [\n        {\n            \"message\": \"Message describing the error.\",\n            \"user_title\": \"A title.\",\n            \"user_message\": \"A message.\"\n        }\n    ],\n    \"validations\": [\n        {\n            \"field\": \"name\",\n            \"path\": \"user.name\",\n            \"tag\": \"required\",\n            \"param\": \"\",\n            \"value\": \"\",\n            \"message\": \"the format of the data is not valid as required.\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -1364,7 +1460,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_default_create":true,"is_deleted":false,"is_enabled":true,"name":"Kilomater","slug":"kilomater","symbol":"km","updated_at":"2022-02-12T04:30:30.359Z"}}
+							"body": "{\n    \"data\": {\n        \"id\": \"string\",\n        \"slug\": \"kilomater\",\n        \"name\": \"Kilomater\",\n        \"symbol\": \"km\",\n        \"is_default_create\": true,\n        \"created_at\": \"2022-02-12T04:30:30.359Z\",\n        \"updated_at\": \"2022-02-12T04:30:30.359Z\",\n        \"is_enabled\": true,\n        \"is_deleted\": false\n    }\n}"
 						},
 						{
 							"name": "500",
@@ -1410,7 +1506,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"code":"000","details":[{"message":"Message describing the error.","user_message":"A message.","user_title":"A title."}],"message":"Message describing the error.","type":"Exception","user_message":"A message.","user_title":"A title.","validations":[{"field":"name","message":"the format of the data is not valid as required.","param":"","path":"user.name","tag":"required","value":""}]}
+							"body": "{\n    \"code\": \"000\",\n    \"type\": \"Exception\",\n    \"message\": \"Message describing the error.\",\n    \"user_title\": \"A title.\",\n    \"user_message\": \"A message.\",\n    \"details\": [\n        {\n            \"message\": \"Message describing the error.\",\n            \"user_title\": \"A title.\",\n            \"user_message\": \"A message.\"\n        }\n    ],\n    \"validations\": [\n        {\n            \"field\": \"name\",\n            \"path\": \"user.name\",\n            \"tag\": \"required\",\n            \"param\": \"\",\n            \"value\": \"\",\n            \"message\": \"the format of the data is not valid as required.\"\n        }\n    ]\n}"
 						}
 					]
 				},
@@ -1491,7 +1587,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"data":{"created_at":"2022-02-12T04:30:30.359Z","id":"string","is_default_create":true,"is_deleted":true,"is_enabled":true,"name":"Kilomater","slug":"kilomater","symbol":"km","updated_at":"2022-02-12T04:30:30.359Z"}}
+							"body": "{\n    \"data\": {\n        \"id\": \"string\",\n        \"slug\": \"kilomater\",\n        \"name\": \"Kilomater\",\n        \"symbol\": \"km\",\n        \"is_default_create\": true,\n        \"created_at\": \"2022-02-12T04:30:30.359Z\",\n        \"updated_at\": \"2022-02-12T04:30:30.359Z\",\n        \"is_enabled\": true,\n        \"is_deleted\": true\n    }\n}"
 						},
 						{
 							"name": "500",
@@ -1536,7 +1632,7 @@
 								}
 							],
 							"cookie": [],
-							"body": {"code":"000","details":[{"message":"Message describing the error.","user_message":"A message.","user_title":"A title."}],"message":"Message describing the error.","type":"Exception","user_message":"A message.","user_title":"A title.","validations":[{"field":"name","message":"the format of the data is not valid as required.","param":"","path":"user.name","tag":"required","value":""}]}
+							"body": "{\n    \"code\": \"000\",\n    \"type\": \"Exception\",\n    \"message\": \"Message describing the error.\",\n    \"user_title\": \"A title.\",\n    \"user_message\": \"A message.\",\n    \"details\": [\n        {\n            \"message\": \"Message describing the error.\",\n            \"user_title\": \"A title.\",\n            \"user_message\": \"A message.\"\n        }\n    ],\n    \"validations\": [\n        {\n            \"field\": \"name\",\n            \"path\": \"user.name\",\n            \"tag\": \"required\",\n            \"param\": \"\",\n            \"value\": \"\",\n            \"message\": \"the format of the data is not valid as required.\"\n        }\n    ]\n}"
 						}
 					]
 				}

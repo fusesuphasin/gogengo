@@ -19,7 +19,7 @@ type Test{{.ControllerName}}Service struct {
 
 var TestMethodSVTemplate = template.Must(template.New("").Parse(
 	`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
-	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Req)
+	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Request)
 
 	return data, nil
 }
@@ -48,12 +48,12 @@ var TestMethodSVTemplateGetBy = template.Must(template.New("").Parse(
 
 var TestMethodSVTemplateCreate = template.Must(template.New("").Parse(
 	`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
-	{{.CtlStructName}}Req := &domain.{{.CtlStructName}}req{}
+	{{.CtlStructName}}Request := &domain.{{.CtlStructName}}Request{}
 	
 	{{range $index, $param := .Param}}
 	{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }} := c.Params("{{.}}"){{end}}
 	
-	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Req{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
+	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Request{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}}{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
 
 	return data, nil
 }
@@ -61,12 +61,12 @@ var TestMethodSVTemplateCreate = template.Must(template.New("").Parse(
 
 var TestMethodSVTemplateUpdate = template.Must(template.New("").Parse(
 	`func Test{{.CtlMethodService}}{{.NewmethodURL}}(t *testing.T) {
-	{{.CtlStructName}}Req := &domain.{{.CtlStructName}}req{}
+	{{.CtlStructName}}Request := &domain.{{.CtlStructName}}Request{}
 	
 	{{range $index, $param := .Param}}
 	{{.}}{{ if eq $param "type" }}s{{ else }}{{ end }} := c.Params("{{.}}"){{end}}
 
-	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Req{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}} {{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
+	data, _ := service.{{.ServiceName}}Repository.{{.CtlMethodService}}{{.NewmethodURL}}({{.CtlStructName}}Request{{if .ParamsParameters}}, {{end}}{{range $index, $param := .ParamsParameters}} {{.}}{{ if eq $param "type" }}s{{ else }}{{ end }}{{ if eq $param ", type" }}s{{ else }}{{ end }}{{end}})
 
 	return data, nil
 }
